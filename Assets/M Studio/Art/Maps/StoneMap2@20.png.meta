@@ -7899,9 +7899,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BaseMap1@20_293: 746505101
       BaseMap1@20_109: 2027865246
-      BaseMap1@20_224: -535392113
       BaseMap1@water08: -1348803144
       BaseMap1@20_111: 1539969422
       BaseMap1@20_263: 1955615791
@@ -7971,8 +7969,8 @@ TextureImporter:
       BaseMap1@20_51: 59892658
       BaseMap1@dig05: -739621279
       BaseMap1@20_176: 1738046501
-      BaseMap1@20_103: -691661866
       BaseMap1@dig07: -893880116
+      BaseMap1@20_103: -691661866
       StoneMap2@20_14: -1199375901
       BaseMap1@water10: -965121518
       BaseMap1@20_50: 2071298405
@@ -7999,8 +7997,8 @@ TextureImporter:
       BaseMap1@20_126: -919498366
       BaseMap1@20_61: -1106286766
       BaseMap1@20_4: 801215717
-      BaseMap1@20_319: -574285479
       BaseMap1@20_281: -760898985
+      BaseMap1@20_319: -574285479
       BaseMap1@20_260: -1942581387
       BaseMap1@20_24: -570742094
       BaseMap1@20_113: 1133180564
@@ -8009,11 +8007,11 @@ TextureImporter:
       BaseMap1@20_189: 1931853552
       BaseMap1@20_241: -1260552530
       BaseMap1@dig11: -2001093014
-      BaseMap1@water09: 1353568680
+      StoneMap2@20_17: -1941728235
       BaseMap1@20_169: 305727698
       BaseMap1@20_131: 1787882972
+      BaseMap1@water09: 1353568680
       StoneMap2@20_12: -151637801
-      StoneMap2@20_17: -1941728235
       BaseMap1@20_247: -1618353455
       BaseMap1@20_20: -1915703593
       BaseMap1@dig16: 1639464469
@@ -8261,9 +8259,11 @@ TextureImporter:
       BaseMap1@20_309: 834871214
       BaseMap1@20_205: -1626434087
       BaseMap1@20_226: 1787685156
-      BaseMap1@20_48: 1213114642
+      BaseMap1@20_293: 746505101
       BaseMap1@20_302: 1702546492
+      BaseMap1@20_48: 1213114642
       BaseMap1@20_75: -408015391
+      BaseMap1@20_224: -535392113
       BaseMap1@20_228: -1273590320
       BaseMap1@20_99: 1012417248
       BaseMap1@20_86: 884027891

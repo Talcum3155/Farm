@@ -33,11 +33,11 @@ public class Player : MonoBehaviour
         _inputX = Input.GetAxis("Horizontal");
         _inputY = Input.GetAxis("Vertical");
 
-        if (_inputX != 0 && _inputY != 0)
-        {
-            _inputX *= 0.6f;
-            _inputY *= 0.6f;
-        }
+        // if (_inputX != 0 && _inputY != 0)
+        // {
+        //     _inputX *= 0.6f;
+        //     _inputY *= 0.6f;
+        // }
 
         _movementInput = new Vector2(_inputX, _inputY);
     }

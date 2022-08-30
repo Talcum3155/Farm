@@ -1,5 +1,7 @@
 # M Farm笔记
 
+## 基本操作
+
 ### 第一节 展示
 
 ### 第二节 创建项目
@@ -99,8 +101,22 @@ private void SwitchConfinerShape()
 1. 单独创建一个类来保存各种数据和各种枚举数据
 2. 使用ItemDataSo来创建物品数据
 
+## Editor编写
+
 ### 第十三节 使用 UI Toolkit 和 UI Builder 制作物品编辑器
+
+1. 右键UI ToolKit-Editor Window创建三个编辑代码ItemEditor
+
+2. 从Window-UIToolKit可以打开创建的编辑器
+
+3. 编辑器ItemEditor代码的C#版本里可以编辑代码，通过特性可以更改编辑器所处的位置
+
+   ```c#
+   前：[MenuItem("Window/UI Toolkit/ItemEditor")]
+   后：[MenuItem("Tarowy Tool/ItemEditor")]
+   ```
+
+4. 双击ItemEditor代码的uxml可以打开UI Builder来编辑工具
 
 ### 第十四节 创建 ListView 中的 ItemTemplate
 
-1. 

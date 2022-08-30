@@ -72,5 +72,35 @@ private void SwitchConfinerShape()
 
 ### 第十一节 实现景观物体遮挡半透明
 
+1. 给树的根部添加碰撞体，其余的部分添加触发体，被player触发后修改sprite Renderer的透明度
 
+2. 使用dotween来线性修改透明度
 
+   ```c#
+   public void FadeIn()
+           {
+               _leaves.DOColor(new Color(1, 1, 1, 1), Settings.FadeDuration);
+               _trunk.DOColor(new Color(1, 1, 1, 1), Settings.FadeDuration);
+           }
+   
+           public void FadeOut()
+           {
+               _leaves.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
+               _trunk.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
+           }
+   ```
+
+   
+
+3. 创建Settings来储存全局使用的变量，方便修改
+
+### 第十二节 背包数据初始化
+
+1. 单独创建一个类来保存各种数据和各种枚举数据
+2. 使用ItemDataSo来创建物品数据
+
+### 第十三节 使用 UI Toolkit 和 UI Builder 制作物品编辑器
+
+### 第十四节 创建 ListView 中的 ItemTemplate
+
+1. 

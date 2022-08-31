@@ -16,14 +16,15 @@
 
 ### 第四节 创建Player
 
-1. 调整头、身体、手图片的pivot为底部，然后Sprite Sort Point选择pivot，将三个部位组装成一个完整的身体，父物体使用Sorting Group可以将整个GO当成一个sorting layer的整体
+1. 调整头、身体、手图片的pivot为底部，然后Sprite Sort Point选择pivot，将三个部位组装成一个完整的身体，父物体使用Sorting
+   Group可以将整个GO当成一个sorting layer的整体
 2. Project Settings-Graphic-Camera Settings可以更改渲染轴，俯视角为x=0,y=1,z=0，这样当sorting layer一样时，y坐标小的会显示在前面
 
 ### 第五节 基本移动
 
 核心移动代码：Horizontal和Vertical组成Vector 2，参与位置移动运算
 
-```c#
+```csharp
 private void MoveMoment() =>
             _rigidbody2D.MovePosition(
                 _rigidbody2D.position 
@@ -46,8 +47,9 @@ private void MoveMoment() =>
 
 1. unity仓库安装Cinemachine便可在Hierarchy中添加Cinemachine
 2. 2D场景有缝隙，可以文件夹中右键2D-Sprite-Sprite Atlas添加图集，再将包含地图的文件夹拖拽进去，使用Pack Preview打包图集
-3. camera添加pixel Prefect组件可以根据像素比例将摄像机的位置调整到最佳距离，然后Cinemachine添加Cinemachine pixel prefect扩展以调用camera的pixel Prefect；根据camera中被pixel Prefect改变的size设置Cinemachine的Lens Ortho Size
-4. 调整Cinemachine的deadzone来设置跟随的缓存距离
+3. camera添加pixel Prefect组件可以根据像素比例将摄像机的位置调整到最佳距离，然后Cinemachine添加Cinemachine pixel
+   prefect扩展以调用camera的pixel Prefect；根据camera中被pixel Prefect改变的size设置Cinemachine的Lens Ortho Size
+4. 调整Cinemachine的dead zone来设置跟随的缓存距离
 
 ### 第九节 碰撞层和景观树
 
@@ -57,7 +59,8 @@ private void MoveMoment() =>
 
 ### 第十节 摄像机边界
 
-1. Cinemachine添加Cinemachine Confiner扩展，将碰撞边界的GO拖拽给Confiner以限制摄像机距离，碰撞边界GO使用Polygon Collider2D碰撞体来包裹整个地图，需要设置为trigger
+1. Cinemachine添加Cinemachine Confiner扩展，将碰撞边界的GO拖拽给Confiner以限制摄像机距离，碰撞边界GO使用Polygon
+   Collider2D碰撞体来包裹整个地图，需要设置为trigger
 2. 由于碰撞边界GO不能跨场景拖拽，所以需要用代码在更换场景时来寻找碰撞边界GO，热更换碰撞边界会导致刷新不及时，所以需要手动清除缓存
 
 ```c#
@@ -78,7 +81,7 @@ private void SwitchConfinerShape()
 
 2. 使用dotween来线性修改透明度
 
-   ```c#
+   ```csharp
    public void FadeIn()
            {
                _leaves.DOColor(new Color(1, 1, 1, 1), Settings.FadeDuration);
@@ -91,23 +94,7 @@ private void SwitchConfinerShape()
                _trunk.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
            }
    ```
-<<<<<<<< HEAD:README.md
-<<<<<<<< HEAD:README.md
-<<<<<<<< HEAD:README.md
-   
-========
-========
-========
 
-
->>>>>>>> farm/master:Assets/README.md
-
-
->>>>>>>> farm/master:Assets/README.md
-
-
-
->>>>>>>> farm/master:Assets/README.md
 3. 创建Settings来储存全局使用的变量，方便修改
 
 ### 第十二节 背包数据初始化
@@ -125,7 +112,7 @@ private void SwitchConfinerShape()
 
 3. 编辑器ItemEditor代码的C#版本里可以编辑代码，通过特性可以更改编辑器所处的位置
 
-   ```c#
+   ```csharp
    前：[MenuItem("Window/UI Toolkit/ItemEditor")]
    后：[MenuItem("Tarowy Tool/ItemEditor")]
    ```
@@ -138,17 +125,64 @@ private void SwitchConfinerShape()
 2. window-UI ToolKit-Samples可以看到编辑器工具UI的样例
 
 ### 第十五节  生成 ListView 列表
-<<<<<<<< HEAD:README.md
-<<<<<<<< HEAD:README.md
-<<<<<<<< HEAD:README.md
+
+1. itemEditor的C#版本里添加读取数据的代码，在初始化UI后读取So的数据
+
+   ```csharp
+   private void LoadDataBase()
+       {
+           //从资源文件夹中找到指定的So文件，获取其GUID，GUID是资源文件的的唯一标识符
+           var dataArray = AssetDatabase.FindAssets("ItemDataList");
+   
+           if (dataArray.Length > 0)
+           {
+               //根据资源文件的GUID获取文件路径
+               var assetPath = AssetDatabase.GUIDToAssetPath(dataArray[0]);
+               //根据文件路径实例化该So
+               _dataBase = AssetDatabase.LoadAssetAtPath(assetPath, typeof(ItemDataListSo)) as ItemDataListSo;
+           }
+   
+           _detailsList = _dataBase != null ? _dataBase.itemDetailsList : null;
+           //需要标记才能成功保存该数据
+           EditorUtility.SetDirty(_dataBase);
+       }
+   ```
+
+2. 在代码中加载上一节创建的模板，将So的数据填充进去，再将其添加到编辑器ListView中
+
+   ```csharp
+    private void GenerateListView()
+    {
+        VisualElement MakeItem() => _itemRowTemplate.CloneTree();
+
+        void BindItem(VisualElement e, int i)
+        {
+            if (i >= _detailsList.Count) return;
+            e.Q<VisualElement>("ItemIcon").style.backgroundImage = _detailsList[i].itemIcon?.texture;
+            e.Q<Label>("ItemName").text = _detailsList[i].itemName ?? "No Item";
+        }
+
+        _itemListView.itemsSource = _detailsList;
+        //在列表中产生数据
+        _itemListView.makeItem = MakeItem;
+        //为列表中每个数据绑定数据
+        _itemListView.bindItem = BindItem;
+    }
+   ```
+   
+### 第十六节 绑定 Editor Window 中的参数变量
+
+1. 分别获取So的详细数据和ScrollView元素的数据，将So的数据显示到ScrollView中 
+2. 使用`RegisterValueChangedCallback`侦测UI中数据的变动并将对应的数据也改变
+
+   ```csharp
+      var itemId = _itemDetailsSelection.Q<IntegerField>("ItemId");
+        itemId.value = _activeItem.itemID;
+        itemId.RegisterValueChangedCallback(evt => { _activeItem.itemID = evt.newValue; });
+   ```
+
+3. 如果So数据中的图片没有数据，则需要将编辑器工具的图片设置为默认值，否则会报错无法运行
+
+### 第十七节 实现 ListView 添加删除同步信息功能
+
 1. 
-========
-
->>>>>>>> farm/master:Assets/README.md
-========
-
->>>>>>>> farm/master:Assets/README.md
-========
-
->>>>>>>> farm/master:Assets/README.md
-

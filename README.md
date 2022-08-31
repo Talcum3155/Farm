@@ -91,9 +91,23 @@ private void SwitchConfinerShape()
                _trunk.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
            }
    ```
+<<<<<<<< HEAD:README.md
+<<<<<<<< HEAD:README.md
+<<<<<<<< HEAD:README.md
+   
+========
+========
+========
+
+
+>>>>>>>> farm/master:Assets/README.md
+
+
+>>>>>>>> farm/master:Assets/README.md
 
 
 
+>>>>>>>> farm/master:Assets/README.md
 3. 创建Settings来储存全局使用的变量，方便修改
 
 ### 第十二节 背包数据初始化
@@ -124,5 +138,17 @@ private void SwitchConfinerShape()
 2. window-UI ToolKit-Samples可以看到编辑器工具UI的样例
 
 ### 第十五节  生成 ListView 列表
+<<<<<<<< HEAD:README.md
+<<<<<<<< HEAD:README.md
+<<<<<<<< HEAD:README.md
+1. 
+========
 
+>>>>>>>> farm/master:Assets/README.md
+========
+
+>>>>>>>> farm/master:Assets/README.md
+========
+
+>>>>>>>> farm/master:Assets/README.md
 

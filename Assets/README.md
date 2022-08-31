@@ -92,7 +92,7 @@ private void SwitchConfinerShape()
            }
    ```
 
-   
+
 
 3. 创建Settings来储存全局使用的变量，方便修改
 
@@ -119,4 +119,10 @@ private void SwitchConfinerShape()
 4. 双击ItemEditor代码的uxml可以打开UI Builder来编辑工具
 
 ### 第十四节 创建 ListView 中的 ItemTemplate
+
+1. 右键UI ToolKit-UI Document可以创建一个UI Builder文件以制作UI模板，在代码中可以调用这个模板，将其添加到List中
+2. window-UI ToolKit-Samples可以看到编辑器工具UI的样例
+
+### 第十五节  生成 ListView 列表
+
 

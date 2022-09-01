@@ -647,6 +647,7 @@ GameObject:
   - component: {fileID: 1552922659}
   - component: {fileID: 1552922660}
   - component: {fileID: 1552922661}
+  - component: {fileID: 1552922662}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -744,6 +745,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &1552922662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552922656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02df38d3c3ac27241ad680d8f1318152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1735790853
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +841,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1 &2060086946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060086947}
+  - component: {fileID: 2060086948}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2060086947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060086946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.192735, y: 0.40854514, z: -0.50252026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060086948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060086946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d579de5af9012224090c1f12416d72dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDataListSo: {fileID: 11400000, guid: 6d48c77a1d6f3ed48acd02b1a34c6a67, type: 2}
+  playerBagSo: {fileID: 11400000, guid: 9fd712be7948827439cd1e3341b22981, type: 2}
 --- !u!1 &2069754214
 GameObject:
   m_ObjectHideFlags: 0

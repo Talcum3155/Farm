@@ -71,7 +71,15 @@ public class ItemEditor : EditorWindow
         var itemDetails = new ItemDetails
         {
             itemName = "New Item",
-            itemID = 1001 + _detailsList.Count
+            itemID = 1001 + _detailsList.Count,
+            itemDescription = _activeItem.itemDescription,
+            itemPrice = _activeItem.itemPrice,
+            itemType = _activeItem.itemType,
+            itemUseRadius = _activeItem.itemUseRadius,
+            canCarried = _activeItem.canCarried,
+            canPickedUp = _activeItem.canPickedUp,
+            canDropped = _activeItem.canDropped,
+            sellPercentage = _activeItem.sellPercentage
         };
         _detailsList.Add(itemDetails);
         _itemListView.Rebuild();
@@ -114,7 +122,7 @@ public class ItemEditor : EditorWindow
         }
 
         //限制子物体高度
-        _itemListView.fixedItemHeight = 50;
+        _itemListView.fixedItemHeight = 40;
         _itemListView.itemsSource = _detailsList;
         //在列表中产生数据
         _itemListView.makeItem = MakeItem;

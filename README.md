@@ -1,6 +1,6 @@
 # M Farm笔记
 
-## 基本操作
+## 游戏部分
 
 ### 第一节 展示
 
@@ -16,13 +16,12 @@
 
 ### 第四节 创建Player
 
-1. 调整头、身体、手图片的pivot为底部，然后Sprite Sort Point选择pivot，将三个部位组装成一个完整的身体，父物体使用Sorting
-   Group可以将整个GO当成一个sorting layer的整体
+1. 调整头、身体、手图片的pivot为底部，然后Sprite Sort Point选择pivot，将三个部位组装成一个完整的身体，父物体使用Sorting Group可以将整个GO当成一个sorting layer的整体
 2. Project Settings-Graphic-Camera Settings可以更改渲染轴，俯视角为x=0,y=1,z=0，这样当sorting layer一样时，y坐标小的会显示在前面
 
 ### 第五节 基本移动
 
-核心移动代码：Horizontal和Vertical组成Vector 2，参与位置移动运算
+&ensp;&ensp;核心移动代码：Horizontal和Vertical组成Vector 2，参与位置移动运算
 
 ```csharp
 private void MoveMoment() =>
@@ -185,4 +184,49 @@ private void SwitchConfinerShape()
 
 ### 第十七节 实现 ListView 添加删除同步信息功能
 
-1. 
+1. 直接从root元素中查找按钮，然后订阅事件
+
+   ```csharp
+   root.Q<Button>("AddButton").clicked += AddItem;
+   root.Q<Button>("DeleteButton").clicked += RemoveItem;
+   ```
+## 继续游戏部分
+
+### 第十八节 填写物品数据库
+
+### 第十九节 创建 InventoryManager 和 Item
+
+1. 创建物品数据库单例以便其他代码调用
+2. 创建一个**itemBase**的GO来显示**itemBase**对应ID的物品图片，对于不同的**Sprite**的大小以及其锚点的位置需要用代码将触发体修改成不同尺寸，`sprite.bounds.center`获取bounds相对锚点的坐标
+
+   ```csharp
+   private void Init(int id)
+        {
+            itemId = id;
+            _itemDetails = InventoryManager.Instance.GetItemDetails(id);
+
+            if (_itemDetails is null) return;
+            var sprite = _itemDetails.itemOnWorldSprite ? _itemDetails.itemOnWorldSprite : _itemDetails.itemIcon;
+            _spriteRenderer.sprite = sprite;
+
+            _boxCollider2D.size = new Vector2(sprite.bounds.size.x,sprite.bounds.size.y);
+            //锚点在不在中心时，需要让碰撞体的y轴偏移到中心点
+            _boxCollider2D.offset = Vector2.up * sprite.bounds.center.y;
+        }
+    }
+   ```
+   
+3. Game窗口右上角可以设置**Play Unforced**，这样运行游戏时不会使焦点切换到Game窗口中
+
+### 第二十节 拾取物品基本逻辑
+
+1. 靠近物品且物品是**CanPickedUp**的就将其捡起来
+
+### 第二十一节 实现背包的数据结构
+
+1. 创建玩家背包物品数据库
+2. 捡到物品后将其添加到玩家的背包中，需要考虑背包已经有该物品以及背包是否还有空格的问题
+
+### 第二十二节 实现背包检查和添加物品
+
+1. 背包有空位就在空位添加物品，如果已经有该物品就直接让该物品数量加上捡取的物品的数量

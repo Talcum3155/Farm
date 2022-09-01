@@ -26,14 +26,170 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   - itemID: 1002
+    itemName: "\u571F\u8C46\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: f140b8cf7b2cb44c5bf34bb9bb3292f4, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 712efb3c5425e4d62aa03accb5b7a498, type: 3}
+    itemDescription: "\u571F\u8C46\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1003
     itemName: "\u8461\u8404\u79CD\u5B50"
     itemType: 0
-    itemIcon: {fileID: 21300000, guid: eff80b331cf5c4ca49471d8604c3b52e, type: 3}
+    itemIcon: {fileID: 21300000, guid: 13fd782ac3661413abe57fc16343e499, type: 3}
     itemOnWorldSprite: {fileID: 21300000, guid: eff80b331cf5c4ca49471d8604c3b52e, type: 3}
-    itemDescription: "\u8461\u8404\u7684\u79CD\u5B50"
+    itemDescription: "\u8461\u8404\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1004
+    itemName: "\u8304\u5B50\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 9f9b0e3a4d4144c4f857b9c99e50a8be, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 7fa27847daa7848cd8221a18379f7a21, type: 3}
+    itemDescription: "\u8304\u5B50\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1005
+    itemName: "\u84DD\u8393\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 145ecd71b23ff4ef1ae4b88ba1820deb, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: a190370c9a26a43aa9c3e596f8976fc4, type: 3}
+    itemDescription: "\u84DD\u8393\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1006
+    itemName: "\u7EA2\u841D\u535C"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 2597146da57814c789a59eda5740c9bf, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 0f5a527a6777043739c58b084887ec12, type: 3}
+    itemDescription: "\u7EA2\u841D\u535C\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1007
+    itemName: "\u5357\u74DC\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: a4cf1d099c0994049a38e73bf9d629dd, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 738078985c017481f8d443cf821e26b5, type: 3}
+    itemDescription: "\u5357\u74DC\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1008
+    itemName: "\u829C\u83C1\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 0689ebc0f067f41fa98586e5b574896f, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 58c6799e544ae49a48186335b7f16ba0, type: 3}
+    itemDescription: "\u829C\u83C1\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1009
+    itemName: "\u7EA2\u8FA3\u6912"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 967cc7f8afb724dd0915a57883580633, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 38565caefc0504f3f9cb90ce3c5d3c3c, type: 3}
+    itemDescription: "\u7EA2\u8FA3\u6912\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1010
+    itemName: "\u756A\u8304\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: cfbba8cf50d164f2182e614389427136, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: b2299da4eb0be49f0843d0e1fbafbed1, type: 3}
+    itemDescription: "\u756A\u8304\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1011
+    itemName: "\u897F\u74DC\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 5cfc475b0e3804e81b1233785b390bde, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: e4373ab1bca4244e89aa5c948b14f09f, type: 3}
+    itemDescription: "\u897F\u74DC\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1012
+    itemName: "\u9488\u6749\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 9930d861d3ccf4ddc87536ae85a56425, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 9930d861d3ccf4ddc87536ae85a56425, type: 3}
+    itemDescription: "\u9488\u6749\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1013
+    itemName: "\u9614\u53F6\u79CD\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 1ae82374d0e4445118e47ce07e8426fe, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 1ae82374d0e4445118e47ce07e8426fe, type: 3}
+    itemDescription: "\u9614\u53F6\u7684\u79CD\u5B50\uFF0C\u53EF\u4EE5\u79CD\u690D\u5728\u571F\u5730\u4E2D"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1014
+    itemName: "\u571F\u8C46"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 59a2ce6cc735e4cd3a3da1bad8629303, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 59a2ce6cc735e4cd3a3da1bad8629303, type: 3}
+    itemDescription: "\u571F\u8C46"
+    itemUseRadius: 1
+    canPickedUp: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1015
+    itemName: "\u9488\u6749\u6728"
+    itemType: 1
+    itemIcon: {fileID: 21300000, guid: 5809980803ddf45a1aa8df14dbc00394, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 0d5f887d0ba144b7180f3e33336beac5, type: 3}
+    itemDescription: "\u9488\u6749\u6728"
     itemUseRadius: 1
     canPickedUp: 1
     canDropped: 1
     canCarried: 1
-    itemPrice: 50
+    itemPrice: 0
     sellPercentage: 0

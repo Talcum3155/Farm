@@ -19,4 +19,11 @@ namespace Utilities
         [Range(0, 1)]
         public float sellPercentage; //卖出再买回的损失价格
     }
+
+    [System.Serializable]
+    public struct InventoryItem
+    {
+        public int itemId;
+        public int itemAmount;
+    }
 }

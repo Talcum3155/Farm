@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace Utilities
 {
     [System.Serializable]
-    public class ItemDetails
+    public class ItemDetails: IComparable<ItemDetails>
     {
         public int itemID;
         public string itemName;
@@ -18,6 +19,13 @@ namespace Utilities
         public int itemPrice;
         [Range(0, 1)]
         public float sellPercentage; //卖出再买回的损失价格
+
+        public int CompareTo(ItemDetails other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            return itemID.CompareTo(other.itemID);
+        }
     }
 
     [System.Serializable]

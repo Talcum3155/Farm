@@ -230,3 +230,34 @@ private void SwitchConfinerShape()
 ### 第二十二节 实现背包检查和添加物品
 
 1. 背包有空位就在空位添加物品，如果已经有该物品就直接让该物品数量加上捡取的物品的数量
+
+### 第二十三节 制作 Action Bar UI
+
+1. 创建一个新的**scene**，在其中创建**Canvas**，**640 * 380**的size
+2. 使用**Layout Group**排列ActionBar上的Slot，对于**Layout Group**中不想被其管束的元素可以为其加上**Layout Element**
+
+### 第二十四节 制作人物背包内的UI
+
+1. 使用**Grid Layout Group**排列背包内的格子
+
+### 第二十五节 SlotUI 根据数据显示图片和数量
+
+1. **Button**的**Navigation**可以在使用键盘操控的时候从一个格子切换到另一个格子，点击**Visible**可以看见切换的线条
+2. **Unity**编辑器拖拽组件比`Awake()`中获取更快，对私有变量使用`[SerializeField]`特性可以使其显示在**Unity**的编辑器中
+3. 为**Slot**创建枚举，定义其是什么类型的**Slot**
+
+### 第二十六节 背包UI显示
+
+1. 将背包的格子和PlayerBag的数据一一匹配
+2. 使用静态事件订阅修改UI的方法，以便其他函数调用
+
+   ```csharp
+   public static event Action<InventoryLocation, List<InventoryItem>, int> UpdateInventoryUI;
+
+   public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list, int index)
+            => UpdateInventoryUI?.Invoke(location, list, index);
+   ```
+   
+### 第二十七节 控制背包打开和关闭
+
+1. `bag.activeInHierarchy`可以获取GO在Hierarchy面板中的激活状态，可以用这个来控制背包的关闭与打开

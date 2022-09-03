@@ -28,7 +28,7 @@ namespace Inventory.Item
             }
         }
 
-        private void Init(int id)
+        public void Init(int id)
         {
             itemId = id;
             _itemDetails = InventoryManager.Instance.GetItemDetails(id);

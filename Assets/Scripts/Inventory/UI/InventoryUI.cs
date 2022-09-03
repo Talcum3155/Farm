@@ -2,22 +2,23 @@ using System;
 using System.Collections.Generic;
 using Inventory.Logic;
 using UnityEngine;
+using UnityEngine.UI;
 using Utilities;
 
 namespace Inventory.UI
 {
     public class InventoryUI : MonoBehaviour
     {
+        public Image dragImage;
+
         [SerializeField] private List<BagSlot> bagSlots;
         [SerializeField] private GameObject bag;
-        private bool _bagOpened;
+        private int _activeSlotIndex;
 
         private void Start()
         {
             for (var i = 0; i < bagSlots.Count; i++)
-            {
                 bagSlots[i].slotIndex = i;
-            }
 
             bag.SetActive(false);
         }
@@ -51,6 +52,11 @@ namespace Inventory.UI
                 case InventoryLocation.Bag:
                     if (index != -1)
                     {
+                        if (itemsList[index].itemId == 0)
+                        {
+                            bagSlots[index].UpdateEmptySlot();
+                            return;
+                        }
                         bagSlots[index].UpdateSlot(InventoryManager.Instance.GetItemDetails(itemsList[index].itemId),
                             itemsList[index].itemAmount);
                         return;
@@ -75,5 +81,21 @@ namespace Inventory.UI
 
         public void SwitchBagOpenStatus()
             => bag.SetActive(!bag.activeInHierarchy);
+
+        public void SwitchSelectItem(int slotIndex)
+        {
+            if (slotIndex == _activeSlotIndex)
+            {
+                bagSlots[_activeSlotIndex].IsSelected
+                    = !bagSlots[_activeSlotIndex].IsSelected;
+                return;
+            }
+
+            if (slotIndex >= bagSlots.Count)
+                return;
+
+            bagSlots[_activeSlotIndex].IsSelected = false;
+            bagSlots[_activeSlotIndex = slotIndex].IsSelected = true;
+        }
     }
 }

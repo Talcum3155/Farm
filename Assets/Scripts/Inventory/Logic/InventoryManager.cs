@@ -34,9 +34,9 @@ namespace Inventory.Logic
             for (var i = 0; i < playerBag.Count; i++)
             {
                 //找到了背包中的空格或者背包中已经拥有该物品
-                if (playerBag[i].itemId != 0 
-                && playerBag[i].itemId != item.itemId) continue;
-                
+                if (playerBag[i].itemId != 0
+                    && playerBag[i].itemId != item.itemId) continue;
+
                 bagFull = false;
                 //当背包中没有该物品时，该格子的数量默认为0
                 playerBag[i] = new InventoryItem()
@@ -76,5 +76,13 @@ namespace Inventory.Logic
 
         public bool CheckBagSpace()
             => InventoryManager.Instance.playerBagSo.inventoryItems.All(inventoryItem => inventoryItem.itemId != 0);
+
+        public void SwapItem(int formIndex, int targetIndex)
+        {
+            (playerBagSo.inventoryItems[formIndex], playerBagSo.inventoryItems[targetIndex]) = (
+                playerBagSo.inventoryItems[targetIndex], playerBagSo.inventoryItems[formIndex]);
+            MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, formIndex);
+            MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, targetIndex);
+        }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BoundsConfiner
   - WorldItem
+  - ItemParent
   layers:
   - Default
   - TransparentFX

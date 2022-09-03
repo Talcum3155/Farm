@@ -1,3 +1,5 @@
+using System;
+
 namespace Utilities
 {
     public enum ItemType
@@ -17,6 +19,7 @@ namespace Utilities
         HarvestableScenery
     }
 
+    [Flags]
     public enum SlotType
     {
         Bag,

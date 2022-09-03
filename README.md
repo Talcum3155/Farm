@@ -261,3 +261,30 @@ private void SwitchConfinerShape()
 ### 第二十七节 控制背包打开和关闭
 
 1. `bag.activeInHierarchy`可以获取GO在Hierarchy面板中的激活状态，可以用这个来控制背包的关闭与打开
+
+### 第二十八节 背包物品选择高亮显示和动画
+
+1. 选中一个格子时激活高亮GO，其他格子的高亮需要关闭，`IPointerClickHandler`可以检测鼠标的点击
+2. 使高亮成GO为一个动画
+
+### 第二十九节 创建 DragItem 实现物品拖拽跟随显示
+
+1. 在Inventory的**Canvas**创建一个新的**Canvas**，**Pixel Prefect**选择none，inherit会让该**Canvas**继承上一个**Canvas**，**Override Sorting**设置比UI画布高一层以覆盖，不需要**Canvas Scaler**
+2. 在拖拽的画布中创建一个Image用来存放被拖拽的Slot物品的Image，同样需要关闭其射线
+3. 拖拽开始事件：`IBeginDragHandler`，拖拽中事件：`IDragHandler`，拖拽结束事件：`IEndDragHandler`
+4. 关闭BagSlot所有子物体和Tmp的**RayCast Target**，以便鼠标的射线能击中对应的格子以便获取格子的数据
+
+### 第三十节 实现拖拽物品交换数据和在地图上生成物品
+
+1. 依靠`IEndDragHandler`结束事件的eventHandler参数获取拖拽的终点是否是格子以及具体是哪个格子
+2. 格子类型不同需要进行转换，考虑目标格子是否是空格子
+3. 如果拖拽的目标是地上，需要将屏幕坐标转换为世界坐标，在对应坐标处生成该物品
+
+### 第三十一节 制作 ItemTooltip 的 UI
+
+1. 创建一个ItemTooltip的GO用来显示物品的信息，为其添加**Vertical Layout Group**以规划垂直布局，勾选**Control Child Size**的width限制元素宽度，添加**Content Size Fitter**并选择**Vertical Fit**为**Preferred Size**以自适应高度
+2. 创建Top(显示名字和类型)、Middle(显示描述)、Bottom(显示价格)的子元素，Middle中的描述需要添加**Content Size Fitter**并选择**Vertical Fit**为**Preferred Size**来适应不同物品的描述字数
+3. Top的**Vertical Layout Group**控制子元素的高度和宽度来让子元素贴紧
+4. Middle也需要勾选**Vertical Layout Group**的控制宽高以及添加**Content Size Fitter**，这样子元素边长后自己也会跟着变长
+5. Bottom的文字可以添加**Shadow**组件来添加阴影，这个文字需要用text(legacy)。如果用TMP，设置其阴影会导致所有的TMP都被一起设置
+

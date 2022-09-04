@@ -288,3 +288,16 @@ private void SwitchConfinerShape()
 4. Middle也需要勾选**Vertical Layout Group**的控制宽高以及添加**Content Size Fitter**，这样子元素边长后自己也会跟着变长
 5. Bottom的文字可以添加**Shadow**组件来添加阴影，这个文字需要用text(legacy)。如果用TMP，设置其阴影会导致所有的TMP都被一起设置
 
+### 第三十二节 实现根据物品详情显示 ItemTooltip
+
+1. 让ItemDetail的数据分别对应上ItemTooltip的UI
+2. 种子、家具、图纸才需要显示价格，对于处于不同类型格子中的物品也需要区分显示卖价和买价
+3. 为BagSlot单独创建一个Script来根据鼠标的位置显示ItemTooltip，不需要显示ItemTooltip的BagSlot可以不挂载该组件，使用`IPointerEnterHandler`,`IPointerExitHandler`来判断鼠标是否移入
+4. ItemDetail的Description文本的长度改变后不能即使刷新**Content Size Fitter**来自适应高度，需要使用`LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>())`来强制刷新布局
+
+### 第三十四节 制作 Player 的动画
+
+1. 创建一个包含空动画的基地动画状态机，动画状态机中创建两个混合树，**Idle**用来控制静止动画，**WalkAndRun**用来控制奔跑和走路的切换
+2. **WalkAndRun**里再创建四个混合树，用来控制上下左右动画的切换，当切换到左右/上下动画时，再根据具体的x/y轴的输入来控制奔跑和行走
+3. 手、足、身体分别创建一个**Animation Override Controller**以空动画状态机为基地的动画状态机来分别控制各部位的动画
+

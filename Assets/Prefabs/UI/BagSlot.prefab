@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 3460675290517359119}
   - component: {fileID: 3460675290517359116}
   - component: {fileID: 6895742551134607400}
+  - component: {fileID: 2931719158976866503}
   m_Layer: 5
   m_Name: BagSlot
   m_TagString: Untagged
@@ -314,6 +315,7 @@ MonoBehaviour:
   highLightImage: {fileID: 1643452312}
   amountTmp: {fileID: 3460675290585918453}
   button: {fileID: 3460675290517359116}
+  inventoryUI: {fileID: 0}
   slotType: 0
   isSelected: 0
   itemDetails:
@@ -331,6 +333,19 @@ MonoBehaviour:
     sellPercentage: 0
   itemAmount: 0
   slotIndex: 0
+--- !u!114 &2931719158976866503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3460675290517359106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb65062a18e1374db64e89e5c9fca39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bagSlot: {fileID: 6895742551134607400}
 --- !u!1 &3460675290585918443
 GameObject:
   m_ObjectHideFlags: 0

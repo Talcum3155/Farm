@@ -15,7 +15,7 @@ MonoBehaviour:
   itemDetailsList:
   - itemID: 1001
     itemName: "\u65A7\u5934"
-    itemType: 0
+    itemType: 3
     itemIcon: {fileID: 21300000, guid: 3714c3e6b5e3d498ebcd06d432b3dd89, type: 3}
     itemOnWorldSprite: {fileID: 0}
     itemDescription: "\u7528\u6765\u780D\u6811\u7684\u6700\u4F4E\u7EA7\u7684\u65A7\u5934"
@@ -71,8 +71,8 @@ MonoBehaviour:
     canPickedUp: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 10
+    sellPercentage: 0.4
   - itemID: 1006
     itemName: "\u7EA2\u841D\u535C"
     itemType: 0
@@ -191,5 +191,5 @@ MonoBehaviour:
     canPickedUp: 1
     canDropped: 1
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 20
+    sellPercentage: 0.5

@@ -2,6 +2,7 @@ using System;
 
 namespace Utilities
 {
+    [Flags]
     public enum ItemType
     {
         Seed,
@@ -27,6 +28,7 @@ namespace Utilities
         Box
     }
 
+    [Flags]
     public enum InventoryLocation
     {
         Bag,

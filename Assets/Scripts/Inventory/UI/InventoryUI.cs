@@ -13,13 +13,17 @@ namespace Inventory.UI
 
         [SerializeField] private List<BagSlot> bagSlots;
         [SerializeField] private GameObject bag;
+        public ItemToolTip itemToolTip;
         private int _activeSlotIndex;
 
         private void Start()
         {
             for (var i = 0; i < bagSlots.Count; i++)
+            {
                 bagSlots[i].slotIndex = i;
-
+                bagSlots[i].inventoryUI = this;
+            }
+            
             bag.SetActive(false);
         }
 

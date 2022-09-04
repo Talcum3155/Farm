@@ -14,7 +14,7 @@ namespace Inventory.UI
         [SerializeField] private Image highLightImage;
         [SerializeField] private TextMeshProUGUI amountTmp;
         [SerializeField] private Button button;
-        private InventoryUI _inventoryUI;
+        public InventoryUI inventoryUI;
 
         [Header("格子类型")] public SlotType slotType;
 
@@ -36,8 +36,6 @@ namespace Inventory.UI
         {
             if (itemDetails.itemID == 0)
                 UpdateEmptySlot();
-
-            _inventoryUI = GetComponentInParent<InventoryUI>();
         }
 
         public void UpdateSlot(ItemDetails details, int amount)
@@ -64,7 +62,7 @@ namespace Inventory.UI
             if (itemAmount == 0)
                 return;
 
-            _inventoryUI.SwitchSelectItem(slotIndex);
+            inventoryUI.SwitchSelectItem(slotIndex);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -72,20 +70,20 @@ namespace Inventory.UI
             if (itemAmount == 0)
                 return;
 
-            _inventoryUI.dragImage.gameObject.SetActive(true);
-            _inventoryUI.dragImage.sprite = itemDetails.itemIcon;
-            _inventoryUI.SwitchSelectItem(slotIndex);
+            inventoryUI.dragImage.gameObject.SetActive(true);
+            inventoryUI.dragImage.sprite = itemDetails.itemIcon;
+            inventoryUI.SwitchSelectItem(slotIndex);
         }
 
         public void OnDrag(PointerEventData eventData) =>
-            _inventoryUI.dragImage.transform.position = eventData.position;
+            inventoryUI.dragImage.transform.position = eventData.position;
 
         public void OnEndDrag(PointerEventData eventData)
         {
             //获取拖拽结束时鼠标射线击中的对象
             var target = eventData.pointerCurrentRaycast.gameObject?.GetComponent<BagSlot>();
             Debug.Log(target);
-            _inventoryUI.dragImage.gameObject.SetActive(false);
+            inventoryUI.dragImage.gameObject.SetActive(false);
 
             //目标位置是格子
             if (target is not null)
@@ -94,7 +92,7 @@ namespace Inventory.UI
                 if ((slotType ^ target.slotType) == 0)
                     InventoryManager.Instance.SwapItem(slotIndex, target.slotIndex);
 
-                _inventoryUI.SwitchSelectItem(target.slotIndex);
+                inventoryUI.SwitchSelectItem(target.slotIndex);
                 return;
             }
 

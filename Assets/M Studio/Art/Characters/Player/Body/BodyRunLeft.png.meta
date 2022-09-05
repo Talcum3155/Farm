@@ -100,47 +100,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 1024
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 1024
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArmHoldRunDown_0
+      name: BodyRunLeft_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a3776ab681aba840a649ce116ddba81
-      internalID: -964084183
+      spriteID: ffd01666392164426bc7a3d8fc85fd0f
+      internalID: -961895407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_1
+      name: BodyRunLeft_1
       rect:
         serializedVersion: 2
         x: 40
@@ -175,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beaba899dc661034d8b4ffe2981ee74b
-      internalID: 517976642
+      spriteID: 07f1303b958da460aae4047dc04ec584
+      internalID: 303811199
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_2
+      name: BodyRunLeft_2
       rect:
         serializedVersion: 2
         x: 80
@@ -196,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d76c75550f0765f409f9cd56c8c1f4c1
-      internalID: -1622897587
+      spriteID: 74d0d7086d1ef435eafdc6eaa19b7208
+      internalID: -984630527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_3
+      name: BodyRunLeft_3
       rect:
         serializedVersion: 2
         x: 120
@@ -217,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55cd90218d350424d80df7c2add3c198
-      internalID: 1300599490
+      spriteID: feede1c6bda9e4fc188632de4e2804c2
+      internalID: -1469457503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_4
+      name: BodyRunLeft_4
       rect:
         serializedVersion: 2
         x: 160
@@ -238,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d507fb9f30ecdc2479be17ce69c26ed9
-      internalID: 714513463
+      spriteID: b72ed37c3ca5f4238aaaf01a9411e279
+      internalID: 1605902557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_5
+      name: BodyRunLeft_5
       rect:
         serializedVersion: 2
         x: 200
@@ -259,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a1ba97ef291e324685501ef56ccdcea
-      internalID: 778040292
+      spriteID: 2df85ba5fc6ba4fb3b4fc9ff14ea5228
+      internalID: 182384555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_6
+      name: BodyRunLeft_6
       rect:
         serializedVersion: 2
         x: 240
@@ -280,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65350bffa3737b64da309cc9bd49e996
-      internalID: 1081845566
+      spriteID: db33474775ede43d5938d80a1da3520f
+      internalID: -2037519274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_7
+      name: BodyRunLeft_7
       rect:
         serializedVersion: 2
         x: 280
@@ -301,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ef6e36233d9f74c90a5ff1975e5241
-      internalID: -748883098
+      spriteID: 7392862520bf842f29aec44c463c4cee
+      internalID: -1726933601
       vertices: []
       indices: 
       edges: []
@@ -318,14 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ArmHoldRunDown_4: 714513463
-      ArmHoldRunDown_0: -964084183
-      ArmHoldRunDown_6: 1081845566
-      ArmHoldRunDown_2: -1622897587
-      ArmHoldRunDown_1: 517976642
-      ArmHoldRunDown_7: -748883098
-      ArmHoldRunDown_5: 778040292
-      ArmHoldRunDown_3: 1300599490
+      BodyRunLeft_2: -984630527
+      BodyRunLeft_6: -2037519274
+      BodyRunLeft_4: 1605902557
+      BodyRunLeft_3: -1469457503
+      BodyRunLeft_5: 182384555
+      BodyRunLeft_7: -1726933601
+      BodyRunLeft_1: 303811199
+      BodyRunLeft_0: -961895407
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

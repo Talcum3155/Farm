@@ -100,47 +100,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 1024
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 1024
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArmHoldRunDown_0
+      name: HairToolRight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a3776ab681aba840a649ce116ddba81
-      internalID: -964084183
+      spriteID: c2ebbddb337664b5a9a7bf147da9da65
+      internalID: 92166226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_1
+      name: HairToolRight_1
       rect:
         serializedVersion: 2
         x: 40
@@ -175,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beaba899dc661034d8b4ffe2981ee74b
-      internalID: 517976642
+      spriteID: 49dfd6ca188ef40848061fd501886030
+      internalID: -1732697071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_2
+      name: HairToolRight_2
       rect:
         serializedVersion: 2
         x: 80
@@ -196,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d76c75550f0765f409f9cd56c8c1f4c1
-      internalID: -1622897587
+      spriteID: 46d5add95dcb54dc4b51fc1bc5c49a5d
+      internalID: 136379513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_3
+      name: HairToolRight_3
       rect:
         serializedVersion: 2
         x: 120
@@ -217,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55cd90218d350424d80df7c2add3c198
-      internalID: 1300599490
+      spriteID: 6762e87e2bd704797abfba0a3e3fc8ba
+      internalID: -969099172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_4
+      name: HairToolRight_4
       rect:
         serializedVersion: 2
         x: 160
@@ -238,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d507fb9f30ecdc2479be17ce69c26ed9
-      internalID: 714513463
+      spriteID: 7e47738296a4341798e1ba9a0e848f0c
+      internalID: -1114955481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_5
+      name: HairToolRight_5
       rect:
         serializedVersion: 2
         x: 200
@@ -259,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a1ba97ef291e324685501ef56ccdcea
-      internalID: 778040292
+      spriteID: 75ce307f42f034088a4b8a97c10fc1f0
+      internalID: 1014185779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_6
+      name: HairToolRight_6
       rect:
         serializedVersion: 2
         x: 240
@@ -280,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65350bffa3737b64da309cc9bd49e996
-      internalID: 1081845566
+      spriteID: 23fb82b7c57da498489f143908f95c0c
+      internalID: -448458478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ArmHoldRunDown_7
+      name: HairToolRight_7
       rect:
         serializedVersion: 2
         x: 280
@@ -301,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ef6e36233d9f74c90a5ff1975e5241
-      internalID: -748883098
+      spriteID: 8176cff17a49743a8b7e997eb75dc0c0
+      internalID: -1791029548
       vertices: []
       indices: 
       edges: []
@@ -318,14 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ArmHoldRunDown_4: 714513463
-      ArmHoldRunDown_0: -964084183
-      ArmHoldRunDown_6: 1081845566
-      ArmHoldRunDown_2: -1622897587
-      ArmHoldRunDown_1: 517976642
-      ArmHoldRunDown_7: -748883098
-      ArmHoldRunDown_5: 778040292
-      ArmHoldRunDown_3: 1300599490
+      HairToolRight_5: 1014185779
+      HairToolRight_0: 92166226
+      HairToolRight_6: -448458478
+      HairToolRight_1: -1732697071
+      HairToolRight_2: 136379513
+      HairToolRight_4: -1114955481
+      HairToolRight_7: -1791029548
+      HairToolRight_3: -969099172
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

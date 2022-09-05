@@ -23,7 +23,7 @@ namespace Inventory.UI
                 bagSlots[i].slotIndex = i;
                 bagSlots[i].inventoryUI = this;
             }
-            
+
             bag.SetActive(false);
         }
 
@@ -61,6 +61,7 @@ namespace Inventory.UI
                             bagSlots[index].UpdateEmptySlot();
                             return;
                         }
+
                         bagSlots[index].UpdateSlot(InventoryManager.Instance.GetItemDetails(itemsList[index].itemId),
                             itemsList[index].itemAmount);
                         return;
@@ -92,6 +93,8 @@ namespace Inventory.UI
             {
                 bagSlots[_activeSlotIndex].IsSelected
                     = !bagSlots[_activeSlotIndex].IsSelected;
+                MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails,
+                    bagSlots[_activeSlotIndex].IsSelected);
                 return;
             }
 
@@ -100,6 +103,7 @@ namespace Inventory.UI
 
             bagSlots[_activeSlotIndex].IsSelected = false;
             bagSlots[_activeSlotIndex = slotIndex].IsSelected = true;
+            MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails, true);
         }
     }
 }

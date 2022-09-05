@@ -34,4 +34,12 @@ namespace Utilities
         public int itemId;
         public int itemAmount;
     }
+
+    [System.Serializable]
+    public class AnimatorType
+    {
+        public PartName partName;
+        public PartType partType;
+        public AnimatorOverrideController animatorOverrideController;
+    }
 }

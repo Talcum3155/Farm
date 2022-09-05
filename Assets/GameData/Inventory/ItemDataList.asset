@@ -178,7 +178,7 @@ MonoBehaviour:
     itemUseRadius: 1
     canPickedUp: 1
     canDropped: 0
-    canCarried: 0
+    canCarried: 1
     itemPrice: 0
     sellPercentage: 0
   - itemID: 1015

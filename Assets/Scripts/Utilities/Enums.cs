@@ -43,7 +43,7 @@ namespace Utilities
         Hair,
         Tool
     }
-    
+
     [Flags]
     public enum PartType //该部位在干什么
     {
@@ -51,5 +51,13 @@ namespace Utilities
         Carry,
         Hoe,
         Break
+    }
+
+    public enum Season
+    {
+        春天 = 0,
+        夏天 = 1,
+        秋天 = 2,
+        冬天 = 3
     }
 }

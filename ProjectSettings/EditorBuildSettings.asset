@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PersistanceScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/01.Field.unity
+    guid: 711e135fe8ef334469f6b3aa1f0391c1
+  - enabled: 1
+    path: Assets/Scenes/02.Home.unity
+    guid: 33b7c88fe22498540927655cec0c6c6e
+  - enabled: 1
+    path: Assets/Scenes/UIScene.unity
+    guid: 9b9ee549c809b144f849d98ba212d733
   m_configObjects: {}

@@ -313,3 +313,39 @@ private void SwitchConfinerShape()
 2. 能砍伐的树木由上半部分和下班部分拼接而成，为树的整体添加**Sorting Group**
 3. 添加半透明脚本
 
+### 第三十六节 构建游戏的时间系统
+
+1. 创建一个Manger来更新时间，在Settings里添加阈值，当时间超过阈值时就产生进位
+
+### 第三十七节 时间系统 UI 制作
+
+1. 右上角添加状态UI，使用将天色图片旋转的方式更替天色图，为天色图的父物体添加一个**Mask**组件，就可以只显示天色图的其中一片图
+2. 状态UI内有六个格子，每个格子代表四个小时。在状态UI下方添加日期和时间的UI，以及代表季节的图片
+3. 最右上角的地方添加设置按钮，对设置按钮的图片勾选上Read/Write，这样点击图片的空白处就不会触发按钮
+
+### 第三十八节 代码链接 UI 实现时间日期对应转换
+
+1. 使用两个事件更新日期，一个事件更新不怎么频繁刷新的日历，一个事件更新频繁刷新的时间
+2. 使用**Dotween**控制天色图的旋转
+
+### 第三十九节 第二场景的绘制指南
+
+1. 绘制 Collision 层碰撞
+2. 添加 Bounds 设置摄像机边界
+3. 创建 ItemParent 并设置 Tag 
+4. 别忘了把**Sprite Sort Point**设置为**Pivot**否则透视关系会不太对
+### 第四十节 创建 TransitionManager 控制人物场景切换
+
+1. 引入**UniTask**使用`SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive).ToUniTask()`转换成UniTask以异步加载场景
+
+   ```csharp
+   private async UniTask LoadSceneSetActive(string sceneName)
+        {
+            await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive).ToUniTask(
+                Progress.Create<float>((f) => { Debug.Log($"加载进度 {f}"); }));
+            //将加载的场景设置为激活态，这样SceneManager.GetActiveScene()就能获取该场景的名称
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(SceneManager.sceneCount - 1));
+        }
+   ```
+   
+2. 创建一个触发体，当玩家触碰时，会传送到触发体上标记的场景以及对应的位置

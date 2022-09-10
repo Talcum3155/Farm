@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -9,6 +11,7 @@ namespace Player
         private float _inputX;
         private float _inputY;
         public Vector2 _movementInput;
+        private bool _controllable;
 
         private Rigidbody2D _rigidbody2D;
         public Animator[] _animators;
@@ -23,15 +26,34 @@ namespace Player
             _animators = GetComponentsInChildren<Animator>();
         }
 
+        private void OnEnable()
+        {
+            MyEventHandler.BeforeSceneUnLoad += OnBeforeSceneUnLoadEvent;
+            MyEventHandler.AfterSceneLoaded += OnAfterSceneLoadEvent;
+            MyEventHandler.MoveToPosition += OnMoveToPositionEvent;
+        }
+
+        private void OnDisable()
+        {
+            MyEventHandler.BeforeSceneUnLoad -= OnBeforeSceneUnLoadEvent;
+            MyEventHandler.AfterSceneLoaded -= OnAfterSceneLoadEvent;
+            MyEventHandler.MoveToPosition -= OnMoveToPositionEvent;
+        }
+
         private void Update()
         {
-            GetInput();
+            if (_controllable)
+                GetInput();
+            else
+                //玩家失去控制权时，需要强制停止人物的移动和动画
+                _isMoving = false;
             SwitchAnimation();
         }
 
         private void FixedUpdate()
         {
-            MoveMoment();
+            if (_controllable)
+                MoveMoment();
         }
 
         private void GetInput()
@@ -57,7 +79,7 @@ namespace Player
 
         private void MoveMoment() =>
             _rigidbody2D.MovePosition(
-                _rigidbody2D.position 
+                _rigidbody2D.position
                 + _movementInput * (moveSpeed * Time.deltaTime));
 
         private void SwitchAnimation()
@@ -65,11 +87,27 @@ namespace Player
             foreach (var animator in _animators)
             {
                 //需要放在if外，否则不移动时，x和y没及时归零导致动画一直处于移动状态
-                animator.SetBool(IsMoving,_isMoving);
+                animator.SetBool(IsMoving, _isMoving);
                 if (!_isMoving) continue;
                 animator.SetFloat(InputX, _inputX);
                 animator.SetFloat(InputY, _inputY);
             }
         }
+
+        /// <summary>
+        /// 卸载场景前禁用人物移动
+        /// </summary>
+        private void OnBeforeSceneUnLoadEvent() => _controllable = false;
+
+        /// <summary>
+        /// 加载场景后启用人物移动
+        /// </summary>
+        private void OnAfterSceneLoadEvent() => _controllable = true;
+
+        /// <summary>
+        /// 将玩家移动到指定位置
+        /// </summary>
+        /// <param name="position"></param>
+        private void OnMoveToPositionEvent(Vector3 position) => transform.position = position;
     }
 }

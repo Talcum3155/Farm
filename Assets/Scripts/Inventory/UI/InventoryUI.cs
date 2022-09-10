@@ -14,7 +14,7 @@ namespace Inventory.UI
         [SerializeField] private List<BagSlot> bagSlots;
         [SerializeField] private GameObject bag;
         public ItemToolTip itemToolTip;
-        private int _activeSlotIndex;
+        private int _activeSlotIndex = -1;
 
         private void Start()
         {
@@ -36,11 +36,13 @@ namespace Inventory.UI
         private void OnEnable()
         {
             MyEventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
+            MyEventHandler.BeforeSceneUnLoad += OnBeforeSceneUnLoad;
         }
 
         private void OnDisable()
         {
             MyEventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
+            MyEventHandler.BeforeSceneUnLoad -= OnBeforeSceneUnLoad;
         }
 
         /// <summary>
@@ -89,21 +91,34 @@ namespace Inventory.UI
 
         public void SwitchSelectItem(int slotIndex)
         {
-            if (slotIndex == _activeSlotIndex)
+            /*
+             * 激活槽位等于传参槽位 或 传参是-1 ，禁用当前选择的槽位
+             * 如果激活槽位和传参槽位都等于-1，则需要直接范返回防止索引越界
+             */
+            if (_activeSlotIndex == slotIndex || slotIndex is -1)
             {
-                bagSlots[_activeSlotIndex].IsSelected
-                    = !bagSlots[_activeSlotIndex].IsSelected;
-                MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails,
-                    bagSlots[_activeSlotIndex].IsSelected);
+                if (_activeSlotIndex is -1)
+                    return;
+                bagSlots[_activeSlotIndex].IsSelected = false;
+                MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails, false);
+                _activeSlotIndex = -1;
                 return;
             }
 
-            if (slotIndex >= bagSlots.Count)
+            if (slotIndex >= bagSlots.Count || slotIndex < 0)
+            {
+                _activeSlotIndex = -1;
                 return;
+            }
 
-            bagSlots[_activeSlotIndex].IsSelected = false;
             bagSlots[_activeSlotIndex = slotIndex].IsSelected = true;
             MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails, true);
+        }
+
+        private void OnBeforeSceneUnLoad()
+        {
+            //取消举起物品状态和举起物品的动画
+            SwitchSelectItem(-1);
         }
     }
 }

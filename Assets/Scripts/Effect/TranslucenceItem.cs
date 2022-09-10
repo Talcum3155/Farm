@@ -21,8 +21,8 @@ namespace Effect
         /// </summary>
         public void FadeIn()
         {
-            _leaves.DOColor(new Color(1, 1, 1, 1), Settings.FadeDuration);
-            _trunk.DOColor(new Color(1, 1, 1, 1), Settings.FadeDuration);
+            _leaves.DOColor(new Color(1, 1, 1, 1), Settings.ItemFadeDuration);
+            _trunk.DOColor(new Color(1, 1, 1, 1), Settings.ItemFadeDuration);
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace Effect
         /// </summary>
         public void FadeOut()
         {
-            _leaves.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
-            _trunk.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.FadeDuration);
+            _leaves.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.ItemFadeDuration);
+            _trunk.DOColor(new Color(1, 1, 1, Settings.TargetAlpha), Settings.ItemFadeDuration);
         }
             
 

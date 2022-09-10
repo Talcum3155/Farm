@@ -48,7 +48,7 @@ namespace Player
                     ItemType.Commodity => PartType.Carry,
                     ItemType.Furniture => PartType.Carry,
                     _ => PartType.None
-                };
+                }; 
                 holdItemSpriteRenderer.enabled = true;
                 holdItemSpriteRenderer.sprite = itemDetails.itemOnWorldSprite;
             }

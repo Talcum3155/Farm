@@ -58,8 +58,7 @@ private void MoveMoment() =>
 
 ### 第十节 摄像机边界
 
-1. Cinemachine添加Cinemachine Confiner扩展，将碰撞边界的GO拖拽给Confiner以限制摄像机距离，碰撞边界GO使用Polygon
-   Collider2D碰撞体来包裹整个地图，需要设置为trigger
+1. Cinemachine添加Cinemachine Confiner扩展，将碰撞边界的GO拖拽给Confiner以限制摄像机距离，碰撞边界GO使用Polygon Collider2D碰撞体来包裹整个地图，需要设置为trigger
 2. 由于碰撞边界GO不能跨场景拖拽，所以需要用代码在更换场景时来寻找碰撞边界GO，热更换碰撞边界会导致刷新不及时，所以需要手动清除缓存
 
 ```c#
@@ -349,3 +348,61 @@ private void SwitchConfinerShape()
    ```
    
 2. 创建一个触发体，当玩家触碰时，会传送到触发体上标记的场景以及对应的位置
+
+### 第四十一节 实现人物跨场景移动以及场景加载前后事件
+
+1. 创建两个事件，分别在卸载场景前、加载场景后执行事件，以及一个让玩家移动到另一个对应场景的事件
+2. 改变镜头边界、 **ItemManager**中寻找**ItemParent**的函数都需要在加载另一个场景之后执行一次
+3. 如果出场景前举着物品，物品栏也处于高亮，那么在切换场景后，需要卸下物品且取消高亮
+
+### 第四十二节 制作 [SceneName] Attribute 特性
+
+1. 创建一个**SceneNameAttribute**和一个**SceneNameDrawer**类，一个用来标记切换场景类中的场景名称字段，一个用来给被标记的字段填充场景名称
+
+   ```csharp
+    private void GetSceneNameArray(SerializedProperty property)
+        {
+            var scenes = EditorBuildSettings.scenes;
+            SceneNames = new GUIContent[scenes.Length];
+
+            for (var i = 0; i < SceneNames.Length; i++)
+            {
+                //从场景路径分割出路径和场景名称
+                var splitPath = scenes[i].path.Split(_splitSeparators, StringSplitOptions.RemoveEmptyEntries);
+                //如果有场景名称就获取场景，如果场景被删除了就返回(Deleted Scene)
+                SceneNames[i] = new GUIContent(splitPath.Length is > 0 ? splitPath[^1] : "(Deleted Scene)");
+            }
+
+            if (SceneNames.Length is 0)
+                SceneNames = new[] { new GUIContent("Check Your Build Settings") };
+
+            SceneIndex = 0;
+            /*
+             * 如果字段本来就有值，检测这个值在不在场景列表里，这个行为是为了检测场景名称有没有拼错
+             * 如果字段没有值，将0索引的值赋值到字段中
+             */
+            if (!string.IsNullOrEmpty(property.stringValue))
+            {
+                for (var i = 0; i < SceneNames.Length; i++)
+                {
+                    if (!SceneNames[i].text.Equals(property.stringValue))
+                        continue;
+                    SceneIndex = i;
+                    break;
+                }
+            }
+            property.stringValue = SceneNames[SceneIndex].text;
+        }
+    }
+   ```
+   
+### 第四十三节 场景切换淡入淡出和动态 UI 显示
+
+1. 创建一个覆盖全屏幕的image，添加**Canvas Group**使用异步更改alpha值来控制淡入淡出
+2. 根据过度时间计算出alpha变化的速度，由于是alpha是浮点数，可能会有微小误差，所以使用`Mathf.Approximately(a,b)`来判断两数是否非常接近
+3. 当切换场景时，如果fade还未结束就不能让玩家再次切换场景
+
+### 第四十四节 保存和加载场景中的物品
+
+1. 创建一个`SerializableVector3`和`SceneItem`储存物品的ID和位置信息
+2. 创建一个字典`Dictionary<场景名称,List<SceneItem>>>`，每次退出场景时遍历场景中的itemParent的子物体，将其保存到该场景名称下的字典中，进入场景时再根据场景名称读取出列表将其重新生成

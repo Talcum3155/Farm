@@ -42,4 +42,28 @@ namespace Utilities
         public PartType partType;
         public AnimatorOverrideController animatorOverrideController;
     }
+
+    [System.Serializable]
+    public class SerializableVector3
+    {
+        public float x, y, z;
+        
+        public SerializableVector3(Vector3 position)
+        {
+            x = position.x;
+            y = position.y;
+            z = position.z;
+        }
+
+        public Vector3 ToVector3() => new Vector3(x, y, z);
+
+        public Vector2Int ToVector2Int() => new Vector2Int((int)x, (int)y);
+    }
+
+    [System.Serializable]
+    public class SceneItem
+    {
+        public int itemId;
+        public SerializableVector3 itemPositionInScene;
+    }
 }

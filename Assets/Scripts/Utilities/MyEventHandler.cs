@@ -61,5 +61,29 @@ namespace Utilities
 
         public static void CallTransitionScene(string targetSceneName, Vector3 targetScenePosition)
             => TransitionScene?.Invoke(targetSceneName, targetScenePosition);
+
+        /// <summary>
+        /// 在场景卸载前执行的方法
+        /// </summary>
+        public static event Action BeforeSceneUnLoad;
+
+        public static void CallBeforeSceneUnLoaded()
+            => BeforeSceneUnLoad?.Invoke();
+
+        /// <summary>
+        /// 在场景加载后执行的方法
+        /// </summary>
+        public static event Action AfterSceneLoaded;
+
+        public static void CallAfterSceneLoaded()
+            => AfterSceneLoaded?.Invoke();
+
+        /// <summary>
+        /// 将玩家移动到对应位置
+        /// </summary>
+        public static event Action<Vector3> MoveToPosition;
+
+        public static void CallMoveToPosition(Vector3 targetPosition)
+            => MoveToPosition?.Invoke(targetPosition);
     }
 }

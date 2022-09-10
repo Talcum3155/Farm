@@ -11,7 +11,7 @@ namespace Inventory.Logic
     {
         public ItemDataListSo itemDataListSo;
         public InventoryBagSo playerBagSo;
-
+        
         private void Start()
         {
             MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, -1);
@@ -77,6 +77,11 @@ namespace Inventory.Logic
         public bool CheckBagSpace()
             => InventoryManager.Instance.playerBagSo.inventoryItems.All(inventoryItem => inventoryItem.itemId != 0);
 
+        /// <summary>
+        /// 使用元组交换两个索引的位置
+        /// </summary>
+        /// <param name="formIndex">从何处交换</param>
+        /// <param name="targetIndex">需要和谁交换</param>
         public void SwapItem(int formIndex, int targetIndex)
         {
             (playerBagSo.inventoryItems[formIndex], playerBagSo.inventoryItems[targetIndex]) = (

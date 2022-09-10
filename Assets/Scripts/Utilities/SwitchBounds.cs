@@ -6,16 +6,21 @@ namespace Utilities
 {
     public class SwitchBounds : MonoBehaviour
     {
-        private void Start()
+        private void OnEnable()
         {
-            SwitchConfinerShape();
+            MyEventHandler.AfterSceneLoaded += OnSwitchConfinerShapeEvent;
+        }
+
+        private void OnDisable()
+        {
+            MyEventHandler.AfterSceneLoaded -= OnSwitchConfinerShapeEvent;
         }
 
         /// <summary>
         /// 切换cinemachine的碰撞边界防止摄像机超出地图边界，
         /// 需要cinemachine添加上Confiner组件
         /// </summary>
-        private void SwitchConfinerShape()
+        private void OnSwitchConfinerShapeEvent()
         {
             var boundGameObject = GameObject.FindGameObjectWithTag("BoundsConfiner").GetComponent<PolygonCollider2D>();
             var cinemachineConfiner = GetComponent<CinemachineConfiner>();

@@ -18,8 +18,9 @@ namespace Transition.Logic
 
         private async void Start()
         {
-            await LoadSceneSetActive(startSceneName);
             _fadeCanvasGroup = FindObjectOfType<CanvasGroup>();
+            await LoadSceneSetActive(startSceneName);
+            MyEventHandler.CallAfterSceneLoaded();
         }
 
         private void OnEnable()

@@ -406,3 +406,47 @@ private void SwitchConfinerShape()
 
 1. 创建一个`SerializableVector3`和`SceneItem`储存物品的ID和位置信息
 2. 创建一个字典`Dictionary<场景名称,List<SceneItem>>>`，每次退出场景时遍历场景中的itemParent的子物体，将其保存到该场景名称下的字典中，进入场景时再根据场景名称读取出列表将其重新生成
+
+### 第四十五节 设置鼠标指针根据物品调整
+
+1. 如果直接将Sprite设置成Cursor类型，会导致该图片无法修改，如果要把Cursor做成动画就更复杂了。所以另一种方法是创建一个Canvas，让鼠标的图片跟随鼠标移动
+2. 鼠标图片的pivot不一致，可以使用图片编辑工具将鼠标的图片移到同一个像素区域内，让它们以同一个像素坐标开始
+3. 选择工具、种子、商品后鼠标会变成不同的类型，取消选择后鼠标变回默认图片。需要注意鼠标在UI上时，无论当前选择是什么鼠标都得变回默认图片，这个需要依靠**EventSystem**来实现
+
+### 第四十六节 构建地图信息系统
+
+1. 规定地图上哪些地方能挖坑，哪些地方能干什么。可以为**Grid**挂载**Grid Information**来实现，但是这样有些限制，最好还是自己写逻辑。
+2. 新创建一个**tileMap**名为GridProperties用来设定被框画的范围的地图属性。类**TileProperty**用来储存格子的坐标、这个格子可以干什么。创建一个地图的SO包含**SceneName**和`List<TileProperty>`用来储存不同场景中每个格子的作用
+3. 类**Grip Map**挂载在GridProperties的每个tileMap层上，当在不同的tileMap层上绘制时，会根据tileMap层的GirdType来将绘制的网格加入到`List<TileProperty>`中，记录每个网格能干什么
+4. **Grip Map**需要使用`[ExecuteInEditMode]`让该脚本只有处于编辑器模式下才能运行，这样编辑器里一关闭**Grip Map**，该tileMap层网格的属性就会被重新添加到`List<TileProperty>`中
+
+   ```csharp
+   private void UpdateMapProperties()
+        {
+            //压缩该Tilemap，去除外圈没有被画的区域，只留下实际实际绘制的内容
+            mountedGoTilemap.CompressBounds();
+            if (Application.IsPlaying(this) || currentMapSo is null) return;
+            //瓦片地图左下角 瓦片地图右下角
+            var cellBounds = mountedGoTilemap.cellBounds;
+            var (minCoordinate, maxCoordinate) = (cellBounds.min, cellBounds.max);
+            for (var x = minCoordinate.x; x < maxCoordinate.x; x++)
+                for (var y = minCoordinate.y; y < maxCoordinate.y; y++)
+                {
+                    //由于绘制的瓦片地图不是规则矩形，有可能该位置没有瓦片
+                    var tile = mountedGoTilemap.GetTile(new Vector3Int(x, y, 0));
+                    if (tile is null) continue;
+                    //添加此处绘制的地图到地图属性列表中
+                    currentMapSo.tilePropertiesInScene.Add(new TileProperty()
+                    {
+                        coordinate = new Vector2Int(x, y),
+                        gridType = tileMapType,
+                        boolTypeValue = true
+                    });
+                }
+        }
+   ```
+
+### 第四十七节 生成地图数据
+
+1. 类**TileDetails**储存格子的坐标以及各种信息，**GripMapManager**中根据格子坐标生成的名称来对应上每个**TileDetails**
+2. 利用**Grid**中的实例化方法`currentGrid.WorldToCell(_mouseWorldPos);`将鼠标的位置转换成对应瓦片地图的网格坐标

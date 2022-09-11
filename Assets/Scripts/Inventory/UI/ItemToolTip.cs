@@ -23,7 +23,7 @@ namespace Inventory.UI
             //如果itemDetails的类型是种子、家具、商品就需要显示价格WS
             if (itemDetails.itemType is ItemType.Seed or ItemType.Commodity or ItemType.Furniture)
             {
-                Debug.Log(GetTypeName(itemDetails.itemType));
+                // Debug.Log(GetTypeName(itemDetails.itemType));
                 bottomPart.SetActive(true);
                 //如果是背包里的物品就显示卖价
                 itemPriceText.text = slotType == SlotType.Bag

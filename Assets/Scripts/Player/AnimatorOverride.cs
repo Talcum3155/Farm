@@ -19,10 +19,7 @@ namespace Player
             _animators = GetComponentsInChildren<Animator>();
             //获取每个动画控制机所处GO的名称
             foreach (var animator in _animators)
-            {
-                Debug.Log(animator.name);
                 _animatorNameDict[animator.name] = animator;
-            }
         }
 
         private void OnEnable()

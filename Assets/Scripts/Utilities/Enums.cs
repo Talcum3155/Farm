@@ -60,4 +60,14 @@ namespace Utilities
         秋天 = 2,
         冬天 = 3
     }
+
+    //瓦片地图的每个格子能干什么
+    [Flags]
+    public enum GridType
+    {
+        Diggable,
+        DropItem,
+        PlaceFurniture,
+        NpcObstacle
+    }
 }

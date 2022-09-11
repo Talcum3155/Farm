@@ -111,6 +111,8 @@ namespace Inventory.UI
                 return;
             }
 
+            if (_activeSlotIndex is not -1)
+                bagSlots[_activeSlotIndex].IsSelected = false;
             bagSlots[_activeSlotIndex = slotIndex].IsSelected = true;
             MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails, true);
         }

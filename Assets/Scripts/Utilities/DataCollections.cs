@@ -66,4 +66,28 @@ namespace Utilities
         public int itemId;
         public SerializableVector3 itemPositionInScene;
     }
+
+    [System.Serializable]
+    public class TileProperty
+    {
+        public Vector2Int coordinate;
+        public GridType gridType;
+        public bool boolTypeValue;
+    }
+
+    [System.Serializable]
+    public class TileDetails
+    {
+        public int gridX, gridY;
+        public bool diggable;
+        public bool dropItem;
+        public bool placeFurniture;
+        public bool npcObstacle;
+        public int seedItemId = -1;
+        public int growthDays = -1;
+        public int daysSinceDug = -1; //距离挖坑过了多少天
+        public int daysSinceWatered = -1; //距离浇水过了多少天
+        //针对可重复收割的农作物，距离收割过了多少天
+        public int daysSinceLastHarvest = 1;
+    }
 }

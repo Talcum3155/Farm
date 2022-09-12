@@ -31,6 +31,7 @@ namespace Player
             MyEventHandler.BeforeSceneUnLoad += OnBeforeSceneUnLoadEvent;
             MyEventHandler.AfterSceneLoaded += OnAfterSceneLoadEvent;
             MyEventHandler.MoveToPosition += OnMoveToPositionEvent;
+            MyEventHandler.MouseClickedEvent += OnMouseClickedEvent;
         }
 
         private void OnDisable()
@@ -38,6 +39,7 @@ namespace Player
             MyEventHandler.BeforeSceneUnLoad -= OnBeforeSceneUnLoadEvent;
             MyEventHandler.AfterSceneLoaded -= OnAfterSceneLoadEvent;
             MyEventHandler.MoveToPosition -= OnMoveToPositionEvent;
+            MyEventHandler.MouseClickedEvent -= OnMouseClickedEvent;
         }
 
         private void Update()
@@ -72,7 +74,7 @@ namespace Player
                 _inputX *= 0.5f;
                 _inputY *= 0.5f;
             }
-
+            
             _movementInput = new Vector2(_inputX, _inputY);
             _isMoving = _movementInput != Vector2.zero;
         }
@@ -94,6 +96,13 @@ namespace Player
             }
         }
 
+        #region 事件绑定
+        
+        private void OnMouseClickedEvent(Vector3 mousePos, ItemDetails itemDetails)
+        {
+            MyEventHandler.CallExecuteActionAfterAnimation(mousePos,itemDetails);
+        }
+
         /// <summary>
         /// 卸载场景前禁用人物移动
         /// </summary>
@@ -109,5 +118,7 @@ namespace Player
         /// </summary>
         /// <param name="position"></param>
         private void OnMoveToPositionEvent(Vector3 position) => transform.position = position;
+
+        #endregion
     }
 }

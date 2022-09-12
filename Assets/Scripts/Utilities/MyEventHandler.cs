@@ -21,6 +21,15 @@ namespace Utilities
 
         public static void CallInstantiatedInScene(int id, Vector3 pos) => InstantiatedItemInScene?.Invoke(id, pos);
 
+
+        /// <summary>
+        /// 将东西扔到地面上的事件
+        /// </summary>
+        public static event Action<int, Vector3> DropItem;
+
+        public static void CallDropItem(int itemId, Vector3 instantiatePos )
+            => DropItem?.Invoke(itemId, instantiatePos);
+
         /// <summary>
         /// 背包中选择物品后触发该事件，内容包含物品详细信息以及是否被选中
         /// </summary>
@@ -85,5 +94,21 @@ namespace Utilities
 
         public static void CallMoveToPosition(Vector3 targetPosition)
             => MoveToPosition?.Invoke(targetPosition);
+
+        /// <summary>
+        /// 鼠标点击地图时触发该事件
+        /// </summary>
+        public static event Action<Vector3, ItemDetails> MouseClickedEvent;
+
+        public static void CallMouseClickedEvent(Vector3 mousePos, ItemDetails itemDetail)
+            => MouseClickedEvent?.Invoke(mousePos, itemDetail);
+
+        /// <summary>
+        /// 某些动画执行完后触发该事件
+        /// </summary>
+        public static event Action<Vector3, ItemDetails> ExecuteActionAfterAnimation;
+
+        public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
+            => ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
     }
 }

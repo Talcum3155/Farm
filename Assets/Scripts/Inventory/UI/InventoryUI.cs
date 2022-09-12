@@ -58,9 +58,11 @@ namespace Inventory.UI
                 case InventoryLocation.Bag:
                     if (index != -1)
                     {
+                        //此背包槽位已经空了
                         if (itemsList[index].itemId == 0)
                         {
                             bagSlots[index].UpdateEmptySlot();
+                            _activeSlotIndex = -1;
                             return;
                         }
 

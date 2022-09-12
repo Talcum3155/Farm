@@ -50,7 +50,7 @@ namespace Inventory.UI
 
         public void UpdateEmptySlot()
         {
-            isSelected = false;
+            IsSelected = false;
             slotImage.enabled = false;
             highLightImage.gameObject.SetActive(false);
             amountTmp.text = string.Empty;

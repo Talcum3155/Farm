@@ -24,19 +24,19 @@ namespace Player
 
         private void OnEnable()
         {
-            MyEventHandler.SelectedItem += OnItemSelected;
+            MyEventHandler.SelectedItem += OnItemSelectedEvent;
         }
 
         private void OnDisable()
         {
-            MyEventHandler.SelectedItem -= OnItemSelected;
+            MyEventHandler.SelectedItem -= OnItemSelectedEvent;
         }
 
-        private void OnItemSelected(ItemDetails itemDetails, bool isSelected)
+        private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
         {
             var partType = PartType.None;
 
-            if (itemDetails.canCarried && isSelected)
+            if (isSelected && itemDetails.canCarried)
             {
                 partType = itemDetails.itemType switch
                 {

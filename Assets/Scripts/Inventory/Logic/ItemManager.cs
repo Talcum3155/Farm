@@ -18,16 +18,18 @@ namespace Inventory.Logic
 
         private void OnEnable()
         {
-            MyEventHandler.InstantiatedItemInScene += OnInstantiatedItemInScene;
+            MyEventHandler.InstantiatedItemInScene += OnInstantiatedItemInSceneEvent;
             MyEventHandler.BeforeSceneUnLoad += OnBeforeSceneUnLoad;
             MyEventHandler.AfterSceneLoaded += OnAfterSceneLoaded;
+            MyEventHandler.DropItem += OnDropItemEvent;
         }
 
         private void OnDisable()
         {
-            MyEventHandler.InstantiatedItemInScene -= OnInstantiatedItemInScene;
+            MyEventHandler.InstantiatedItemInScene -= OnInstantiatedItemInSceneEvent;
             MyEventHandler.BeforeSceneUnLoad -= OnBeforeSceneUnLoad;
             MyEventHandler.AfterSceneLoaded -= OnAfterSceneLoaded;
+            MyEventHandler.DropItem -= OnDropItemEvent;
         }
 
         private void OnBeforeSceneUnLoad()
@@ -40,14 +42,9 @@ namespace Inventory.Logic
             FindItemParent();
             RecreateAllItemsInScene();
         }
-        
+
         private void FindItemParent()
             => itemParent = GameObject.FindGameObjectWithTag("ItemParent").transform;
-
-        private void OnInstantiatedItemInScene(int id, Vector3 pos)
-        {
-            Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
-        }
 
         /// <summary>
         /// 获取ItemParent下所有的子物体，也就是场景中所有的实例化物品
@@ -85,5 +82,19 @@ namespace Inventory.Logic
                 }
             }
         }
+
+        #region 事件绑定
+        
+        private void OnInstantiatedItemInSceneEvent(int id, Vector3 pos)
+        {
+            Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
+        }
+
+        private void OnDropItemEvent(int id, Vector3 pos)
+        {
+            Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
+        }
+
+        #endregion
     }
 }

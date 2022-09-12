@@ -11,7 +11,17 @@ namespace Inventory.Logic
     {
         public ItemDataListSo itemDataListSo;
         public InventoryBagSo playerBagSo;
-        
+
+        private void OnEnable()
+        {
+            MyEventHandler.DropItem += OnDropItemEvent;
+        }
+
+        private void OnDisable()
+        {
+            MyEventHandler.DropItem -= OnDropItemEvent;
+        }
+
         private void Start()
         {
             MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, -1);
@@ -49,29 +59,13 @@ namespace Inventory.Logic
                 Destroy(item.gameObject);
         }
 
-        public bool GetItemIndex(int itemId, out int index)
+        private int GetItemIndexInBag(int itemId)
         {
-            index = -1;
-            var bagFull = true;
-            var playerBag = InventoryManager.Instance.playerBagSo.inventoryItems;
-            for (var i = 0; i < playerBag.Count; i++)
-            {
-                //找到了背包中的空格，返回空格索引
-                if (playerBag[i].itemId == 0)
-                {
-                    bagFull = false;
-                    index = i;
-                    break;
-                }
+            for (var i = 0; i < playerBagSo.inventoryItems.Count; i++)
+                if (playerBagSo.inventoryItems[i].itemId == itemId)
+                    return i;
 
-                //查找到背包中已经拥有该物品，返回该物品索引
-                if (playerBag[i].itemId != itemId) continue;
-                bagFull = false;
-                index = i;
-                break;
-            }
-
-            return bagFull;
+            return -1;
         }
 
         public bool CheckBagSpace()
@@ -89,5 +83,41 @@ namespace Inventory.Logic
             MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, formIndex);
             MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, targetIndex);
         }
+
+        /// <summary>
+        /// 移除指定数量的背包物品
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="removeAmount"></param>
+        private void RemoveItem(int itemId, int removeAmount)
+        {
+            var index = GetItemIndexInBag(itemId);
+            Debug.Log($"索引{index}");
+            if (playerBagSo.inventoryItems[index].itemAmount > removeAmount)
+            {
+                playerBagSo.inventoryItems[index] = new InventoryItem()
+                {
+                    itemId = itemId,
+                    itemAmount = playerBagSo.inventoryItems[index].itemAmount - removeAmount
+                };
+                MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, index);
+                return;
+            }
+
+            playerBagSo.inventoryItems[index] = new InventoryItem();
+            //让动画回归默认状态
+            MyEventHandler.CallSelectedItem(null, false);
+            MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, index);
+        }
+
+        #region 事件绑定
+
+        private void OnDropItemEvent(int itemId, Vector3 pos)
+        {
+            Debug.Log($"减少 {itemId}");
+            RemoveItem(itemId, 1);
+        }
+
+        #endregion
     }
 }

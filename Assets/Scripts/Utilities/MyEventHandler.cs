@@ -27,7 +27,7 @@ namespace Utilities
         /// </summary>
         public static event Action<int, Vector3> DropItem;
 
-        public static void CallDropItem(int itemId, Vector3 instantiatePos )
+        public static void CallDropItem(int itemId, Vector3 instantiatePos)
             => DropItem?.Invoke(itemId, instantiatePos);
 
         /// <summary>
@@ -110,5 +110,13 @@ namespace Utilities
 
         public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
             => ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
+
+        /// <summary>
+        /// 每天结束后触发事件
+        /// </summary>
+        public static event Action<int, Season> GameDayEnd;
+
+        public static void CallGameDayEnd(int day, Season season)
+            => GameDayEnd?.Invoke(day, season);
     }
 }

@@ -92,7 +92,6 @@ namespace Inventory.Logic
         private void RemoveItem(int itemId, int removeAmount)
         {
             var index = GetItemIndexInBag(itemId);
-            Debug.Log($"索引{index}");
             if (playerBagSo.inventoryItems[index].itemAmount > removeAmount)
             {
                 playerBagSo.inventoryItems[index] = new InventoryItem()
@@ -114,7 +113,6 @@ namespace Inventory.Logic
 
         private void OnDropItemEvent(int itemId, Vector3 pos)
         {
-            Debug.Log($"减少 {itemId}");
             RemoveItem(itemId, 1);
         }
 

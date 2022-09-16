@@ -13,6 +13,7 @@ namespace Inventory.Logic
     {
         public WorldItem itemPrefab;
         public Transform itemParent;
+        [SerializeField] private Transform playerTrans;
 
         private readonly Dictionary<string, List<SceneItem>> _itemsInSceneDictionary = new();
 
@@ -84,7 +85,7 @@ namespace Inventory.Logic
         }
 
         #region 事件绑定
-        
+
         private void OnInstantiatedItemInSceneEvent(int id, Vector3 pos)
         {
             Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
@@ -92,7 +93,10 @@ namespace Inventory.Logic
 
         private void OnDropItemEvent(int id, Vector3 pos)
         {
-            Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
+            var position = playerTrans.position;
+            var item = Instantiate(itemPrefab, position, Quaternion.identity, itemParent);
+            item.itemId = id;
+            item.GetComponent<ItemBounce>().InitBounceItem(pos, (pos - position).normalized);
         }
 
         #endregion

@@ -113,8 +113,17 @@ namespace Inventory.UI
                 return;
             }
 
+            /*
+             * _activeSlotIndex不是-1，说明持有物品，需要先将该物品卸下。
+             * 卸下时不仅要取消高亮，如果持有物是工具，
+             * 还需要将工具的动画状态机还原回默认状态
+             */
             if (_activeSlotIndex is not -1)
+            {
                 bagSlots[_activeSlotIndex].IsSelected = false;
+                MyEventHandler.CallSelectedItem(null, false);
+            }
+
             bagSlots[_activeSlotIndex = slotIndex].IsSelected = true;
             MyEventHandler.CallSelectedItem(bagSlots[_activeSlotIndex].itemDetails, true);
         }

@@ -459,3 +459,44 @@ private void SwitchConfinerShape()
 ### 第四十九节 实现鼠标选中物品后的场景点击事件流程
 
 1. 选中可抛出的物品后点击世界地图可以将物品丢出去，需要保证物品数量会减少，且丢光物品之后取消高亮
+
+### 第五十节 制作可以扔出来的物品
+
+1. **BounceItemBase**具有一个子物体显示是什么物品，另一个子物体是一个影子图片
+2. 当玩家点击地面时，会在玩家脚底生成该GO，将其显示图片的子物体的位置更改到头顶。影子才是该物体的本体，子物体的图片逐渐向影子靠拢，即向y做匀速运动，而影子则向抛出的目标位置移动，做x方向的匀速运动，子物体图片和影子应该同时到达目标点
+
+   ```csharp
+   private void Bounce()
+        {
+            _landed = itemTrans.position.y <= transform.position.y;
+            if (Vector3.Distance(_targetPos, transform.position) > 0.1f)
+                //水平方向根据玩家的的扔出速度改变位置
+                transform.position += (Vector3)_throwDirection * (throwAcceleration * Time.deltaTime);
+            if (!_landed)
+            {
+                //竖直方向根据速度改变位置
+                itemTrans.position += Vector3.down * (_landSpeed * Time.deltaTime);
+                return;
+            }
+            coll.enabled = true;
+            //落地后删除脚本节省性能
+            Destroy(this);
+        }
+   ```
+   
+### 第五十一节 实现挖坑和浇水的地图更改变化
+
+1. 创建一个挖过的土壤和浇水后的土壤的规则瓦片地图，使其能随挖坑大小变化形状
+2. 点击地图后使用`TileMap.SetTile()`来根据点击的Grid位置切换地图上该处的挖过或浇水的规则瓦片
+3. 需要同时改变鼠标在不同持有物下的可用状态以及动画
+
+### 第五十二节 制作人物使用工具的动画和流程
+
+1. 为**BaseController**添加一个使用工具的混合树，根据鼠标点击的方位来切换人物的转向并使用工具，所有继承**BaseController**的动画状态机也会出现刚添加的使用工具的混合树的动画槽位
+2. 混合树播放完毕后直接过渡到**Exit**，动画会重新从**Entry**开始执行
+3. 制作每个部位的使用工具的动画和浇水的动画
+
+### 第五十三节 （Map）随着时间变化刷新地图显示内容
+
+1. 每次挖掘或者浇水后都需要更新这块瓦片的状态
+2. 每天结束后都需要更新已挖掘和已浇水瓦片的天数信息，并重绘**Dig**和**Water**层的瓦片

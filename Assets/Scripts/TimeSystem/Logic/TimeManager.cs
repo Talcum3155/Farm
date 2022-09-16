@@ -35,6 +35,11 @@ namespace TimeSystem.Logic
                 for (var i = 0; i < 60; i++)
                     UpdateSecond();
             }
+            
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                UpdateDay();
+            }
                 
         }
 
@@ -82,6 +87,7 @@ namespace TimeSystem.Logic
             }
 
             MyEventHandler.CallUpdateDate(_gameDay, _gameMonth, gameSeason, _gameYear);
+            MyEventHandler.CallGameDayEnd(_gameDay, gameSeason);
         }
 
         private void UpdateMonth()

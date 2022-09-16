@@ -8,6 +8,8 @@ TagManager:
   - WorldItem
   - ItemParent
   - CursorCanvas
+  - Dig
+  - Watered
   layers:
   - Default
   - TransparentFX

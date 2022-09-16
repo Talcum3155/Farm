@@ -125,6 +125,7 @@ namespace Cursor.Logic
                         SetCursorValid();
                         return;
                     }
+
                     SetCursorInvalid();
                     break;
                 case ItemType.Commodity:
@@ -133,14 +134,31 @@ namespace Cursor.Logic
                         SetCursorInvalid();
                         return;
                     }
+
                     SetCursorValid();
                     break;
                 case ItemType.Furniture:
                     break;
                 case ItemType.HoeTool:
+                    if (tile.diggable)
+                    {
+                        SetCursorValid();
+                        return;
+                    }
+
+                    SetCursorInvalid();
+                    break;
+                case ItemType.WaterTool:
+                    if (tile.daysSinceDug >= 0 && tile.daysSinceWatered is -1)
+                    {
+                        SetCursorValid();
+                        return;
+                    }
+
+                    SetCursorInvalid();
+                    break;
                 case ItemType.ChopTool:
                 case ItemType.BreakTool:
-                case ItemType.WaterTool:
                 case ItemType.CollectTool:
 
                     break;

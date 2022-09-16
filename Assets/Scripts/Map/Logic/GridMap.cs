@@ -64,7 +64,7 @@ namespace Map.Logic
                         continue;
 
                     //添加此处绘制的地图到地图属性列表中
-                    currentMapSo.tilePropertiesInScene.Add(new TileProperty()
+                    currentMapSo.tilePropertiesInScene.Add(new TileProperty
                     {
                         coordinate = new Vector2Int(x, y),
                         gridType = tileMapType,

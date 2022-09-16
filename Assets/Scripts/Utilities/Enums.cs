@@ -34,8 +34,7 @@ namespace Utilities
         Bag,
         Box
     }
-
-    [Flags]
+    
     public enum PartName //玩家的哪个部位
     {
         Body,
@@ -43,13 +42,13 @@ namespace Utilities
         Hair,
         Tool
     }
-
-    [Flags]
+    
     public enum PartType //该部位在干什么
     {
         None,
         Carry,
         Hoe,
+        Water,
         Break
     }
 

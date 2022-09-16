@@ -13,7 +13,7 @@ namespace Player
 
         [Header("各部位动画的列表")] public List<AnimatorType> animatorTypes;
         private Dictionary<string, Animator> _animatorNameDict = new();
-
+        
         private void Awake()
         {
             _animators = GetComponentsInChildren<Animator>();
@@ -34,25 +34,33 @@ namespace Player
 
         private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
         {
-            var partType = PartType.None;
-
-            if (isSelected && itemDetails.canCarried)
+            if (!isSelected)
             {
-                partType = itemDetails.itemType switch
-                {
-                    //这些物品需要举起来
-                    ItemType.Seed => PartType.Carry,
-                    ItemType.Commodity => PartType.Carry,
-                    ItemType.Furniture => PartType.Carry,
-                    _ => PartType.None
-                }; 
+                holdItemSpriteRenderer.enabled = false;
+                SwitchAnimator(PartType.None);
+                return;
+            }
+
+            if (itemDetails.canCarried)
+            {
                 holdItemSpriteRenderer.enabled = true;
                 holdItemSpriteRenderer.sprite = itemDetails.itemOnWorldSprite;
             }
-            else
-                holdItemSpriteRenderer.enabled = false;
 
-            SwitchAnimator(partType);
+            //TODO: 补充不同种类的动画
+            SwitchAnimator(itemDetails.itemType switch
+            {
+                //这些物品需要举起来
+                ItemType.Seed
+                    or ItemType.Commodity
+                    or ItemType.Furniture
+                    => PartType.Carry,
+                ItemType.HoeTool
+                    => PartType.Hoe,
+                ItemType.WaterTool
+                    => PartType.Water,
+                _ => PartType.None
+            });
         }
 
         private void SwitchAnimator(PartType partType)

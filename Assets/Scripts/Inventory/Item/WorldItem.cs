@@ -17,7 +17,7 @@ namespace Inventory.Item
         private void Awake()
         {
             _boxCollider2D = GetComponent<BoxCollider2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
 
         private void Start()

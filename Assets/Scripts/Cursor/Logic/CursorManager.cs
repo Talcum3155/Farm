@@ -1,4 +1,5 @@
 using System;
+using Crop.Logic;
 using Map.Logic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -119,51 +120,62 @@ namespace Cursor.Logic
 
             switch (_holdingItem.itemType)
             {
+                //TODO:添加持有物品时鼠标位于每个瓦片上的判断逻辑
                 case ItemType.Seed:
-                    if (tile.diggable)
-                    {
+                    //瓦片被挖掘过且未被播种才能启用鼠标
+                    if (tile.daysSinceDug > -1 && tile.seedItemId is -1)
                         SetCursorValid();
-                        return;
-                    }
-
-                    SetCursorInvalid();
+                    else
+                        SetCursorInvalid();
                     break;
+                
                 case ItemType.Commodity:
                     if (!tile.dropItem || !_holdingItem.canDropped)
+                        SetCursorInvalid();
+                    else
+                        SetCursorValid();
+                    break;
+                
+                case ItemType.Furniture:
+                    break;
+                
+                case ItemType.HoeTool:
+                    if (tile.diggable)
+                        SetCursorValid();
+                    else
+                        SetCursorInvalid();
+                    break;
+                
+                case ItemType.WaterTool:
+                    if (tile.daysSinceDug >= 0 && tile.daysSinceWatered is -1)
+                        SetCursorValid();
+                    else
+                        SetCursorInvalid();
+                    break;
+                
+                case ItemType.ChopTool:
+                    break;
+                
+                case ItemType.BreakTool:
+                    break;
+                
+                case ItemType.CollectTool:
+                    //没有种子就不判断了
+                    if (tile.seedItemId < 1000)
                     {
                         SetCursorInvalid();
                         return;
                     }
-
-                    SetCursorValid();
-                    break;
-                case ItemType.Furniture:
-                    break;
-                case ItemType.HoeTool:
-                    if (tile.diggable)
-                    {
+                    var crop = CropManager.Instance.GetCropDetails(tile.seedItemId);
+                    if (crop is not null && tile.growthDays > crop.TotalGrowthDays)
                         SetCursorValid();
-                        return;
-                    }
-
-                    SetCursorInvalid();
+                    else
+                        SetCursorInvalid();
                     break;
-                case ItemType.WaterTool:
-                    if (tile.daysSinceDug >= 0 && tile.daysSinceWatered is -1)
-                    {
-                        SetCursorValid();
-                        return;
-                    }
-
-                    SetCursorInvalid();
-                    break;
-                case ItemType.ChopTool:
-                case ItemType.BreakTool:
-                case ItemType.CollectTool:
-
-                    break;
+                
                 case ItemType.HarvestableScenery:
                     break;
+                
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -59,6 +59,8 @@ namespace Player
                     => PartType.Hoe,
                 ItemType.WaterTool
                     => PartType.Water,
+                ItemType.CollectTool
+                    => PartType.Collect,
                 _ => PartType.None
             });
         }

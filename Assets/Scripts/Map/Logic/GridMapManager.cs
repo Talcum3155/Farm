@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Crop.Logic;
 using Map.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ namespace Map.Logic
         private readonly Dictionary<string, TileDetails> _tileDetailsDict = new();
         private Grid _currentGrid;
         private Season _season;
+        private Transform _cropParent;
 
         private void OnEnable()
         {
@@ -95,7 +97,7 @@ namespace Map.Logic
         #region 事件绑定
 
         /// <summary>
-        /// 
+        /// 人物动画播放完毕或执行到一定进度后触发该事件
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="itemDetails"></param>
@@ -103,6 +105,7 @@ namespace Map.Logic
         private void OnExecuteActionAfterAnimationEvent(Vector3 pos, ItemDetails itemDetails)
         {
             var mouseGridPos = _currentGrid.WorldToCell(pos);
+            //得到鼠标所位于的瓦片上的详细信息
             var currentTile = GetTileInDict(mouseGridPos);
 
             if (currentTile is not null)
@@ -110,28 +113,43 @@ namespace Map.Logic
                 switch (itemDetails.itemType)
                 {
                     case ItemType.Seed:
+                        MyEventHandler.CallPlantSeed(itemDetails.itemID, currentTile);
+                        MyEventHandler.CallDropItem(itemDetails.itemID, pos, itemDetails.itemType);
                         break;
+                    
                     case ItemType.Commodity:
-                        MyEventHandler.CallDropItem(itemDetails.itemID, pos);
+                        MyEventHandler.CallDropItem(itemDetails.itemID, pos, itemDetails.itemType);
                         break;
+                    
                     case ItemType.HoeTool:
                         SetDugTile(currentTile);
                         currentTile.daysSinceDug = 0;
                         currentTile.diggable = false;
                         currentTile.dropItem = false;
                         break;
+                    
                     case ItemType.WaterTool:
                         SetWateredTile(currentTile);
                         currentTile.daysSinceWatered = 0;
                         break;
+                    
                     case ItemType.ChopTool:
-                    case ItemType.BreakTool:
-                    case ItemType.CollectTool:
                         break;
+                    
+                    case ItemType.BreakTool:
+                        break;
+                    
+                    case ItemType.CollectTool:
+                        var cropper = GetCropObject(pos);
+                        Debug.Log(cropper.cropDetails.seedItemID);
+                        break;
+                    
                     case ItemType.Furniture:
                         break;
+                    
                     case ItemType.HarvestableScenery:
                         break;
+                    
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -146,6 +164,7 @@ namespace Map.Logic
             _currentGrid = FindObjectOfType<Grid>();
             _digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             _waterTilemap = GameObject.FindWithTag("Watered").GetComponent<Tilemap>();
+            _cropParent = GameObject.FindWithTag("CropParent").transform;
 
             RefreshMap();
         }
@@ -164,17 +183,24 @@ namespace Map.Logic
                 //每天重置浇水状态
                 if (tile.Value.daysSinceWatered > -1)
                     tile.Value.daysSinceWatered = -1;
-                
+
                 if (tile.Value.daysSinceDug > -1)
-                    tile.Value.daysSinceDug ++;
-                
+                    tile.Value.daysSinceDug++;
+
                 //土壤挖的时间超过天且没有播种就让土壤恢复到没有被挖掘的状态
                 if (tile.Value.daysSinceDug > 5 && tile.Value.seedItemId is -1)
                 {
                     tile.Value.daysSinceDug = -1;
                     tile.Value.diggable = true;
+                    tile.Value.growthDays = -1;
+                }
+
+                if (tile.Value.seedItemId is not -1)
+                {
+                    tile.Value.growthDays++;
                 }
             }
+
             RefreshMap();
         }
 
@@ -213,7 +239,10 @@ namespace Map.Logic
                     SetDugTile(tileDetails);
                 if (tileDetails.daysSinceWatered > -1)
                     SetWateredTile(tileDetails);
-                //TODO:种子
+                if (tileDetails.seedItemId > -1)
+                {
+                    MyEventHandler.CallPlantSeed(tileDetails.seedItemId, tileDetails);
+                }
             }
         }
 
@@ -226,7 +255,27 @@ namespace Map.Logic
             _digTilemap?.ClearAllTiles();
             _waterTilemap?.ClearAllTiles();
 
+            for (var i = 0; i < _cropParent.childCount; i++)
+                Destroy(_cropParent.GetChild(0).gameObject);
+
             DisplayMap(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        /// 获取鼠标点击位置的所有碰撞体，从这些碰撞体取得种子的脚本
+        /// </summary>
+        /// <param name="mouseWorldPos"></param>
+        /// <returns></returns>
+        private Cropper GetCropObject(Vector3 mouseWorldPos)
+        {
+            Cropper currentCrop = null;
+            foreach (var c in Physics2D.OverlapPointAll(mouseWorldPos))
+            {
+                if (c.GetComponent<Cropper>())
+                    currentCrop = c.GetComponent<Cropper>();
+            }
+
+            return currentCrop;
         }
     }
 }

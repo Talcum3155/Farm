@@ -38,7 +38,8 @@ namespace TimeSystem.Logic
             
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                UpdateDay();
+                for (var i = 0; i < 5; i++)
+                    UpdateDay();
             }
                 
         }

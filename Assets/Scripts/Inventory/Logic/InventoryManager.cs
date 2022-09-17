@@ -111,7 +111,7 @@ namespace Inventory.Logic
 
         #region 事件绑定
 
-        private void OnDropItemEvent(int itemId, Vector3 pos)
+        private void OnDropItemEvent(int itemId, Vector3 pos, ItemType type)
         {
             RemoveItem(itemId, 1);
         }

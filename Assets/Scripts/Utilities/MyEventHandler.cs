@@ -25,10 +25,10 @@ namespace Utilities
         /// <summary>
         /// 将东西扔到地面上的事件
         /// </summary>
-        public static event Action<int, Vector3> DropItem;
+        public static event Action<int, Vector3, ItemType> DropItem;
 
-        public static void CallDropItem(int itemId, Vector3 instantiatePos)
-            => DropItem?.Invoke(itemId, instantiatePos);
+        public static void CallDropItem(int itemId, Vector3 instantiatePos, ItemType type)
+            => DropItem?.Invoke(itemId, instantiatePos, type);
 
         /// <summary>
         /// 背包中选择物品后触发该事件，内容包含物品详细信息以及是否被选中
@@ -118,5 +118,13 @@ namespace Utilities
 
         public static void CallGameDayEnd(int day, Season season)
             => GameDayEnd?.Invoke(day, season);
+
+        /// <summary>
+        /// 播种后触发该事件
+        /// </summary>
+        public static event Action<int, TileDetails> PlantSeed;
+
+        public static void CallPlantSeed(int seedId, TileDetails tile)
+            => PlantSeed?.Invoke(seedId, tile);
     }
 }

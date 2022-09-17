@@ -49,6 +49,7 @@ namespace Utilities
         Carry,
         Hoe,
         Water,
+        Collect,
         Break
     }
 

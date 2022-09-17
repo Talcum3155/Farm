@@ -278,13 +278,58 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18933418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9223146, y: -12.530565, z: -0.03261518}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &109189040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109189041}
+  - component: {fileID: 109189042}
+  m_Layer: 0
+  m_Name: CropManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109189041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109189040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109189042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109189040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bc9a02ec34f394bab502546775e91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropDetailsSo: {fileID: 11400000, guid: 1002422bc4b9724478551d947c2213cd, type: 2}
 --- !u!1 &244530889
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490814895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1128,12 +1173,18 @@ MonoBehaviour:
   - partName: 2
     partType: 3
     animatorOverrideController: {fileID: 22100000, guid: 5c279c8af54d88d498628d2721facab0, type: 2}
+  - partName: 2
+    partType: 4
+    animatorOverrideController: {fileID: 22100000, guid: d36587c87ae76764abf562b24832c258, type: 2}
   - partName: 0
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 18178a3c3dbf7d34f8697a02d6689871, type: 2}
   - partName: 0
     partType: 3
     animatorOverrideController: {fileID: 22100000, guid: 7ba10cd17ce80c04381271e8fd41626e, type: 2}
+  - partName: 0
+    partType: 4
+    animatorOverrideController: {fileID: 22100000, guid: 835898f37782ebf4ea51bbb23e6be93e, type: 2}
   - partName: 1
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 893ba80ff3e574540b5f448746f3ceac, type: 2}
@@ -1143,6 +1194,9 @@ MonoBehaviour:
   - partName: 1
     partType: 1
     animatorOverrideController: {fileID: 22100000, guid: e8b661feedca3994087670ec51488d93, type: 2}
+  - partName: 1
+    partType: 4
+    animatorOverrideController: {fileID: 22100000, guid: 0e1ae2efb02a637419580389b8d31ca4, type: 2}
   - partName: 3
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 9296e9b36e2362640b373d388c4510eb, type: 2}
@@ -1387,7 +1441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060086946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.192735, y: 0.40854514, z: -0.50252026}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

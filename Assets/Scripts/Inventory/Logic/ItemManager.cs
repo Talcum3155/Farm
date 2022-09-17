@@ -91,8 +91,12 @@ namespace Inventory.Logic
             Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
         }
 
-        private void OnDropItemEvent(int id, Vector3 pos)
+        private void OnDropItemEvent(int id, Vector3 pos, ItemType type)
         {
+            //TODO:以下类型不需要抛出
+            if (type is ItemType.Seed)
+                return;
+
             var position = playerTrans.position;
             var item = Instantiate(itemPrefab, position, Quaternion.identity, itemParent);
             item.itemId = id;

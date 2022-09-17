@@ -10,6 +10,7 @@ TagManager:
   - CursorCanvas
   - Dig
   - Watered
+  - CropParent
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System;
+using Crop.Data;
 using Crop.Logic;
 using Map.Logic;
 using UnityEngine;
@@ -42,6 +43,7 @@ namespace Cursor.Logic
          */
         private bool _cursorUsable;
         private bool _cursorPosValid;
+        private Vector3 _treePos = Vector3.zero;
 
         private ItemDetails _holdingItem; //持有的物品
 
@@ -118,6 +120,7 @@ namespace Cursor.Logic
                 return;
             }
 
+            CropDetails crop = null;
             switch (_holdingItem.itemType)
             {
                 //TODO:添加持有物品时鼠标位于每个瓦片上的判断逻辑
@@ -128,37 +131,48 @@ namespace Cursor.Logic
                     else
                         SetCursorInvalid();
                     break;
-                
+
                 case ItemType.Commodity:
                     if (!tile.dropItem || !_holdingItem.canDropped)
                         SetCursorInvalid();
                     else
                         SetCursorValid();
                     break;
-                
+
                 case ItemType.Furniture:
                     break;
-                
+
                 case ItemType.HoeTool:
                     if (tile.diggable)
                         SetCursorValid();
                     else
                         SetCursorInvalid();
                     break;
-                
+
                 case ItemType.WaterTool:
                     if (tile.daysSinceDug >= 0 && tile.daysSinceWatered is -1)
                         SetCursorValid();
                     else
                         SetCursorInvalid();
                     break;
-                
-                case ItemType.ChopTool:
-                    break;
-                
+
                 case ItemType.BreakTool:
                     break;
-                
+
+                case ItemType.ChopTool:
+                    //Make it clickable when the mouse is over the trunk
+                    var cropScript = GridMapManager.Instance.GetCropObject(_mouseWorldPos);
+                    if (cropScript is not null && cropScript.Mature &&
+                        cropScript.cropDetails.CheckToolAvailable(_holdingItem.itemID))
+                    {
+                        SetCursorValid();
+                        _treePos = cropScript.transform.position;
+                        return;
+                    }
+
+                    SetCursorInvalid();
+                    break;
+
                 case ItemType.CollectTool:
                     //没有种子就不判断了
                     if (tile.seedItemId < 1000)
@@ -166,16 +180,18 @@ namespace Cursor.Logic
                         SetCursorInvalid();
                         return;
                     }
-                    var crop = CropManager.Instance.GetCropDetails(tile.seedItemId);
-                    if (crop is not null && tile.growthDays > crop.TotalGrowthDays)
+
+                    crop = CropManager.Instance.GetCropDetails(tile.seedItemId);
+                    if (crop is not null && tile.growthDays > crop.TotalGrowthDays &&
+                        crop.CheckToolAvailable(_holdingItem.itemID))
                         SetCursorValid();
                     else
                         SetCursorInvalid();
                     break;
-                
+
                 case ItemType.HarvestableScenery:
                     break;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -208,7 +224,14 @@ namespace Cursor.Logic
         {
             if (Input.GetMouseButtonDown(0) && _cursorPosValid)
             {
-                MyEventHandler.CallMouseClickedEvent(_mouseWorldPos, _holdingItem);
+                if (_treePos == Vector3.zero)
+                {
+                    MyEventHandler.CallMouseClickedEvent(_mouseWorldPos, Vector3.zero, _holdingItem);
+                    return;
+                }
+
+                MyEventHandler.CallMouseClickedEvent(_mouseWorldPos, _treePos, _holdingItem);
+                _treePos = Vector3.zero;
             }
         }
 

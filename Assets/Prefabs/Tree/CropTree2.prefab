@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6116004980590445561}
   - component: {fileID: 6116004980590445560}
   - component: {fileID: 6116004980590445543}
+  - component: {fileID: 2158747924528839598}
   m_Layer: 0
   m_Name: Tree01_Top
   m_TagString: Untagged
@@ -26,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6116004980590445562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.048, y: 0.851, z: 0}
+  m_LocalPosition: {x: 0.12, y: 0.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6116004980965402726}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6116004980590445560
 SpriteRenderer:
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1539677011
   m_SortingLayer: 8
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e12c6f18fb50544fea7f5245a9a2aeff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a21492e2d90cf4f038c4b9ae2600c5ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,19 +99,39 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03852153, y: -0.7979722}
+  m_Offset: {x: -0.14649743, y: -0.7435549}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 4.4, y: 5.95}
+    oldSize: {x: 5.75, y: 5.75}
     newSize: {x: 4.4, y: 5.95}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5274396, y: 0.6221361}
+  m_Size: {x: 1.2444695, y: 0.5278126}
   m_EdgeRadius: 0
+--- !u!95 &2158747924528839598
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116004980590445562}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3bb672cb56bbc84180671914f7aa497, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6116004980965402727
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,8 +145,9 @@ GameObject:
   - component: {fileID: 6116004980965402723}
   - component: {fileID: 6116004980965402722}
   - component: {fileID: 6116004980965402721}
+  - component: {fileID: 903416936574970372}
   m_Layer: 0
-  m_Name: Tree1
+  m_Name: CropTree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,12 +161,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6116004980965402727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.39, y: -11.55, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6116004981089398458}
   - {fileID: 6116004980590445561}
+  - {fileID: 6116004981089398458}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -161,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0137963295, y: 4.3200774}
+  m_Offset: {x: 0.09338188, y: 4.39676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -172,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.662221, y: 3.5697985}
+  m_Size: {x: 4.517147, y: 3.7231646}
   m_EdgeRadius: 0
 --- !u!61 &6116004980965402723
 BoxCollider2D:
@@ -187,7 +209,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020694494, y: 1.4541893}
+  m_Offset: {x: -0.064714074, y: 1.4541893}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -198,7 +220,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.958611, y: 2.1089706}
+  m_Size: {x: 0.81793857, y: 2.1089706}
   m_EdgeRadius: 0
 --- !u!114 &6116004980965402722
 MonoBehaviour:
@@ -223,6 +245,53 @@ SortingGroup:
   m_SortingLayerID: -1539677011
   m_SortingLayer: 8
   m_SortingOrder: 0
+--- !u!114 &903416936574970372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116004980965402727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeef614115f47b94ca01010a881d7d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropDetails:
+    seedItemID: 0
+    growthDays: 
+    growthPrefabs: []
+    growthSprites: []
+    seasons: 
+    harvestToolItemID: 
+    requireActionCount: 
+    transferItemID: 0
+    producedItemID: 
+    producedMinAmount: 
+    producedMaxAmount: 
+    spawnRadius: {x: 0, y: 0}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticleEffect: 0
+    effectType: 0
+    particlePosition: {x: 0, y: 0, z: 0}
+  tileDetails:
+    gridX: 0
+    gridY: 0
+    diggable: 0
+    dropItem: 0
+    placeFurniture: 0
+    npcObstacle: 0
+    seedItemId: -1
+    growthDays: -1
+    daysSinceDug: -1
+    daysSinceWatered: -1
+    daysSinceLastHarvest: -1
+  harvestActionCount: 0
+  _animator: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &6116004981089398459
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +322,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6116004980965402726}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6116004981089398457
 SpriteRenderer:
@@ -296,7 +365,7 @@ SpriteRenderer:
   m_SortingLayerID: -1539677011
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c00b9352baa0c44639d70f0e2a96a856, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab3861d4b685d4d048cd7cd1c18e9574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

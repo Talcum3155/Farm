@@ -28,6 +28,7 @@ namespace Map.Logic
             MyEventHandler.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimationEvent;
             MyEventHandler.AfterSceneLoaded += OnAfterSceneLoadedEvent;
             MyEventHandler.GameDayEnd += OnGameDayEndEvent;
+            MyEventHandler.RefreshMap += OnRefreshMapEvent;
         }
 
         private void OnDisable()
@@ -35,6 +36,7 @@ namespace Map.Logic
             MyEventHandler.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimationEvent;
             MyEventHandler.AfterSceneLoaded -= OnAfterSceneLoadedEvent;
             MyEventHandler.GameDayEnd -= OnGameDayEndEvent;
+            MyEventHandler.RefreshMap -= OnRefreshMapEvent;
         }
 
         private void Start()
@@ -110,6 +112,7 @@ namespace Map.Logic
 
             if (currentTile is not null)
             {
+                Cropper cropper = null;
                 switch (itemDetails.itemType)
                 {
                     case ItemType.Seed:
@@ -133,15 +136,13 @@ namespace Map.Logic
                         currentTile.daysSinceWatered = 0;
                         break;
                     
-                    case ItemType.ChopTool:
-                        break;
-                    
                     case ItemType.BreakTool:
                         break;
                     
+                    case ItemType.ChopTool:
                     case ItemType.CollectTool:
-                        var cropper = GetCropObject(pos);
-                        Debug.Log(cropper.cropDetails.seedItemID);
+                        cropper = GetCropObject(pos);
+                        cropper.ProcessToolAction(itemDetails);
                         break;
                     
                     case ItemType.Furniture:
@@ -166,7 +167,7 @@ namespace Map.Logic
             _waterTilemap = GameObject.FindWithTag("Watered").GetComponent<Tilemap>();
             _cropParent = GameObject.FindWithTag("CropParent").transform;
 
-            RefreshMap();
+            OnRefreshMapEvent();
         }
 
         /// <summary>
@@ -180,7 +181,7 @@ namespace Map.Logic
 
             foreach (var tile in _tileDetailsDict)
             {
-                //每天重置浇水状态
+                //Reset water status everyday
                 if (tile.Value.daysSinceWatered > -1)
                     tile.Value.daysSinceWatered = -1;
 
@@ -201,7 +202,7 @@ namespace Map.Logic
                 }
             }
 
-            RefreshMap();
+            OnRefreshMapEvent();
         }
 
         #endregion
@@ -250,13 +251,13 @@ namespace Map.Logic
         /// 清除Dig和Water层的瓦片，根据场景的名称
         /// 重新将之前保存的瓦片绘制上去
         /// </summary>
-        private void RefreshMap()
+        private void OnRefreshMapEvent()
         {
             _digTilemap?.ClearAllTiles();
             _waterTilemap?.ClearAllTiles();
 
             for (var i = 0; i < _cropParent.childCount; i++)
-                Destroy(_cropParent.GetChild(0).gameObject);
+                Destroy(_cropParent.GetChild(i).gameObject);
 
             DisplayMap(SceneManager.GetActiveScene().name);
         }
@@ -266,7 +267,7 @@ namespace Map.Logic
         /// </summary>
         /// <param name="mouseWorldPos"></param>
         /// <returns></returns>
-        private Cropper GetCropObject(Vector3 mouseWorldPos)
+        public Cropper GetCropObject(Vector3 mouseWorldPos)
         {
             Cropper currentCrop = null;
             foreach (var c in Physics2D.OverlapPointAll(mouseWorldPos))

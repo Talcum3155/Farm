@@ -414,6 +414,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1 &424169527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 424169528}
+  - component: {fileID: 424169529}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &424169528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424169527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.871682, y: -19.552456, z: 0.04837675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424169529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424169527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1586f1f8742a0a42a4f4af0a26f945f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolPrefabs:
+  - {fileID: 7368322452248591586, guid: 3edc0df78b1401946aa684b41472605d, type: 3}
+  - {fileID: 7368322452248591586, guid: 282609128a5210941af8f28a4cb734e5, type: 3}
 --- !u!1 &490814895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1253,9 @@ MonoBehaviour:
   - partName: 3
     partType: 3
     animatorOverrideController: {fileID: 22100000, guid: 000ca9a73f17fd041843b036ffbdfbe3, type: 2}
+  - partName: 3
+    partType: 5
+    animatorOverrideController: {fileID: 22100000, guid: ee2ece5da68b5ad4e953e032d6f24616, type: 2}
 --- !u!1 &1735790853
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ namespace Inventory.Item
         public float throwAcceleration; //抛出物体的加速度
         private bool _landed; //判断物体是否落地
         private float _landSpeed;
+        private float _throwDistance;
         private Vector2 _throwDirection;
         private Vector3 _targetPos;
 
@@ -27,8 +28,8 @@ namespace Inventory.Item
             _throwDirection = dir;
             _targetPos = target;
 
-            var throwDistance = Vector3.Distance(target, transform.position);
-            throwAcceleration *= throwDistance; //扔出的距离越远速度越快
+            _throwDistance = Vector3.Distance(target, transform.position);
+            throwAcceleration *= _throwDistance; //扔出的距离越远速度越快
             /*
              * 水平和垂直时间是相等的，所以可以根据水平飞行的参数求出竖直方向的飞行速度
              * 水平飞行距离：Distance: Vector3.Distance(target, transform.position)
@@ -36,7 +37,7 @@ namespace Inventory.Item
              * 竖直方向的速度：1.5f / time
              */
             // _landSpeed = 1.5f / (throwDistance / throwAcceleration);
-            _landSpeed = 1.5f * throwAcceleration / throwDistance; //简化
+            _landSpeed = 1.5f * throwAcceleration / _throwDistance; //简化
 
             //物体在玩家头上的距离
             itemTrans.position += Vector3.up * 1.5f;
@@ -47,6 +48,19 @@ namespace Inventory.Item
         /// </summary>
         private void Bounce()
         {
+            //only need uniform descent
+            if (_throwDistance is 0)
+            {
+                if(itemTrans.localPosition.magnitude > 0.1f)
+                {
+                    itemTrans.position += Vector3.down * 4 * Time.deltaTime;
+                    return;
+                }
+                coll.enabled = true;
+                Destroy(this);
+                return;
+            }
+            
             _landed = itemTrans.position.y <= transform.position.y;
 
             if (Vector3.Distance(_targetPos, transform.position) > 0.1f)

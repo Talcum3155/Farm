@@ -50,6 +50,7 @@ namespace Utilities
         Hoe,
         Water,
         Collect,
+        Chop,
         Break
     }
 
@@ -69,5 +70,12 @@ namespace Utilities
         DropItem,
         PlaceFurniture,
         NpcObstacle
+    }
+
+    public enum ParticleEffectType
+    {
+        FallenLeaves01,
+        FallenLeaves02,
+        None
     }
 }

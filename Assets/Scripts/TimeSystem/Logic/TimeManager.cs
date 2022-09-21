@@ -32,16 +32,14 @@ namespace TimeSystem.Logic
 
             if (Input.GetKey(KeyCode.T))
             {
-                for (var i = 0; i < 60; i++)
+                for (var i = 0; i < 100; i++)
                     UpdateSecond();
             }
-            
-            if (Input.GetKeyDown(KeyCode.Y))
+
+            if (Input.GetKey(KeyCode.Y))
             {
-                for (var i = 0; i < 5; i++)
-                    UpdateDay();
+                UpdateDay();
             }
-                
         }
 
         private void UpdateSecond()

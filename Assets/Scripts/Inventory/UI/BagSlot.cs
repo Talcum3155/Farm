@@ -82,7 +82,6 @@ namespace Inventory.UI
         {
             //获取拖拽结束时鼠标射线击中的对象
             var target = eventData.pointerCurrentRaycast.gameObject?.GetComponent<BagSlot>();
-            Debug.Log(target);
             inventoryUI.dragImage.gameObject.SetActive(false);
 
             //目标位置是格子

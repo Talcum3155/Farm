@@ -43,5 +43,32 @@ namespace Crop.Data
         public bool hasAnimation;
         public bool hasParticleEffect;
         //TODO:特效 音效 等
+
+        public ParticleEffectType effectType;
+        public Vector3 particlePosition;
+
+        /// <summary>
+        /// 工具是否可用来采集该果实
+        /// </summary>
+        /// <param name="toolId"></param>
+        /// <returns></returns>
+        public bool CheckToolAvailable(int toolId)
+            => harvestToolItemID.Any(t => t == toolId);
+        
+        /// <summary>
+        /// 该工具需要几次才能完成收割
+        /// </summary>
+        /// <param name="toolId"></param>
+        /// <returns></returns>
+        public int GetReapCount(int toolId)
+        {
+            for (var i = 0; i < harvestToolItemID.Length; i++)
+            {
+                if (harvestToolItemID[i] == toolId)
+                    return requireActionCount[i];
+            }
+
+            return -1;
+        }
     }
 }

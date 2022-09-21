@@ -96,12 +96,12 @@ namespace Utilities
             => MoveToPosition?.Invoke(targetPosition);
 
         /// <summary>
-        /// 鼠标点击地图时触发该事件
+        /// Trigger when click on the ground or tree
         /// </summary>
-        public static event Action<Vector3, ItemDetails> MouseClickedEvent;
+        public static event Action<Vector3, Vector3, ItemDetails> MouseClickedEvent;
 
-        public static void CallMouseClickedEvent(Vector3 mousePos, ItemDetails itemDetail)
-            => MouseClickedEvent?.Invoke(mousePos, itemDetail);
+        public static void CallMouseClickedEvent(Vector3 mousePos, Vector3 treePos, ItemDetails itemDetail)
+            => MouseClickedEvent?.Invoke(mousePos, treePos, itemDetail);
 
         /// <summary>
         /// 某些动画执行完后触发该事件
@@ -126,5 +126,29 @@ namespace Utilities
 
         public static void CallPlantSeed(int seedId, TileDetails tile)
             => PlantSeed?.Invoke(seedId, tile);
+
+        /// <summary>
+        /// display cropper sprite in player's head
+        /// </summary>
+        public static event Action<int, int> HarvestAtPlayerPosition;
+
+        public static void CallHarvestAtPlayerPosition(int id, int amount)
+            => HarvestAtPlayerPosition?.Invoke(id, amount);
+
+        /// <summary>
+        /// Refresh map after reap cropper
+        /// </summary>
+        public static event Action RefreshMap;
+
+        public static void CallRefreshMap()
+            => RefreshMap?.Invoke();
+
+        /// <summary>
+        /// Generate particle effect at specified position
+        /// </summary>
+        public static event Action<ParticleEffectType, Vector3> InstantiatedParticle;
+
+        public static void CallInstantiatedParticle(ParticleEffectType particle, Vector3 position)
+            => InstantiatedParticle?.Invoke(particle, position);
     }
 }

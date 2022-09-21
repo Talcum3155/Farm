@@ -97,7 +97,7 @@ namespace Player
             {
                 //需要放在if外，否则不移动时，x和y没及时归零导致动画一直处于移动状态
                 animator.SetBool(IsMoving, _isMoving);
-                
+
                 /*
                  * 根据鼠标的方位改变工具的动画方向，
                  * 工具动画播放完毕后会过渡到Exit，
@@ -107,7 +107,7 @@ namespace Player
                  */
                 animator.SetFloat(MouseX, mouseX);
                 animator.SetFloat(MouseY, mouseY);
-                
+
                 if (!_isMoving) continue;
                 animator.SetFloat(InputX, _inputX);
                 animator.SetFloat(InputY, _inputY);
@@ -116,9 +116,9 @@ namespace Player
 
         #region 事件绑定
 
-        private async void OnMouseClickedEvent(Vector3 mousePos, ItemDetails itemDetails)
+        private async void OnMouseClickedEvent(Vector3 mousePos, Vector3 treePos, ItemDetails itemDetails)
         {
-            //这些物品种类不需要动画，直接就可以执行，如果不是说明该物品是工具会执行工具动画
+            //these item type needn't play any animation
             if (itemDetails.itemType is ItemType.Seed or ItemType.Commodity or ItemType.Furniture)
             {
                 MyEventHandler.CallExecuteActionAfterAnimation(mousePos, itemDetails);
@@ -126,8 +126,18 @@ namespace Player
             }
 
             var position = transform.position;
-            mouseX = mousePos.x - position.x;
-            mouseY = mousePos.y - position.y;
+
+            if (treePos == Vector3.zero)
+            {
+                mouseX = mousePos.x - position.x;
+                mouseY = mousePos.y - position.y;
+            }
+            else
+            {
+                mouseX = treePos.x - position.x;
+                mouseY = treePos.y - position.y;
+            }
+
             if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
                 mouseY = 0;
             else
@@ -153,7 +163,7 @@ namespace Player
         private void OnMoveToPositionEvent(Vector3 position) => transform.position = position;
 
         #endregion
-        
+
         /// <summary>
         /// 根据鼠标相对人物的位置播放不同的使用工具的动画
         /// </summary>
@@ -171,7 +181,7 @@ namespace Player
             {
                 //依次触发每个部位的工具动画
                 animator.SetTrigger(UseTool);
-                
+
                 //覆盖之前输入的XY轴的值，防止动画结束后人物又转回原来的方向
                 animator.SetFloat(InputX, mouseX);
                 animator.SetFloat(InputY, mouseY);

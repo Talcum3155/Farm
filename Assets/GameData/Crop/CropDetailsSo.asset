@@ -30,7 +30,7 @@ MonoBehaviour:
     - {fileID: -302366086, guid: bd1655396b777431e85369611fc36aed, type: 3}
     seasons: 0000000001000000
     harvestToolItemID: fa030000
-    requireActionCount: 01000000
+    requireActionCount: 00000000
     transferItemID: 0
     producedItemID: f6030000
     producedMinAmount: 01000000
@@ -41,3 +41,135 @@ MonoBehaviour:
     generateAtPlayerPosition: 1
     hasAnimation: 0
     hasParticleEffect: 0
+    effectType: 2
+    particlePosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1003
+    growthDays: 0200000002000000030000000400000005000000
+    growthPrefabs:
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    growthSprites:
+    - {fileID: 335049101, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -1150923953, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -270931293, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: 546229442, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -1031843392, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -1889884627, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    seasons: 0000000001000000
+    harvestToolItemID: fa030000
+    requireActionCount: 00000000
+    transferItemID: 0
+    producedItemID: fb030000
+    producedMinAmount: 02000000
+    producedMaxAmount: 04000000
+    spawnRadius: {x: 0, y: 0}
+    daysToRegrow: 12
+    regrowTimes: 2
+    generateAtPlayerPosition: 1
+    hasAnimation: 0
+    hasParticleEffect: 0
+    effectType: 0
+    particlePosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1021
+    growthDays: 0200000002000000030000000400000004000000
+    growthPrefabs:
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 6116004980965402727, guid: 01749eefee35d7a41b7cd7b9f2900465, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: 3979be82862ab4b42be8e0b3222694bc, type: 3}
+    - {fileID: 21300000, guid: b344f2cee7ac54d7ab52e493a1bb4ee7, type: 3}
+    - {fileID: 21300000, guid: c54002cd9727a43329d7f75c50778b57, type: 3}
+    - {fileID: 21300000, guid: 4590cd3fefdd74b22ae749a122189ece, type: 3}
+    - {fileID: 21300000, guid: e12c6f18fb50544fea7f5245a9a2aeff, type: 3}
+    seasons: 00000000010000000200000003000000
+    harvestToolItemID: e9030000
+    requireActionCount: 03000000
+    transferItemID: 1020
+    producedItemID: fd030000f7030000
+    producedMinAmount: 0100000002000000
+    producedMaxAmount: 0300000004000000
+    spawnRadius: {x: 3.5, y: 1.2}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 1
+    hasParticleEffect: 1
+    effectType: 0
+    particlePosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1013
+    growthDays: 0200000002000000030000000400000004000000
+    growthPrefabs:
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 7566779824747856916, guid: fede8ba3dd730c7499ed2658b1d3107a, type: 3}
+    - {fileID: 6116004980965402727, guid: 8645e17d5e7fed24ca8db98f046a6bd8, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: 83539708444bc497b8d9f5bba223cc6f, type: 3}
+    - {fileID: 21300000, guid: 309497be57b084f4da5b2c165ddceca7, type: 3}
+    - {fileID: 21300000, guid: 41bef8696d59f440aa1befb8b23dee5e, type: 3}
+    - {fileID: 21300000, guid: 0a4318b810b0f467fab50a11f472c746, type: 3}
+    - {fileID: 21300000, guid: a21492e2d90cf4f038c4b9ae2600c5ff, type: 3}
+    seasons: 00000000010000000200000003000000
+    harvestToolItemID: e9030000
+    requireActionCount: 03000000
+    transferItemID: 1022
+    producedItemID: f4030000f5030000
+    producedMinAmount: 0200000001000000
+    producedMaxAmount: 0400000003000000
+    spawnRadius: {x: 3.5, y: 1.2}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 1
+    hasParticleEffect: 1
+    effectType: 1
+    particlePosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1020
+    growthDays: ffffffff
+    growthPrefabs:
+    - {fileID: 7566779824747856916, guid: fe4d019cc9e92f849958211aaadf1c2e, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    seasons: 00000000010000000300000002000000
+    harvestToolItemID: e9030000
+    requireActionCount: 03000000
+    transferItemID: 0
+    producedItemID: f7030000
+    producedMinAmount: 01000000
+    producedMaxAmount: 03000000
+    spawnRadius: {x: 0.5, y: 0.5}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticleEffect: 0
+    effectType: 2
+    particlePosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1022
+    growthDays: ffffffff
+    growthPrefabs:
+    - {fileID: 7566779824747856916, guid: fe4d019cc9e92f849958211aaadf1c2e, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: 774ad8d2636c5457e81a95a3e1f2352d, type: 3}
+    seasons: 00000000010000000200000003000000
+    harvestToolItemID: e9030000
+    requireActionCount: 03000000
+    transferItemID: 0
+    producedItemID: f4030000
+    producedMinAmount: 01000000
+    producedMaxAmount: 03000000
+    spawnRadius: {x: 0.5, y: 0.5}
+    daysToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticleEffect: 0
+    effectType: 2
+    particlePosition: {x: 0, y: 0, z: 0}

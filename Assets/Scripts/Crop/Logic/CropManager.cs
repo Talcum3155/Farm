@@ -97,7 +97,7 @@ namespace Crop.Logic
 
                 totalGrowthDays -= cropDetails.growthDays[i];
             }
-
+            
             var cropper = Instantiate(cropDetails.growthPrefabs[currentStage],
                 new Vector3(tileDetails.gridX + 0.5f, tileDetails.gridY + 0.5f, 0),
                 Quaternion.identity,
@@ -105,7 +105,10 @@ namespace Crop.Logic
             cropper.transform.GetChild(0)
                 .GetComponent<SpriteRenderer>()
                 .sprite = cropDetails.growthSprites[currentStage];
-            cropper.GetComponent<Cropper>().cropDetails = cropDetails;
+            var cropperScript = cropper.GetComponent<Cropper>();
+            //Each Cropper contains themselves' cropper info and tile info where there are 
+            cropperScript.cropDetails = cropDetails;
+            cropperScript.tileDetails = tileDetails;
         }
     }
 }

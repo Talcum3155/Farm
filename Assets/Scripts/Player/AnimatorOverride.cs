@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using Inventory.Logic;
 using UnityEngine;
 using Utilities;
 
@@ -12,8 +14,8 @@ namespace Player
         public SpriteRenderer holdItemSpriteRenderer;
 
         [Header("各部位动画的列表")] public List<AnimatorType> animatorTypes;
-        private Dictionary<string, Animator> _animatorNameDict = new();
-        
+        private readonly Dictionary<string, Animator> _animatorNameDict = new();
+
         private void Awake()
         {
             _animators = GetComponentsInChildren<Animator>();
@@ -25,11 +27,13 @@ namespace Player
         private void OnEnable()
         {
             MyEventHandler.SelectedItem += OnItemSelectedEvent;
+            MyEventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPositionEvent;
         }
 
         private void OnDisable()
         {
             MyEventHandler.SelectedItem -= OnItemSelectedEvent;
+            MyEventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPositionEvent;
         }
 
         private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
@@ -61,6 +65,8 @@ namespace Player
                     => PartType.Water,
                 ItemType.CollectTool
                     => PartType.Collect,
+                ItemType.ChopTool
+                    => PartType.Chop,
                 _ => PartType.None
             });
         }
@@ -75,6 +81,22 @@ namespace Player
                 _animatorNameDict[animatorType.partName.ToString()].runtimeAnimatorController =
                     animatorType.animatorOverrideController;
             }
+        }
+
+        private async void OnHarvestAtPlayerPositionEvent(int itemId, int amount)
+        {
+            var itemSprite = InventoryManager.Instance.GetItemDetails(itemId).itemOnWorldSprite;
+            if (!holdItemSpriteRenderer.enabled)
+                await ShowItemInPlayerHead(itemSprite);
+        }
+
+
+        private async UniTask ShowItemInPlayerHead(Sprite itemSprite)
+        {
+            holdItemSpriteRenderer.sprite = itemSprite;
+            holdItemSpriteRenderer.enabled = true;
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+            holdItemSpriteRenderer.enabled = false;
         }
     }
 }

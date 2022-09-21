@@ -15,11 +15,13 @@ namespace Inventory.Logic
         private void OnEnable()
         {
             MyEventHandler.DropItem += OnDropItemEvent;
+            MyEventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPositionEvent;
         }
 
         private void OnDisable()
         {
             MyEventHandler.DropItem -= OnDropItemEvent;
+            MyEventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPositionEvent;
         }
 
         private void Start()
@@ -114,6 +116,23 @@ namespace Inventory.Logic
         private void OnDropItemEvent(int itemId, Vector3 pos, ItemType type)
         {
             RemoveItem(itemId, 1);
+        }
+
+        private void OnHarvestAtPlayerPositionEvent(int id, int amount)
+        {
+            var playerBag = playerBagSo.inventoryItems;
+
+            for (var i = 0; i < playerBag.Count; i++)
+            {
+                //背包有空位，或者已经有该物品
+                if (playerBag[i].itemId != 0 && playerBag[i].itemId != id) continue;
+                
+                //当背包中没有该物品时，该格子的数量默认为0
+                playerBag[i] = new InventoryItem
+                    { itemId = id, itemAmount = playerBag[i].itemAmount + amount };
+                MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, i);
+                break;
+            }
         }
 
         #endregion

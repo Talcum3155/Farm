@@ -88,7 +88,9 @@ namespace Inventory.Logic
 
         private void OnInstantiatedItemInSceneEvent(int id, Vector3 pos)
         {
-            Instantiate(itemPrefab, pos, Quaternion.identity, itemParent).itemId = id;
+            var item = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
+            item.itemId = id;
+            item.GetComponent<ItemBounce>().InitBounceItem(pos,Vector2.up);
         }
 
         private void OnDropItemEvent(int id, Vector3 pos, ItemType type)

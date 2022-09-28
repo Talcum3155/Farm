@@ -51,9 +51,9 @@ namespace Crop.Logic
                 //play particle effect
                 if (cropDetails.hasParticleEffect)
                     MyEventHandler.CallInstantiatedParticle(cropDetails.effectType,
-                        transform.position + Vector3.up * 2.5f);
+                        transform.position + cropDetails.particlePosition);
 
-                    //play sound
+                //play sound
                 return;
             }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Crop.Logic;
+using Inventory.Item;
 using Map.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,9 +20,12 @@ namespace Map.Logic
 
         [Header("地图信息")] public List<MapSo> mapSos;
         private readonly Dictionary<string, TileDetails> _tileDetailsDict = new();
+        private readonly Dictionary<string, bool> _loadSceneFirstTimeDict = new();
         private Grid _currentGrid;
         private Season _season;
         private Transform _cropParent;
+
+        public List<ReapItem> _reapItems;
 
         private void OnEnable()
         {
@@ -49,6 +53,9 @@ namespace Map.Logic
         {
             if (map is null)
                 return;
+
+            //The scene has not loaded
+            _loadSceneFirstTimeDict[map.sceneNameOfMap] = true;
 
             foreach (var tileProperty in map.tilePropertiesInScene)
             {
@@ -112,45 +119,51 @@ namespace Map.Logic
 
             if (currentTile is not null)
             {
-                Cropper cropper = null;
                 switch (itemDetails.itemType)
                 {
                     case ItemType.Seed:
                         MyEventHandler.CallPlantSeed(itemDetails.itemID, currentTile);
                         MyEventHandler.CallDropItem(itemDetails.itemID, pos, itemDetails.itemType);
                         break;
-                    
+
                     case ItemType.Commodity:
                         MyEventHandler.CallDropItem(itemDetails.itemID, pos, itemDetails.itemType);
                         break;
-                    
+
                     case ItemType.HoeTool:
                         SetDugTile(currentTile);
                         currentTile.daysSinceDug = 0;
                         currentTile.diggable = false;
                         currentTile.dropItem = false;
                         break;
-                    
+
                     case ItemType.WaterTool:
                         SetWateredTile(currentTile);
                         currentTile.daysSinceWatered = 0;
                         break;
-                    
+
                     case ItemType.BreakTool:
-                        break;
-                    
                     case ItemType.ChopTool:
                     case ItemType.CollectTool:
-                        cropper = GetCropObject(pos);
+                        var cropper = GetCropObject(pos);
                         cropper.ProcessToolAction(itemDetails);
                         break;
-                    
+
                     case ItemType.Furniture:
                         break;
-                    
+
                     case ItemType.HarvestableScenery:
                         break;
-                    
+
+                    case ItemType.ReapTool:
+                        for (var i = 0; i < _reapItems.Count; i++)
+                        {
+                            MyEventHandler.CallInstantiatedParticle(ParticleEffectType.Grass,
+                                _reapItems[i].transform.position + Vector3.up);
+                            _reapItems[i].SpawnHarvestItems();
+                        }
+                        break;
+
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -166,6 +179,12 @@ namespace Map.Logic
             _digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             _waterTilemap = GameObject.FindWithTag("Watered").GetComponent<Tilemap>();
             _cropParent = GameObject.FindWithTag("CropParent").transform;
+
+            if (_loadSceneFirstTimeDict[SceneManager.GetActiveScene().name])
+            {
+                MyEventHandler.CallGenerateCrop();
+                _loadSceneFirstTimeDict[SceneManager.GetActiveScene().name] = false;
+            }
 
             OnRefreshMapEvent();
         }
@@ -211,13 +230,12 @@ namespace Map.Logic
         /// 将土地挖掘或者浇水后更新这块土地的状态
         /// </summary>
         /// <param name="tileDetails"></param>
-        private void UpdateTileDetailSInMap(TileDetails tileDetails)
+        public void UpdateTileDetailSInMap(TileDetails tileDetails)
         {
             //TODO: 高性能消耗
             var key = $"{tileDetails.gridX}X{tileDetails.gridY}Y{SceneManager.GetActiveScene().name}";
 
-            if (_tileDetailsDict.ContainsKey(key))
-                _tileDetailsDict[key] = tileDetails;
+            _tileDetailsDict[key] = tileDetails;
         }
 
         /// <summary>
@@ -277,6 +295,32 @@ namespace Map.Logic
             }
 
             return currentCrop;
+        }
+
+        /// <summary>
+        /// Get weed in the radius of reap tool
+        /// </summary>
+        /// <param name="tool"></param>
+        /// <param name="mousePosition"></param>
+        /// <returns></returns>
+        public bool HarvestableItemInRadius(ItemDetails tool, Vector3 mousePosition)
+        {
+            _reapItems = new List<ReapItem>();
+            var collider2Ds = new Collider2D[20];
+            Physics2D.OverlapCircleNonAlloc(mousePosition, tool.itemUseRadius, collider2Ds);
+
+            if (collider2Ds.Length > 0)
+            {
+                foreach (var c in collider2Ds)
+                {
+                    if (c != null
+                        && c.GetComponent<ReapItem>())
+                        _reapItems.Add(
+                            c.GetComponent<ReapItem>());
+                }
+            }
+
+            return _reapItems.Count > 0;
         }
     }
 }

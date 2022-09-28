@@ -150,5 +150,13 @@ namespace Utilities
 
         public static void CallInstantiatedParticle(ParticleEffectType particle, Vector3 position)
             => InstantiatedParticle?.Invoke(particle, position);
+
+        /// <summary>
+        /// Generate crop after scene loaded
+        /// </summary>
+        public static event Action GenerateCrop;
+
+        public static void CallGenerateCrop()
+            => GenerateCrop?.Invoke();
     }
 }

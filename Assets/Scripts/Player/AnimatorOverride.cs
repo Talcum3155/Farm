@@ -67,6 +67,10 @@ namespace Player
                     => PartType.Collect,
                 ItemType.ChopTool
                     => PartType.Chop,
+                ItemType.BreakTool
+                    => PartType.Break,
+                ItemType.ReapTool
+                    => PartType.Reap,
                 _ => PartType.None
             });
         }

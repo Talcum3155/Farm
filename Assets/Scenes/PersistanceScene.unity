@@ -461,6 +461,8 @@ MonoBehaviour:
   poolPrefabs:
   - {fileID: 7368322452248591586, guid: 3edc0df78b1401946aa684b41472605d, type: 3}
   - {fileID: 7368322452248591586, guid: 282609128a5210941af8f28a4cb734e5, type: 3}
+  - {fileID: 9123825423035782137, guid: e2c5b1bbaac7bb248b546665c9c5a3bc, type: 3}
+  - {fileID: 9123825423035782137, guid: 7cf0fe48f5123bd4bb432ab1c95e937b, type: 3}
 --- !u!1 &490814895
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +963,7 @@ MonoBehaviour:
   waterTile: {fileID: 11400000, guid: 39e49f7c96bf5af4c85ead1ee04d8af0, type: 2}
   mapSos:
   - {fileID: 11400000, guid: 814e4713fb3998e48bc1a865937c2e17, type: 2}
+  - {fileID: 11400000, guid: 719151e33577a244b85821af8b130a95, type: 2}
 --- !u!1 &1432104698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1226,9 @@ MonoBehaviour:
   - partName: 2
     partType: 4
     animatorOverrideController: {fileID: 22100000, guid: d36587c87ae76764abf562b24832c258, type: 2}
+  - partName: 2
+    partType: 7
+    animatorOverrideController: {fileID: 22100000, guid: d89a6b116d857e34e8f5214e853421b4, type: 2}
   - partName: 0
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 18178a3c3dbf7d34f8697a02d6689871, type: 2}
@@ -1232,6 +1238,9 @@ MonoBehaviour:
   - partName: 0
     partType: 4
     animatorOverrideController: {fileID: 22100000, guid: 835898f37782ebf4ea51bbb23e6be93e, type: 2}
+  - partName: 0
+    partType: 7
+    animatorOverrideController: {fileID: 22100000, guid: 801747cfd71206d4d8f53f19410597b1, type: 2}
   - partName: 1
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 893ba80ff3e574540b5f448746f3ceac, type: 2}
@@ -1244,6 +1253,9 @@ MonoBehaviour:
   - partName: 1
     partType: 4
     animatorOverrideController: {fileID: 22100000, guid: 0e1ae2efb02a637419580389b8d31ca4, type: 2}
+  - partName: 1
+    partType: 7
+    animatorOverrideController: {fileID: 22100000, guid: 2a0191a353450da449fd6750d36cab01, type: 2}
   - partName: 3
     partType: 0
     animatorOverrideController: {fileID: 22100000, guid: 9296e9b36e2362640b373d388c4510eb, type: 2}
@@ -1256,6 +1268,12 @@ MonoBehaviour:
   - partName: 3
     partType: 5
     animatorOverrideController: {fileID: 22100000, guid: ee2ece5da68b5ad4e953e032d6f24616, type: 2}
+  - partName: 3
+    partType: 6
+    animatorOverrideController: {fileID: 22100000, guid: 721b0180371ae1d4fbc259c0a96d226d, type: 2}
+  - partName: 3
+    partType: 7
+    animatorOverrideController: {fileID: 22100000, guid: 05c29206a363a244689ae784a84cf796, type: 2}
 --- !u!1 &1735790853
 GameObject:
   m_ObjectHideFlags: 0

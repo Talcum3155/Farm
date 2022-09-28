@@ -49,7 +49,7 @@ namespace ObjectPool
                 ));
             }
         }
-        
+
         /// <summary>
         /// Get specified Object from ObjectPool according particle type
         /// </summary>
@@ -61,15 +61,17 @@ namespace ObjectPool
             {
                 ParticleEffectType.FallenLeaves01 => _poolEffect[0],
                 ParticleEffectType.FallenLeaves02 => _poolEffect[1],
+                ParticleEffectType.Rock => _poolEffect[2],
+                ParticleEffectType.Grass => _poolEffect[3],
                 _ => null
             };
 
             var particleObject = objPool?.Get();
             if (!particleObject)
                 throw new NullReferenceException($"{effectType} 的对象池未创建");
-            
+
             particleObject.transform.position = position;
-            
+
             //Set inactive after particle active
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             objPool.Release(particleObject);

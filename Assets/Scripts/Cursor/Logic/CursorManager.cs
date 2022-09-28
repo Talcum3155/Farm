@@ -157,8 +157,6 @@ namespace Cursor.Logic
                     break;
 
                 case ItemType.BreakTool:
-                    break;
-
                 case ItemType.ChopTool:
                     //Make it clickable when the mouse is over the trunk
                     var cropScript = GridMapManager.Instance.GetCropObject(_mouseWorldPos);
@@ -190,6 +188,15 @@ namespace Cursor.Logic
                     break;
 
                 case ItemType.HarvestableScenery:
+                    break;
+
+                case ItemType.ReapTool:
+                    if (GridMapManager.Instance.HarvestableItemInRadius(_holdingItem, _mouseWorldPos))
+                    {
+                        SetCursorValid();
+                        return;
+                    }
+                    SetCursorValid();
                     break;
 
                 default:

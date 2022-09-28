@@ -15,6 +15,7 @@ namespace Utilities
         BreakTool,
         WaterTool,
         CollectTool,
+        ReapTool,
 
         //可收割的
         HarvestableScenery
@@ -51,7 +52,8 @@ namespace Utilities
         Water,
         Collect,
         Chop,
-        Break
+        Break,
+        Reap
     }
 
     public enum Season
@@ -76,6 +78,8 @@ namespace Utilities
     {
         FallenLeaves01,
         FallenLeaves02,
-        None
+        None,
+        Rock,
+        Grass
     }
 }

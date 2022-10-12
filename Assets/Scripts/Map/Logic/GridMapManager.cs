@@ -83,8 +83,6 @@ namespace Map.Logic
                     case GridType.NpcObstacle:
                         details.npcObstacle = tileProperty.boolTypeValue;
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
 
                 _tileDetailsDict[key] = details;
@@ -162,6 +160,7 @@ namespace Map.Logic
                                 _reapItems[i].transform.position + Vector3.up);
                             _reapItems[i].SpawnHarvestItems();
                         }
+
                         break;
 
                     default:
@@ -321,6 +320,33 @@ namespace Map.Logic
             }
 
             return _reapItems.Count > 0;
+        }
+
+        /// <summary>
+        /// Get range and origin point from map
+        /// according to scene name
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="gridDimensions"></param>
+        /// <param name="gridOrigin"></param>
+        /// <returns></returns>
+        public bool GetGridDimensions(string sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin)
+        {
+            gridDimensions = Vector2Int.zero;
+            gridOrigin = Vector2Int.zero;
+
+            foreach (var mapSo in mapSos.Where(mapSo => mapSo.sceneNameOfMap.Equals(sceneName)))
+            {
+                gridDimensions.x = mapSo.gridWidth;
+                gridDimensions.y = mapSo.gridHeight;
+
+                gridOrigin.x = mapSo.originX;
+                gridOrigin.y = mapSo.originY;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

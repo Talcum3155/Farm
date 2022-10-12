@@ -576,3 +576,18 @@ private void SwitchConfinerShape()
 2. 创建**ReapItem**脚本用来初始化杂草的信息，如果杂草的**WorldItem**脚本检测到该物品是杂草就会为其添加上该脚本
 3. 使用`Physics2D.OverlapCircleNonAlloc(mousePosition, tool.itemUseRadius, collider2Ds)`来检测半径内的物体，这个函数不会产生太多垃圾回收。挥出镰刀后将半径范围内的杂草割除
 4. 人物穿过杂草后杂草会摇晃产生互动效果
+
+### 第六十九节 
+
+1. 创建AStar算法所需的节点信息，包含目标距离，起点距离以及得分
+2. 为**MapSO**添加地图格子信息，由于瓦片的坐标会是负数，但数组索引不能是负数，所以需要以瓦片地图的左下角为原点
+
+### 第七十节
+
+### 第七十一节
+
+### 第七十二节
+
+
+
+

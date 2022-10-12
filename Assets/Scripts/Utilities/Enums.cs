@@ -65,7 +65,6 @@ namespace Utilities
     }
 
     //瓦片地图的每个格子能干什么
-    [Flags]
     public enum GridType
     {
         Diggable,

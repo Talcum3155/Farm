@@ -39,31 +39,6 @@ namespace Utilities
             SelectedItem?.Invoke(item, isSelected);
 
         /// <summary>
-        /// 更新时间UI的秒和分,，由于时分秒是连在一起的，单独更新小时不太方便，所以这里也加上了小时的参数
-        /// </summary>
-        public static event Action<int, int, int> UpdateTime;
-
-        public static void CallUpdateTime(int second, int minutes, int hour)
-            => UpdateTime?.Invoke(second, minutes, hour);
-
-        /// <summary>
-        /// 更新时间UI的小时，由于更新小时既需要更新时间槽也需要更新天色图，
-        /// 所以单独抽离出来，防止同时又要重复更新其他值而浪费性能
-        /// </summary>
-        public static event Action<int> UpdateHour;
-
-        public static void CallUpdateHour(int hour)
-            => UpdateHour?.Invoke(hour);
-
-        /// <summary>
-        /// 更新时间UI的日期
-        /// </summary>
-        public static event Action<int, int, Season, int> UpdateDate;
-
-        public static void CallUpdateDate(int day, int month, Season season, int year)
-            => UpdateDate?.Invoke(day, month, season, year);
-
-        /// <summary>
         /// 根据名称加载场景以及移动到加载后的场景的对应位置
         /// </summary>
         public static event Action<string, Vector3> TransitionScene;
@@ -111,6 +86,8 @@ namespace Utilities
         public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
             => ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
 
+        #region Time about
+
         /// <summary>
         /// 每天结束后触发事件
         /// </summary>
@@ -118,6 +95,43 @@ namespace Utilities
 
         public static void CallGameDayEnd(int day, Season season)
             => GameDayEnd?.Invoke(day, season);
+
+        /// <summary>
+        /// 更新时间UI的秒和分,，由于时分秒是连在一起的，单独更新小时不太方便，所以这里也加上了小时的参数
+        /// </summary>
+        public static event Action<int, int, int> UpdateTime;
+
+        public static void CallUpdateTime(int second, int minutes, int hour)
+            => UpdateTime?.Invoke(second, minutes, hour);
+
+        /// <summary>
+        /// Touch off every minute, used in schedule event of npc 
+        /// </summary>
+        public static event Action<int, int, int, Season> GameMinuteEnd;
+
+        public static void CallGameMinuteEnd(int minute, int hour, int day, Season season)
+        {
+            GameMinuteEnd?.Invoke(minute, hour, day, season);
+        }
+
+        /// <summary>
+        /// 更新时间UI的小时，由于更新小时既需要更新时间槽也需要更新天色图，
+        /// 所以单独抽离出来，防止同时又要重复更新其他值而浪费性能
+        /// </summary>
+        public static event Action<int> UpdateHour;
+
+        public static void CallUpdateHour(int hour)
+            => UpdateHour?.Invoke(hour);
+
+        /// <summary>
+        /// 更新时间UI的日期
+        /// </summary>
+        public static event Action<int, int, Season, int> UpdateDate;
+
+        public static void CallUpdateDate(int day, int month, Season season, int year)
+            => UpdateDate?.Invoke(day, month, season, year);
+
+        #endregion
 
         /// <summary>
         /// 播种后触发该事件

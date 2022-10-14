@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utilities;
 
@@ -12,6 +13,8 @@ namespace TimeSystem.Logic
         public bool gameClockPause;
         private float _tikTime;
 
+        public TimeSpan GameTime => new TimeSpan(_gameHour, _gameMinutes, _gameSecond);
+        
         private void Start()
         {
             ResetTime();
@@ -62,6 +65,8 @@ namespace TimeSystem.Logic
                 _gameMinutes = 0;
                 UpdateHour();
             }
+
+            MyEventHandler.CallGameMinuteEnd(_gameMinutes, _gameHour, _gameDay, gameSeason);
         }
 
         private void UpdateHour()

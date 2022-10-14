@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Map.Logic;
 using UnityEngine;
+using Utilities;
 
 namespace AStar
 {
-    public class AStarCore : MonoBehaviour
+    public class AStarCore : SingleTon<AStarCore>
     {
         private GridNodes _gridNodes;
         private Node _startNode;

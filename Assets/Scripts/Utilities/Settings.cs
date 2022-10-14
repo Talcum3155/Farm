@@ -15,5 +15,13 @@ namespace Utilities
         public const int SeasonHold = 3; //季到达20进一
 
         public const float FadeCanvasDuration = 1.5f;
+
+        public const float GridCellSize = 1f;
+        public const float GridCellDiagonalSize = 1.41f;
+        // 20*20 pixel per 1unit => 1*1 pixel per 0.05 unit
+        public const float PixelSize = 0.05f;
+
+        //Wait a while to play animation
+        public const float AnimationBreakTime = 5f; 
     }
 }

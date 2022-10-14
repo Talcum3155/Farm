@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using NPC.Data;
+using NPC.Logic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using Utilities;
+using Utilities.CustomAttribute;
 
 namespace AStar
 {
@@ -19,10 +23,11 @@ namespace AStar
 
         private Stack<MovementStep> _movementSteps;
 
-        private void Start()
-        {
-            ShowPathOnGridMap();
-        }
+        [Header("测试移动NPC")] public NpcMovement npcMovement;
+        public bool moveNpc;
+        [SceneName] public string targetScene;
+        public Vector2Int targetPos;
+        public AnimationClip eventAnimationClip;
 
         private void Awake()
         {
@@ -32,12 +37,20 @@ namespace AStar
 
         private void Update()
         {
+            ShowPathOnGridMap();
+
+            if (moveNpc)
+            {
+                moveNpc = false;
+                var scheduleDetails = new ScheduleDetails(0, 0, 0, 0, Season.春天, targetScene, targetPos, eventAnimationClip, true);
+                npcMovement.BuildPath(scheduleDetails);
+            }
         }
 
         private void ShowPathOnGridMap()
         {
             if (displayMap == null || displayTile == null) return;
-            
+
             if (displayStartAndEnd)
             {
                 displayMap.SetTile((Vector3Int)startPos, displayTile);
@@ -61,7 +74,7 @@ namespace AStar
             else
             {
                 if (_movementSteps.Count <= 0) return;
-                
+
                 foreach (var step in _movementSteps)
                     displayMap.SetTile((Vector3Int)step.gridCoordinate, null);
             }

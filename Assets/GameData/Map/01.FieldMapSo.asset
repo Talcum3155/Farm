@@ -8421,9 +8421,6 @@ MonoBehaviour:
   - coordinate: {x: 32, y: 21}
     gridType: 1
     boolTypeValue: 1
-  - coordinate: {x: -26, y: -23}
-    gridType: 3
-    boolTypeValue: 1
   - coordinate: {x: -26, y: -22}
     gridType: 3
     boolTypeValue: 1
@@ -8454,15 +8451,6 @@ MonoBehaviour:
   - coordinate: {x: -26, y: -2}
     gridType: 3
     boolTypeValue: 1
-  - coordinate: {x: -25, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -25, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -25, y: -21}
-    gridType: 3
-    boolTypeValue: 1
   - coordinate: {x: -25, y: -20}
     gridType: 3
     boolTypeValue: 1
@@ -8485,15 +8473,6 @@ MonoBehaviour:
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -25, y: -2}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -24, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -24, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -24, y: -21}
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -24, y: -20}
@@ -8520,15 +8499,6 @@ MonoBehaviour:
   - coordinate: {x: -24, y: -2}
     gridType: 3
     boolTypeValue: 1
-  - coordinate: {x: -23, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -23, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -23, y: -21}
-    gridType: 3
-    boolTypeValue: 1
   - coordinate: {x: -23, y: -20}
     gridType: 3
     boolTypeValue: 1
@@ -8553,18 +8523,6 @@ MonoBehaviour:
   - coordinate: {x: -23, y: -2}
     gridType: 3
     boolTypeValue: 1
-  - coordinate: {x: -22, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -22, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -22, y: -21}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -22, y: -20}
-    gridType: 3
-    boolTypeValue: 1
   - coordinate: {x: -22, y: -19}
     gridType: 3
     boolTypeValue: 1
@@ -8584,15 +8542,6 @@ MonoBehaviour:
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -22, y: -2}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -21, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -21, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -21, y: -21}
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -21, y: -20}
@@ -8617,15 +8566,6 @@ MonoBehaviour:
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -21, y: -2}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -20, y: -23}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -20, y: -22}
-    gridType: 3
-    boolTypeValue: 1
-  - coordinate: {x: -20, y: -21}
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -20, y: -20}
@@ -8901,6 +8841,27 @@ MonoBehaviour:
   - coordinate: {x: -12, y: -16}
     gridType: 3
     boolTypeValue: 1
+  - coordinate: {x: -10, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -10, y: -21}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -9, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -9, y: -21}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -8, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -8, y: -21}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -7, y: -22}
+    gridType: 3
+    boolTypeValue: 1
   - coordinate: {x: -7, y: 8}
     gridType: 3
     boolTypeValue: 1
@@ -8916,6 +8877,12 @@ MonoBehaviour:
   - coordinate: {x: -7, y: 12}
     gridType: 3
     boolTypeValue: 1
+  - coordinate: {x: -6, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -6, y: -21}
+    gridType: 3
+    boolTypeValue: 1
   - coordinate: {x: -6, y: 8}
     gridType: 3
     boolTypeValue: 1
@@ -8929,6 +8896,12 @@ MonoBehaviour:
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -6, y: 12}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -5, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -5, y: -21}
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -5, y: -17}
@@ -8965,6 +8938,12 @@ MonoBehaviour:
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -5, y: 12}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -4, y: -22}
+    gridType: 3
+    boolTypeValue: 1
+  - coordinate: {x: -4, y: -21}
     gridType: 3
     boolTypeValue: 1
   - coordinate: {x: -4, y: -17}

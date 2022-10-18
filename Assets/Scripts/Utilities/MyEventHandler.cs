@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Dialogue.Data;
 using UnityEngine;
 
 namespace Utilities
@@ -172,5 +173,9 @@ namespace Utilities
 
         public static void CallGenerateCrop()
             => GenerateCrop?.Invoke();
+
+        public static event Action<DialoguePiece> ShowDialogue;
+
+        public static void CallShowDialogue(DialoguePiece piece) => ShowDialogue?.Invoke(piece);
     }
 }

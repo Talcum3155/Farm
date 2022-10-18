@@ -71,7 +71,7 @@ namespace AStar
             {
                 //Get real point in tilemap
                 var tilePos = new Vector3Int(i + _originX, j + _originY, 0);
-                var tile = GridMapManager.Instance.GetTileInDict(tilePos);
+                var tile = GridMapManager.Instance.GetTileDetails($"{tilePos.x}X{tilePos.y}Y{sceneName}");
 
                 if (tile == null) continue;
                 _gridNodes.GetGridNode(i, j).isObstacle = tile.npcObstacle;
@@ -182,7 +182,7 @@ namespace AStar
         private void UpdatePathOnMovement(string sceneName, Stack<MovementStep> npcMovementStep)
         {
             var nextNode = _targetNode;
-            
+
             while (nextNode is not null)
             {
                 var step = new MovementStep

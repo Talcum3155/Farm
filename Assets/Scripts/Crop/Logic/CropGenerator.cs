@@ -35,6 +35,8 @@ namespace Crop.Logic
             
             //Get tileDetails from tile dictionary
             var tile = GridMapManager.Instance.GetTileInDict(cropPosInGrid) ?? new TileDetails();
+            tile.gridX = cropPosInGrid.x;
+            tile.gridY = cropPosInGrid.y;
 
             tile.seedItemId = seedItemId;
             tile.growthDays = growthDays;

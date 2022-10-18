@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Utilities.CustomAttribute;
 
@@ -98,5 +99,26 @@ namespace Utilities
         public Transform npc;
         public string startScene;
         public Vector3 position;
+    }
+
+    [Serializable]
+    public class SceneRoute
+    {
+        public string fromSceneName;
+        public string targetSceneName;
+        public List<ScenePath> scenePaths;
+    }
+    
+    [Serializable]
+    public class ScenePath
+    {
+        public string sceneName;
+        /*
+         *  if these two value equal or bigger than MaxGridSize
+         * in settings, the npc will action according to
+         * schedule
+         */
+        public Vector2Int fromGridCell;
+        public Vector2Int targetGridCell;
     }
 }

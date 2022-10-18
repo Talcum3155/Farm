@@ -22,6 +22,8 @@ namespace Utilities
         public const float PixelSize = 0.05f;
 
         //Wait a while to play animation
-        public const float AnimationBreakTime = 5f; 
+        public const float AnimationBreakTime = 5f;
+
+        public const int MaxGridSize = 9999;
     }
 }

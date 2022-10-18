@@ -43,6 +43,7 @@ namespace NPC.Logic
         private Grid _grid;
         private bool _initialized;
         private bool _npcMove;
+        public bool interactable;
 
         public string StartScene
         {
@@ -185,7 +186,7 @@ namespace NPC.Logic
                     //Judgment distance by pixel-level
                     while (Vector3.Distance(transform.position, _nextWorldPosition) > Settings.PixelSize)
                     {
-                        Debug.Log("移动中...");
+                        Debug.Log($"移动中...{transform.position}");
                         _dir = (_nextWorldPosition - transform.position).normalized;
 
                         var posOffset = new Vector2(
@@ -213,12 +214,55 @@ namespace NPC.Logic
             _currentSchedule = schedule;
             TargetGridPosition = (Vector3Int)schedule.targetGridPosition;
             _stopAnimationClip = schedule.animationClip;
+            interactable = schedule.interactable;
 
             if (schedule.targetScene.Equals(currentScene))
             {
                 AStarCore.Instance.BuildPath(schedule.targetScene, (Vector2Int)_currentGridPosition,
                     schedule.targetGridPosition,
                     _movementSteps);
+            }
+            //To another scene
+            else
+            {
+                Debug.Log("跨场景移动");
+                //Find teleport position from this scene to another scene
+                var sceneRoute = NpcManger.Instance.GetSceneRoute(currentScene, schedule.targetScene);
+
+                if (sceneRoute != null)
+                {
+                    /*
+                     * Because stack is FIFO, so the order is
+                     * Get another scene path first
+                     */
+                    foreach (var path in sceneRoute.scenePaths)
+                    {
+                        Debug.Log("PATH");
+                        Vector2Int fromPos;
+                        //Use current position of npc
+                        if (path.fromGridCell.x >= Settings.MaxGridSize
+                            || path.fromGridCell.y >= Settings.MaxGridSize)
+                            fromPos = (Vector2Int)_currentGridPosition;
+                        else
+                            fromPos = path.fromGridCell;
+
+                        Vector2Int targetPos;
+                        if (path.targetGridCell.x >= Settings.MaxGridSize
+                            || path.targetGridCell.y >= Settings.MaxGridSize)
+                            targetPos = schedule.targetGridPosition;
+                        else
+                            targetPos = path.targetGridCell;
+
+                        /*
+                         * Stack contains steps from
+                         * currentPosition to
+                         * teleport position of another scene
+                         * and form teleport position
+                         * to targetPosition 
+                         */
+                        AStarCore.Instance.BuildPath(path.sceneName, fromPos, targetPos, _movementSteps);
+                    }
+                }
             }
 
             if (_movementSteps.Count > 1)
@@ -331,7 +375,7 @@ namespace NPC.Logic
         {
             _spriteRenderer.enabled = true;
             _boxCollider2D.enabled = true;
-            transform.GetChild(0).gameObject.SetActive(true);
+            // transform.GetChild(0).gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -341,7 +385,7 @@ namespace NPC.Logic
         {
             _spriteRenderer.enabled = false;
             _boxCollider2D.enabled = false;
-            transform.GetChild(0).gameObject.SetActive(false);
+            // transform.GetChild(0).gameObject.SetActive(false);
         }
 
         #endregion

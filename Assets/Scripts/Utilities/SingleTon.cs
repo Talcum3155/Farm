@@ -7,7 +7,7 @@ namespace Utilities
     {
         public static T Instance { private set; get; }
         
-        private void Awake()
+        protected virtual void Awake()
         {
             if (Instance)
             {

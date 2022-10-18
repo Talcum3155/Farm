@@ -39,7 +39,7 @@ namespace AStar
         {
             ShowPathOnGridMap();
 
-            if (moveNpc)
+            if (moveNpc || Input.GetKeyDown(KeyCode.P))
             {
                 moveNpc = false;
                 var scheduleDetails = new ScheduleDetails(0, 0, 0, 0, Season.春天, targetScene, targetPos, eventAnimationClip, true);

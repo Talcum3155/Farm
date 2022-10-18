@@ -90,10 +90,10 @@ namespace Map.Logic
         }
 
         public TileDetails GetTileInDict(Vector3Int mouseGridPos)
-        {
-            var key = $"{mouseGridPos.x}X{mouseGridPos.y}Y{SceneManager.GetActiveScene().name}";
-            return _tileDetailsDict.ContainsKey(key) ? _tileDetailsDict[key] : null;
-        }
+            => GetTileDetails($"{mouseGridPos.x}X{mouseGridPos.y}Y{SceneManager.GetActiveScene().name}");
+
+        public TileDetails GetTileDetails(string key)
+            => _tileDetailsDict.ContainsKey(key) ? _tileDetailsDict[key] : null;
 
         private void SetDugTile(TileDetails details)
             => _digTilemap?.SetTile(new Vector3Int(details.gridX, details.gridY), digTile);

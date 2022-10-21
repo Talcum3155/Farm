@@ -39,6 +39,7 @@ namespace Player
             MyEventHandler.AfterSceneLoaded += OnAfterSceneLoadEvent;
             MyEventHandler.MoveToPosition += OnMoveToPositionEvent;
             MyEventHandler.MouseClickedEvent += OnMouseClickedEvent;
+            MyEventHandler.UpdateGameState += OnUpdateGameStateEvent;
         }
 
         private void OnDisable()
@@ -47,6 +48,7 @@ namespace Player
             MyEventHandler.AfterSceneLoaded -= OnAfterSceneLoadEvent;
             MyEventHandler.MoveToPosition -= OnMoveToPositionEvent;
             MyEventHandler.MouseClickedEvent -= OnMouseClickedEvent;
+            MyEventHandler.UpdateGameState -= OnUpdateGameStateEvent;
         }
 
         private void Update()
@@ -115,6 +117,16 @@ namespace Player
         }
 
         #region 事件绑定
+
+        private void OnUpdateGameStateEvent(GameState state)
+        {
+            _controllable = state switch
+            {
+                GameState.Pause => false,
+                GameState.GamePlay => true,
+                _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
+            };
+        }
 
         private async void OnMouseClickedEvent(Vector3 mousePos, Vector3 treePos, ItemDetails itemDetails)
         {

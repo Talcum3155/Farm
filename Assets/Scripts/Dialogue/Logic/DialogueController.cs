@@ -71,15 +71,22 @@ namespace Dialogue.Logic
             {
                 //Send dialogue piece
                 MyEventHandler.CallShowDialogue(result);
+                MyEventHandler.CallUpdateGameState(GameState.Pause);
                 //Waiting for the dialogue are showed completely
                 await UniTask.WaitUntil(() => result.done);
                 _talking = false;
                 return;
             }
-
+            MyEventHandler.CallUpdateGameState(GameState.GamePlay);
             MyEventHandler.CallShowDialogue(null);
             FillDialogueStack();
             _talking = false;
+
+            if (afterTalkEvent != null)
+            {
+                afterTalkEvent.Invoke();
+                _canTalk = false;
+            }
         }
     }
 }

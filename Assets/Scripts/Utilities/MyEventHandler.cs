@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dialogue.Data;
+using Inventory.DataSO;
 using UnityEngine;
 
 namespace Utilities
@@ -174,8 +175,42 @@ namespace Utilities
         public static void CallGenerateCrop()
             => GenerateCrop?.Invoke();
 
+        /// <summary>
+        /// Send Dialogue Piece to Dialogue UI
+        /// </summary>
         public static event Action<DialoguePiece> ShowDialogue;
 
         public static void CallShowDialogue(DialoguePiece piece) => ShowDialogue?.Invoke(piece);
+
+        /// <summary>
+        /// Show trade UI when trading
+        /// </summary>
+        public static event Action<SlotType, InventoryBagSo> BagBaseOpen;
+
+        public static void CallBagBaseOpen(SlotType slotType, InventoryBagSo bagSo) =>
+            BagBaseOpen?.Invoke(slotType, bagSo);
+        
+        /// <summary>
+        /// Hide trade UI when trade finished
+        /// </summary>
+        public static event Action<SlotType, InventoryBagSo> BagBaseClose;
+
+        public static void CallBagBaseClose(SlotType slotType, InventoryBagSo bagSo) =>
+            BagBaseClose?.Invoke(slotType, bagSo);
+
+        /// <summary>
+        /// Send Game State to other scripts
+        /// </summary>
+        public static event Action<GameState> UpdateGameState;
+
+        public static void CallUpdateGameState(GameState state) => UpdateGameState?.Invoke(state);
+
+        /// <summary>
+        /// Display Trade UI when drag items from shop to bag
+        /// </summary>
+        public static event Action<ItemDetails, bool> ShowTradeUI;
+
+        public static void CallShowTradeUI(ItemDetails details, bool sellingItem)
+            => ShowTradeUI?.Invoke(details, sellingItem);
     }
 }

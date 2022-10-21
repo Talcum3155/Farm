@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Inventory.DataSO;
 using Inventory.Logic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
@@ -14,7 +17,15 @@ namespace Inventory.UI
         [SerializeField] private List<BagSlot> bagSlots;
         [SerializeField] private GameObject bag;
         public ItemToolTip itemToolTip;
+        
+        [Header("交易UI")] public TradeUI tradeUI;
+        public TextMeshProUGUI moneyText;
+        
         private int _activeSlotIndex = -1;
+
+        [Header("通用背包")] [SerializeField] private GameObject bagBase;
+        public GameObject shopSlotPrefab;
+        [SerializeField] private List<BagSlot> baseBagSlots;
 
         private void Start()
         {
@@ -25,6 +36,7 @@ namespace Inventory.UI
             }
 
             bag.SetActive(false);
+            moneyText.text = InventoryManager.Instance.money.ToString();
         }
 
         private void Update()
@@ -37,12 +49,18 @@ namespace Inventory.UI
         {
             MyEventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
             MyEventHandler.BeforeSceneUnLoad += OnBeforeSceneUnLoad;
+            MyEventHandler.BagBaseOpen += OnBaseBagOpenEvent;
+            MyEventHandler.BagBaseClose += OnBaseBagCloseEvent;
+            MyEventHandler.ShowTradeUI += OnShowTradeUIEvent;
         }
 
         private void OnDisable()
         {
             MyEventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
             MyEventHandler.BeforeSceneUnLoad -= OnBeforeSceneUnLoad;
+            MyEventHandler.BagBaseOpen -= OnBaseBagOpenEvent;
+            MyEventHandler.BagBaseClose -= OnBaseBagCloseEvent;
+            MyEventHandler.ShowTradeUI -= OnShowTradeUIEvent;
         }
 
         /// <summary>
@@ -56,8 +74,11 @@ namespace Inventory.UI
             switch (location)
             {
                 case InventoryLocation.Bag:
+                    Debug.Log($"更新财产{InventoryManager.Instance.money}");
+                    moneyText.text = InventoryManager.Instance.money.ToString();
                     if (index != -1)
                     {
+                        Debug.Log($"id: {itemsList[index].itemId} amount: {itemsList[index].itemAmount}");
                         //此背包槽位已经空了
                         if (itemsList[index].itemId == 0)
                         {
@@ -84,6 +105,18 @@ namespace Inventory.UI
 
                     break;
                 case InventoryLocation.Box:
+                    for (var i = 0; i < baseBagSlots.Count; i++)
+                    {
+                        if (itemsList[i].itemAmount > 0)
+                        {
+                            var details = InventoryManager.Instance.GetItemDetails(itemsList[i].itemId);
+                            baseBagSlots[i].UpdateSlot(details, itemsList[i].itemAmount);
+                            continue;
+                        }
+
+                        baseBagSlots[i].UpdateEmptySlot();
+                    }
+
                     break;
             }
         }
@@ -132,6 +165,59 @@ namespace Inventory.UI
         {
             //取消举起物品状态和举起物品的动画
             SwitchSelectItem(-1);
+        }
+
+        private void OnBaseBagOpenEvent(SlotType slotType, InventoryBagSo bagSo)
+        {
+            var prefab = slotType switch
+            {
+                SlotType.Shop => shopSlotPrefab,
+                _ => null
+            };
+
+            bagBase.SetActive(true);
+            var i = 0;
+            baseBagSlots = new List<BagSlot>(bagSo.inventoryItems.Select((s) =>
+            {
+                var slot = Instantiate(prefab, bagBase.transform.GetChild(1)).GetComponent<BagSlot>();
+                slot.inventoryUI = this;
+                slot.slotIndex = i++;
+                return slot;
+            }));
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(bagBase.GetComponent<RectTransform>());
+
+            if (slotType == SlotType.Shop)
+            {
+                bag.GetComponent<RectTransform>().pivot = new Vector2(-0.75f, 0.5f);
+                bag.SetActive(true);
+            }
+
+            OnUpdateInventoryUI(InventoryLocation.Box, bagSo.inventoryItems, -1);
+        }
+
+        private void OnBaseBagCloseEvent(SlotType slotType, InventoryBagSo bagSo)
+        {
+            bagBase.SetActive(false);
+
+            itemToolTip.gameObject.SetActive(false);
+            SwitchSelectItem(-1);
+
+            foreach (var slot in baseBagSlots)
+                Destroy(slot.gameObject);
+            baseBagSlots.Clear();
+
+            if (slotType == SlotType.Shop)
+            {
+                bag.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+                bag.SetActive(false);
+            }
+        }
+
+        private void OnShowTradeUIEvent(ItemDetails details,bool sell)
+        {
+            tradeUI.gameObject.SetActive(true);
+            tradeUI.SetupTradeUI(details,sell);
         }
     }
 }

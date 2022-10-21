@@ -12,6 +12,8 @@ namespace Inventory.Logic
         public ItemDataListSo itemDataListSo;
         public InventoryBagSo playerBagSo;
 
+        [Header("交易")] public int money;
+
         private void OnEnable()
         {
             MyEventHandler.DropItem += OnDropItemEvent;
@@ -61,17 +63,43 @@ namespace Inventory.Logic
                 Destroy(item.gameObject);
         }
 
-        private int GetItemIndexInBag(int itemId)
+        /// <summary>
+        /// Get index from bag if own this item.
+        /// if there is no this item and
+        /// don't need free space index in bag,
+        /// it will return -1, otherwise it will
+        /// return free space index
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="freeSpaceIndex">whether get free space in bag</param>
+        /// <returns></returns>
+        private int GetItemIndexInBag(int itemId, bool freeSpaceIndex)
         {
             for (var i = 0; i < playerBagSo.inventoryItems.Count; i++)
+            {
                 if (playerBagSo.inventoryItems[i].itemId == itemId)
                     return i;
+                if (freeSpaceIndex && playerBagSo.inventoryItems[i].itemId < 1000)
+                    return i;
+            }
 
             return -1;
         }
 
-        public bool CheckBagSpace()
-            => InventoryManager.Instance.playerBagSo.inventoryItems.All(inventoryItem => inventoryItem.itemId != 0);
+        private void AddItemAtIndex(ItemDetails details, int index, int amount)
+            =>
+                playerBagSo.inventoryItems[index] = new InventoryItem
+                {
+                    itemId = details.itemID,
+                    itemAmount = amount
+                };
+
+        /// <summary>
+        /// If bag is full, return true
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckBagFull()
+            => playerBagSo.inventoryItems.All(inventoryItem => inventoryItem.itemId != 0);
 
         /// <summary>
         /// 使用元组交换两个索引的位置
@@ -93,10 +121,10 @@ namespace Inventory.Logic
         /// <param name="removeAmount"></param>
         private void RemoveItem(int itemId, int removeAmount)
         {
-            var index = GetItemIndexInBag(itemId);
+            var index = GetItemIndexInBag(itemId, false);
             if (playerBagSo.inventoryItems[index].itemAmount > removeAmount)
             {
-                playerBagSo.inventoryItems[index] = new InventoryItem()
+                playerBagSo.inventoryItems[index] = new InventoryItem
                 {
                     itemId = itemId,
                     itemAmount = playerBagSo.inventoryItems[index].itemAmount - removeAmount
@@ -126,7 +154,7 @@ namespace Inventory.Logic
             {
                 //背包有空位，或者已经有该物品
                 if (playerBag[i].itemId != 0 && playerBag[i].itemId != id) continue;
-                
+
                 //当背包中没有该物品时，该格子的数量默认为0
                 playerBag[i] = new InventoryItem
                     { itemId = id, itemAmount = playerBag[i].itemAmount + amount };
@@ -136,5 +164,35 @@ namespace Inventory.Logic
         }
 
         #endregion
+
+        public void TradeItem(ItemDetails details, int amount, bool sellTrade)
+        {
+            var cost = details.itemPrice * amount;
+            var indexInBag = GetItemIndexInBag(details.itemID, true);
+            Debug.Log($"背包空位置索引：{indexInBag}");
+
+            if (sellTrade) //Sell
+            {
+                if (playerBagSo.inventoryItems[indexInBag].itemAmount >= amount)
+                {
+                    RemoveItem(details.itemID, amount);
+                    //Total price of sold item
+                    cost = (int)(cost * details.sellPercentage);
+                    money += cost;
+                }
+            }
+            else if (money - cost >= 0) //Buy
+            {
+                if (!CheckBagFull())
+                {
+                    AddItemAtIndex(details, indexInBag, amount);
+                    money -= cost;
+                }
+                else
+                    return;
+            }
+
+            MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, indexInBag);
+        }
     }
 }

@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 56112215}
   - component: {fileID: 56112214}
   - component: {fileID: 56112216}
+  - component: {fileID: 56112217}
   m_Layer: 0
   m_Name: NPC_Mayor
   m_TagString: Untagged
@@ -450,7 +451,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0030326843, y: 0.14583206}
+  m_Offset: {x: -0.0030326843, y: -0.54308987}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -461,7 +462,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5627384, y: 0.20676422}
+  m_Size: {x: 0.5627384, y: 1.5846081}
   m_EdgeRadius: 0
 --- !u!114 &56112216
 MonoBehaviour:
@@ -478,21 +479,41 @@ MonoBehaviour:
   npc: {fileID: 56112214}
   afterTalkEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56112217}
+        m_TargetAssemblyTypeName: NPC.Logic.NpcFunction, Assembly-CSharp
+        m_MethodName: OpenShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   dialogues:
   - faceImage: {fileID: 21300000, guid: 7951faae60d314030a0981ea02e3c592, type: 3}
     onLeft: 1
     name: Andy
-    dialogueText: "\u4F60\u597D\uFF0C\u6211\u662F\u9547\u957FAndy\uFF01"
-    needToPause: 1
-    done: 0
-  - faceImage: {fileID: 21300000, guid: 9250cb0d0524f439fb2e48d5ecc828e5, type: 3}
-    onLeft: 0
-    name: Tarowy
-    dialogueText: "\u4F60\u597D\uFF0C\u6211Tarowy\uFF01"
+    dialogueText: "\u9700\u8981\u4E70\u4EC0\u4E48\u4E1C\u897F\u5417"
     needToPause: 1
     done: 1
+  _canTalk: 0
   uiSign: {fileID: 1828538745}
+--- !u!114 &56112217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56112207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bed9ab8818e1f04bb6bc5da77b2f000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopData: {fileID: 11400000, guid: f4c580ec37e905741bfc9b2ed9fd2beb, type: 2}
 --- !u!1 &64323183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,6 +2263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDataListSo: {fileID: 11400000, guid: 6d48c77a1d6f3ed48acd02b1a34c6a67, type: 2}
   playerBagSo: {fileID: 11400000, guid: 9fd712be7948827439cd1e3341b22981, type: 2}
+  money: 300
 --- !u!1 &2069754214
 GameObject:
   m_ObjectHideFlags: 0

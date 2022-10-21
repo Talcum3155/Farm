@@ -59,7 +59,7 @@ namespace Inventory.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (itemAmount == 0)
+            if (itemAmount == 0 || slotType != SlotType.Bag)
                 return;
 
             inventoryUI.SwitchSelectItem(slotIndex);
@@ -88,10 +88,23 @@ namespace Inventory.UI
             if (target is not null)
             {
                 //此格子类型和目标格子的类型一样，就直接交换位置
-                if ((slotType ^ target.slotType) == 0)
+                if (slotType == target.slotType)
+                {
                     InventoryManager.Instance.SwapItem(slotIndex, target.slotIndex);
-
-                inventoryUI.SwitchSelectItem(target.slotIndex);
+                    inventoryUI.SwitchSelectItem(target.slotIndex);
+                }
+                //Buy Item
+                else if (slotType == SlotType.Shop && target.slotType == SlotType.Bag)
+                {
+                    MyEventHandler.CallShowTradeUI(itemDetails, false);
+                    inventoryUI.SwitchSelectItem(-1);
+                }
+                //Sell Item
+                else if (slotType == SlotType.Bag && target.slotType == SlotType.Shop)
+                {
+                    MyEventHandler.CallShowTradeUI(itemDetails, true);
+                    inventoryUI.SwitchSelectItem(-1);
+                }
                 return;
             }
 
@@ -101,7 +114,7 @@ namespace Inventory.UI
                     Input.mousePosition.y, -Camera.main.transform.position.z));
             if (itemDetails.canDropped)
             {
-                MyEventHandler.CallInstantiatedInScene(itemDetails.itemID,screenToWorldPoint);
+                MyEventHandler.CallInstantiatedInScene(itemDetails.itemID, screenToWorldPoint);
             }
         }
     }

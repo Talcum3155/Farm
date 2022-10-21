@@ -21,7 +21,6 @@ namespace Utilities
         HarvestableScenery
     }
 
-    [Flags]
     public enum SlotType
     {
         Bag,
@@ -80,5 +79,11 @@ namespace Utilities
         None,
         Rock,
         Grass
+    }
+
+    public enum GameState
+    {
+        Pause,
+        GamePlay
     }
 }

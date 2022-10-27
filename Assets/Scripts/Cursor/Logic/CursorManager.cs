@@ -1,6 +1,7 @@
 using System;
 using Crop.Data;
 using Crop.Logic;
+using Inventory.Logic;
 using Map.Logic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,7 @@ namespace Cursor.Logic
     {
         public Sprite normal, seed, tool, item;
         private Image _cursorImage;
+        private Image _buildImage;
         private RectTransform _cursorCanvas;
 
         private Sprite _currentCursorSprite;
@@ -67,6 +69,8 @@ namespace Cursor.Logic
         {
             _cursorCanvas = GameObject.FindGameObjectWithTag("CursorCanvas").GetComponent<RectTransform>();
             _cursorImage = _cursorCanvas.GetChild(0).GetComponent<Image>();
+            _buildImage = _cursorCanvas.GetChild(1).GetComponent<Image>();
+            _buildImage.gameObject.SetActive(false);
             CurrentCursorSprite = normal;
 
             _camera = Camera.main;
@@ -83,6 +87,7 @@ namespace Cursor.Logic
             if (InteractWithUI() || !_cursorUsable)
             {
                 _cursorImage.sprite = normal;
+                // _buildImage.gameObject.SetActive(false);
                 return;
             }
 
@@ -106,6 +111,8 @@ namespace Cursor.Logic
             _mouseGridPos = _currentGrid.WorldToCell(_mouseWorldPos);
             var playerGridPos = _currentGrid.WorldToCell(_playerTransform.position);
 
+            _buildImage.rectTransform.position = Input.mousePosition;
+
             //鼠标与玩家的距离大于持有物品的使用范围
             if (Mathf.Abs(_mouseGridPos.x - playerGridPos.x) > 2 || Mathf.Abs(_mouseGridPos.y - playerGridPos.y) > 2)
             {
@@ -120,7 +127,6 @@ namespace Cursor.Logic
                 return;
             }
 
-            CropDetails crop = null;
             switch (_holdingItem.itemType)
             {
                 //TODO:添加持有物品时鼠标位于每个瓦片上的判断逻辑
@@ -140,6 +146,13 @@ namespace Cursor.Logic
                     break;
 
                 case ItemType.Furniture:
+                    _buildImage.gameObject.SetActive(true);
+                    if (tile.placeFurniture && InventoryManager.Instance.CheckStock(_holdingItem.itemID))
+                    {
+                        SetCursorValid();
+                        return;
+                    }
+                    SetCursorInvalid();
                     break;
 
                 case ItemType.HoeTool:
@@ -179,7 +192,7 @@ namespace Cursor.Logic
                         return;
                     }
 
-                    crop = CropManager.Instance.GetCropDetails(tile.seedItemId);
+                    var crop = CropManager.Instance.GetCropDetails(tile.seedItemId);
                     if (crop is not null && tile.growthDays > crop.TotalGrowthDays &&
                         crop.CheckToolAvailable(_holdingItem.itemID))
                         SetCursorValid();
@@ -208,12 +221,14 @@ namespace Cursor.Logic
         {
             _cursorPosValid = true;
             _cursorImage.color = new Color(1, 1, 1, 1);
+            _buildImage.color = new Color(1, 1, 1, 0.5f);
         }
 
         private void SetCursorInvalid()
         {
             _cursorPosValid = false;
             _cursorImage.color = new Color(1, 0, 0, 0.5f);
+            _buildImage.color = new Color(1, 0, 0, 0.5f);
         }
 
         /// <summary>
@@ -258,6 +273,7 @@ namespace Cursor.Logic
                 //只有持有物品的时候才需要就检测鼠标的位置是否合法
                 _cursorUsable = false;
                 _holdingItem = null;
+                _buildImage.gameObject.SetActive(false);
                 return;
             }
 
@@ -275,6 +291,13 @@ namespace Cursor.Logic
                     ItemType.CollectTool => tool,
                 _ => normal
             };
+
+            if (details.itemType == ItemType.Furniture)
+            {
+                _buildImage.gameObject.SetActive(true);
+                _buildImage.sprite = details.itemOnWorldSprite;
+                _buildImage.SetNativeSize();
+            }
         }
 
         private void OnAfterSceneLoaded()

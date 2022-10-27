@@ -17,14 +17,15 @@ namespace Inventory.UI
         [SerializeField] private List<BagSlot> bagSlots;
         [SerializeField] private GameObject bag;
         public ItemToolTip itemToolTip;
-        
+
         [Header("交易UI")] public TradeUI tradeUI;
         public TextMeshProUGUI moneyText;
-        
+
         private int _activeSlotIndex = -1;
 
         [Header("通用背包")] [SerializeField] private GameObject bagBase;
         public GameObject shopSlotPrefab;
+        public GameObject boxSlotPrefab;
         [SerializeField] private List<BagSlot> baseBagSlots;
 
         private void Start()
@@ -74,11 +75,9 @@ namespace Inventory.UI
             switch (location)
             {
                 case InventoryLocation.Bag:
-                    Debug.Log($"更新财产{InventoryManager.Instance.money}");
                     moneyText.text = InventoryManager.Instance.money.ToString();
                     if (index != -1)
                     {
-                        Debug.Log($"id: {itemsList[index].itemId} amount: {itemsList[index].itemAmount}");
                         //此背包槽位已经空了
                         if (itemsList[index].itemId == 0)
                         {
@@ -172,6 +171,7 @@ namespace Inventory.UI
             var prefab = slotType switch
             {
                 SlotType.Shop => shopSlotPrefab,
+                SlotType.Box => boxSlotPrefab,
                 _ => null
             };
 
@@ -214,10 +214,10 @@ namespace Inventory.UI
             }
         }
 
-        private void OnShowTradeUIEvent(ItemDetails details,bool sell)
+        private void OnShowTradeUIEvent(ItemDetails details, bool sell)
         {
             tradeUI.gameObject.SetActive(true);
-            tradeUI.SetupTradeUI(details,sell);
+            tradeUI.SetupTradeUI(details, sell);
         }
     }
 }

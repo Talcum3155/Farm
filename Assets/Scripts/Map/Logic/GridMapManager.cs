@@ -148,6 +148,7 @@ namespace Map.Logic
                         break;
 
                     case ItemType.Furniture:
+                        MyEventHandler.CallBuildFurniture(itemDetails.itemID, pos);
                         break;
 
                     case ItemType.HarvestableScenery:

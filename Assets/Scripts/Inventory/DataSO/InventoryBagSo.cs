@@ -4,9 +4,12 @@ using Utilities;
 
 namespace Inventory.DataSO
 {
-    [CreateAssetMenu(menuName = "Inventory/InventoryBag",fileName = "New Bag")]
+    [CreateAssetMenu(menuName = "Inventory/InventoryBag", fileName = "New Bag")]
     public class InventoryBagSo : ScriptableObject
     {
         public List<InventoryItem> inventoryItems;
+
+        public InventoryItem GetInventoryItem(int id)
+            => inventoryItems.Find(i => i.itemId == id);
     }
 }

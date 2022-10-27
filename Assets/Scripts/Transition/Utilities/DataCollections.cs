@@ -69,6 +69,14 @@ namespace Utilities
         public SerializableVector3 itemPositionInScene;
     }
 
+    [Serializable]
+    public class SceneFurniture
+    {
+        public int itemId;
+        public SerializableVector3 position;
+        public int boxIndex;
+    }
+
     [System.Serializable]
     public class TileProperty
     {

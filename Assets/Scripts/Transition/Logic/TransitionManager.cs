@@ -58,7 +58,6 @@ namespace Transition.Logic
                 Progress.Create<float>((f) => { }));
             //将加载的场景设置为激活态，这样SceneManager.GetActiveScene()就能获取该场景的名称
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(SceneManager.sceneCount - 1));
-            MyEventHandler.CallAfterSceneLoaded();
         }
 
         /// <summary>

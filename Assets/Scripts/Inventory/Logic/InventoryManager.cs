@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Inventory.DataSO;
 using Inventory.Item;
@@ -11,19 +12,29 @@ namespace Inventory.Logic
     {
         public ItemDataListSo itemDataListSo;
         public InventoryBagSo playerBagSo;
+        public InventoryBagSo currentBoxBag;
+        public BlueprintDataSo blueprintSo;
 
         [Header("交易")] public int money;
+
+        private readonly Dictionary<string, List<InventoryItem>> _boxDataDict = new();
+
+        public int BoxDataAmount => _boxDataDict.Count;
 
         private void OnEnable()
         {
             MyEventHandler.DropItem += OnDropItemEvent;
             MyEventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPositionEvent;
+            MyEventHandler.BuildFurniture += OnBuildFurnitureEvent;
+            MyEventHandler.BagBaseOpen += OnBagBaseOpenEvent;
         }
 
         private void OnDisable()
         {
             MyEventHandler.DropItem -= OnDropItemEvent;
             MyEventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPositionEvent;
+            MyEventHandler.BuildFurniture -= OnBuildFurnitureEvent;
+            MyEventHandler.BagBaseOpen -= OnBagBaseOpenEvent;
         }
 
         private void Start()
@@ -115,6 +126,45 @@ namespace Inventory.Logic
         }
 
         /// <summary>
+        /// Swap Item between two different bags
+        /// </summary>
+        /// <param name="sourceLocation"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetLocation"></param>
+        /// <param name="targetIndex"></param>
+        public void SwapItem(InventoryLocation sourceLocation, int sourceIndex, InventoryLocation targetLocation,
+            int targetIndex)
+        {
+            var sourceItemList = GetItemList(sourceLocation);
+            var targetItemList = GetItemList(targetLocation);
+
+            if (targetIndex >= targetItemList.Count) return;
+
+            var sourceItem = sourceItemList[sourceIndex];
+            var targetItem = targetItemList[targetIndex];
+
+            if (targetItem.itemId >= 1000 && sourceItem.itemId != targetItem.itemId)
+            {
+                sourceItemList[sourceIndex] = targetItem;
+                targetItemList[targetIndex] = sourceItem;
+            }
+            else if (sourceItem.itemId == targetItem.itemId)
+            {
+                targetItem.itemAmount += sourceItem.itemAmount;
+                targetItemList[targetIndex] = targetItem;
+                sourceItemList[sourceIndex] = new InventoryItem();
+            }
+            else
+            {
+                targetItemList[targetIndex] = sourceItem;
+                sourceItemList[sourceIndex] = new InventoryItem();
+            }
+
+            MyEventHandler.CallUpdateInventoryUI(sourceLocation, sourceItemList, sourceIndex);
+            MyEventHandler.CallUpdateInventoryUI(targetLocation, targetItemList, targetIndex);
+        }
+
+        /// <summary>
         /// 移除指定数量的背包物品
         /// </summary>
         /// <param name="itemId"></param>
@@ -163,6 +213,19 @@ namespace Inventory.Logic
             }
         }
 
+        private void OnBuildFurnitureEvent(int itemId, Vector3 mousePosition)
+        {
+            RemoveItem(itemId, 1);
+            var blueprint = blueprintSo.GetBlueprintDetails(itemId);
+            foreach (var requiredItem in blueprint.resourceItem)
+                RemoveItem(requiredItem.itemId, requiredItem.itemAmount);
+        }
+
+        private void OnBagBaseOpenEvent(SlotType slotType, InventoryBagSo bagSo)
+        {
+            currentBoxBag = bagSo;
+        }
+
         #endregion
 
         public void TradeItem(ItemDetails details, int amount, bool sellTrade)
@@ -193,6 +256,53 @@ namespace Inventory.Logic
             }
 
             MyEventHandler.CallUpdateInventoryUI(InventoryLocation.Bag, playerBagSo.inventoryItems, indexInBag);
+        }
+
+        /// <summary>
+        /// Check the stock of building resource
+        /// </summary>
+        /// <param name="id">blue print id</param>
+        /// <returns></returns>
+        public bool CheckStock(int id)
+        {
+            var blueprintDetails = blueprintSo.GetBlueprintDetails(id);
+
+            foreach (var requireItem in blueprintDetails.resourceItem)
+            {
+                var itemStock = playerBagSo.GetInventoryItem(requireItem.itemId);
+                if (itemStock.itemAmount >= requireItem.itemAmount)
+                    continue;
+                return false;
+            }
+
+            return true;
+        }
+
+        private List<InventoryItem> GetItemList(InventoryLocation location)
+            => location switch
+            {
+                InventoryLocation.Bag => playerBagSo.inventoryItems,
+                InventoryLocation.Box => currentBoxBag.inventoryItems,
+                _ => null
+            };
+
+        /// <summary>
+        /// Get bag item list from dictionary
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="itemList"></param>
+        /// <returns></returns>
+        public bool GetBoxDataList(string key, out List<InventoryItem> itemList)
+            => _boxDataDict.TryGetValue(key, out itemList);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="box"></param>
+        public void AddBoxDataToDict(Box box)
+        {
+            Debug.Log($"{box.name}{box.boxIndex}");
+            _boxDataDict[$"{box.name}{box.boxIndex}"] = box.boxBagSo.inventoryItems;
         }
     }
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8542ebdd9c043a64986197ec653b4342, type: 3}
+  m_Name: BlueprintDataBase
+  m_EditorClassIdentifier: 
+  blueprintDataList:
+  - bluePrintId: 1032
+    resourceItem:
+    - itemId: 1012
+      itemAmount: 15
+    buildPrefab: {fileID: 7477584241903575752, guid: b8f95e6d5db52614fbb668cf2ea5ee4c, type: 3}
+  - bluePrintId: 1033
+    resourceItem:
+    - itemId: 1015
+      itemAmount: 20
+    - itemId: 1012
+      itemAmount: 20
+    buildPrefab: {fileID: 8111119203215821505, guid: d56f0de5088d8e84dbe8148d9dc7f989, type: 3}

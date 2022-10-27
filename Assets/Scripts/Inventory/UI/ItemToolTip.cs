@@ -1,4 +1,6 @@
 using System;
+using Inventory.DataSO;
+using Inventory.Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +15,9 @@ namespace Inventory.UI
         [SerializeField] private TextMeshProUGUI itemDescriptionText;
         [SerializeField] private Text itemPriceText;
         [SerializeField] private GameObject bottomPart;
+
+        [Header("建造")] [SerializeField] public GameObject resourcePanel;
+        [SerializeField] private Image[] materials;
 
         public void SetUpItemToolTip(ItemDetails itemDetails, SlotType slotType)
         {
@@ -52,6 +57,25 @@ namespace Inventory.UI
                 ItemType.CollectTool => "工具",
                 _ => "无"
             };
+        }
+
+        public void SetupResourcePanel(int blueprintId)
+        {
+            var blueprint = InventoryManager.Instance.blueprintSo.GetBlueprintDetails(blueprintId);
+            for (var i = 0; i < materials.Length; i++)
+            {
+                if (i < blueprint.resourceItem.Length)
+                {
+                    var blueprintItem = blueprint.resourceItem[i];
+                    materials[i].gameObject.SetActive(true);
+                    materials[i].sprite = InventoryManager.Instance.GetItemDetails(blueprintItem.itemId).itemIcon;
+                    materials[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                        blueprintItem.itemAmount.ToString();
+                    continue;
+                }
+
+                materials[i].gameObject.SetActive(false);
+            }
         }
     }
 }

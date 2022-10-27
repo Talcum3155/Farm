@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17448987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.59, y: -19.7, z: -10}
+  m_LocalPosition: {x: -22.13, y: -24.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -896,7 +896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.59, y: -19.7, z: -10}
+  m_LocalPosition: {x: -22.13, y: -24.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1670,7 +1670,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552922656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.59, y: -19.7, z: 0}
+  m_LocalPosition: {x: -22.13, y: -24.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2263,6 +2263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDataListSo: {fileID: 11400000, guid: 6d48c77a1d6f3ed48acd02b1a34c6a67, type: 2}
   playerBagSo: {fileID: 11400000, guid: 9fd712be7948827439cd1e3341b22981, type: 2}
+  blueprintSo: {fileID: 11400000, guid: ecc221dce433df6448c617a18702960c, type: 2}
   money: 300
 --- !u!1 &2069754214
 GameObject:

@@ -212,5 +212,14 @@ namespace Utilities
 
         public static void CallShowTradeUI(ItemDetails details, bool sellingItem)
             => ShowTradeUI?.Invoke(details, sellingItem);
+
+        /// <summary>
+        /// Trigger when building furniture, delete required
+        /// resource from bag after build
+        /// </summary>
+        public static event Action<int,Vector3> BuildFurniture;
+
+        public static void CallBuildFurniture(int blueprintId, Vector3 position) =>
+            BuildFurniture?.Invoke(blueprintId, position);
     }
 }

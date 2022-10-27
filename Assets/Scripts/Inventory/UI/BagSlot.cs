@@ -27,6 +27,18 @@ namespace Inventory.UI
             get => isSelected;
         }
 
+        public InventoryLocation Location
+        {
+            get
+            {
+                return slotType switch
+                {
+                    SlotType.Box => InventoryLocation.Box,
+                    _ => InventoryLocation.Bag,
+                };
+            }
+        }
+
         [Header("物品信息")] public ItemDetails itemDetails;
         public int itemAmount;
 
@@ -105,6 +117,13 @@ namespace Inventory.UI
                     MyEventHandler.CallShowTradeUI(itemDetails, true);
                     inventoryUI.SwitchSelectItem(-1);
                 }
+                //Swap item between player and bag
+                else if (slotType != SlotType.Shop
+                         && target.slotType != SlotType.Shop && slotType != target.slotType)
+                {
+                    InventoryManager.Instance.SwapItem(Location, slotIndex, target.Location, target.slotIndex);
+                }
+
                 return;
             }
 

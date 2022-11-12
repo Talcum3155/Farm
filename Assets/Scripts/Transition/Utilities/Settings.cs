@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Utilities
@@ -17,7 +18,9 @@ namespace Utilities
         public const float FadeCanvasDuration = 1.5f;
 
         public const float GridCellSize = 1f;
+
         public const float GridCellDiagonalSize = 1.41f;
+
         // 20*20 pixel per 1unit => 1*1 pixel per 0.05 unit
         public const float PixelSize = 0.05f;
 
@@ -25,5 +28,11 @@ namespace Utilities
         public const float AnimationBreakTime = 5f;
 
         public const int MaxGridSize = 9999;
+
+        //Light
+        //Time to transition from Morning light to Night light
+        public const float LightDuration = 25f; 
+        public static TimeSpan MorningTime = new TimeSpan(5, 0, 0);
+        public static TimeSpan NightTime = new TimeSpan(19, 0, 0);
     }
 }

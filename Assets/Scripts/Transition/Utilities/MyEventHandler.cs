@@ -133,6 +133,14 @@ namespace Utilities
         public static void CallUpdateDate(int day, int month, Season season, int year)
             => UpdateDate?.Invoke(day, month, season, year);
 
+        /// <summary>
+        /// Trigger when the light needs to be changed
+        /// </summary>
+        public static event Action<Season, LightShift, float> LightShiftChange;
+
+        public static void CallLightShiftChange(Season season, LightShift lightShift, float timeDifference)
+            => LightShiftChange?.Invoke(season, lightShift, timeDifference);
+
         #endregion
 
         /// <summary>

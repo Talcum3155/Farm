@@ -13,6 +13,8 @@ namespace TimeSystem.Logic
         public bool gameClockPause;
         private float _tikTime;
 
+        private float _timeDifference;
+
         public TimeSpan GameTime => new TimeSpan(_gameHour, _gameMinutes, _gameSecond);
         
         private void Start()
@@ -21,6 +23,7 @@ namespace TimeSystem.Logic
             MyEventHandler.CallUpdateTime(_gameSecond, _gameMinutes, _gameHour);
             MyEventHandler.CallUpdateHour(_gameHour);
             MyEventHandler.CallUpdateDate(_gameDay, _gameMonth, gameSeason, _gameYear);
+            MyEventHandler.CallLightShiftChange(gameSeason, GetCurrentLightShift(), _timeDifference);
         }
 
         private void Update()
@@ -67,6 +70,8 @@ namespace TimeSystem.Logic
             }
 
             MyEventHandler.CallGameMinuteEnd(_gameMinutes, _gameHour, _gameDay, gameSeason);
+            //Judge the light whether needs to be changed
+            MyEventHandler.CallLightShiftChange(gameSeason, GetCurrentLightShift(), _timeDifference);
         }
 
         private void UpdateHour()
@@ -143,6 +148,23 @@ namespace TimeSystem.Logic
             _gameMonth = 1;
             _gameYear = 2022;
             gameSeason = Season.春天;
+        }
+
+        private LightShift GetCurrentLightShift()
+        {
+            if (GameTime >= Settings.MorningTime && GameTime < Settings.NightTime)
+            {
+                _timeDifference = (float)(GameTime - Settings.MorningTime).TotalMinutes;
+                return LightShift.Morning;
+            }
+
+            if (GameTime < Settings.MorningTime || GameTime >= Settings.NightTime)
+            {
+                _timeDifference = Mathf.Abs((float)(GameTime - Settings.NightTime).TotalMinutes);
+                return LightShift.Night;
+            }
+
+            return LightShift.Morning;
         }
 
         public string GetFormatTime() =>

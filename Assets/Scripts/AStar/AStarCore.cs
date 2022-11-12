@@ -62,8 +62,8 @@ namespace AStar
             _startNode = _gridNodes.GetGridNode(startPos.x - _originX, startPos.y - _originY);
             _targetNode = _gridNodes.GetGridNode(endPos.x - _originX, endPos.y - _originY);
 
-            Debug.Log(
-                $"获取到原点({_originX},{_originY}),地图的长宽({_gridWidth},{_gridHeight}),起始地点: {_startNode.gridPosition},终点: {_targetNode.gridPosition}");
+            // Debug.Log(
+            //     $"获取到原点({_originX},{_originY}),地图的长宽({_gridWidth},{_gridHeight}),起始地点: {_startNode.gridPosition},终点: {_targetNode.gridPosition}");
 
             //Map the tilemap to gridNodes and identify whether the grid is an obstacle
             for (var i = 0; i < _gridWidth; i++)

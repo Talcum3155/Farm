@@ -86,4 +86,10 @@ namespace Utilities
         Pause,
         GamePlay
     }
+
+    public enum LightShift
+    {
+        Morning,
+        Night
+    }
 }

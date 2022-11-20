@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerBag
   m_EditorClassIdentifier: 
   inventoryItems:
-  - itemId: 1032
+  - itemId: 1001
     itemAmount: 96
   - itemId: 1033
     itemAmount: 94

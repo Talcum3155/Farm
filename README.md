@@ -679,3 +679,22 @@ private void SwitchConfinerShape()
 
 1. **LightControl**包含了设置灯光的方法
 2. 根据时间差值来计算当前应该把灯光设置成哪个LightShift，如果时间差值大于过渡时间就直接将灯光设成目标值，如果小于过渡时间就根据余下的过渡时间逐渐设置
+
+## Audio部分
+
+### 第九十节 创建声音数据结构实现不同场景播放不同音乐和音效
+
+1. 创建**SoundDetailsListSo**用来储存每个声音的数据
+2. 创建**SceneSoundDetailsListSo**用来储存每个场景使用什么BGM
+3. 创建**AudioManager**，当切换场景时会根据**SceneSoundDetailsListSo**查询BGM并从**SoundDetailsListSo**获取**AudioClip**来播放不同场景对应的声音
+
+### 第九十一节 创建 AudioMixer 实现音乐音效的控制和切换、
+
+1. 使用**AudioMixer**来实现声音的渐变，切换场景时会逐渐改变BGM
+2. 在**AudioManager**里获取**AudioMixer**的**Snapshots**，使用`normalSnapshot.TransitionTo(transitionTime)`控制渐变
+
+### 第九十二节 利用对象池播放所有音效
+
+1. 创建一个声音预制体**Sound**带有一个音源
+2. 使用对象池，当某些物体带有音效时就会从对象池中获取一个**Sound**对象，并播放相应的声音
+

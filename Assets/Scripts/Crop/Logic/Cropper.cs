@@ -54,6 +54,9 @@ namespace Crop.Logic
                         transform.position + cropDetails.particlePosition);
 
                 //play sound
+                if (cropDetails.soundEffect != SoundName.None)
+                    MyEventHandler.CallPlaySoundEffect(cropDetails.soundEffect);
+                
                 return;
             }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Dialogue.Data;
 using Inventory.DataSO;
+using Sound.Data;
 using UnityEngine;
 
 namespace Utilities
@@ -197,7 +198,7 @@ namespace Utilities
 
         public static void CallBagBaseOpen(SlotType slotType, InventoryBagSo bagSo) =>
             BagBaseOpen?.Invoke(slotType, bagSo);
-        
+
         /// <summary>
         /// Hide trade UI when trade finished
         /// </summary>
@@ -225,9 +226,23 @@ namespace Utilities
         /// Trigger when building furniture, delete required
         /// resource from bag after build
         /// </summary>
-        public static event Action<int,Vector3> BuildFurniture;
+        public static event Action<int, Vector3> BuildFurniture;
 
-        public static void CallBuildFurniture(int blueprintId, Vector3 position) =>
-            BuildFurniture?.Invoke(blueprintId, position);
+        public static void CallBuildFurniture(int blueprintId, Vector3 position)
+            => BuildFurniture?.Invoke(blueprintId, position);
+
+        #region Sound about
+
+        public static event Action<SoundDetails> InitSoundEffect;
+
+        public static void CallInitSoundEffect(SoundDetails soundDetails)
+            => InitSoundEffect?.Invoke(soundDetails);
+
+        public static event Action<SoundName> PlaySoundEffect;
+
+        public static void CallPlaySoundEffect(SoundName soundName)
+            => PlaySoundEffect?.Invoke(soundName);
+
+        #endregion
     }
 }

@@ -26,6 +26,21 @@ namespace TimeSystem.Logic
             MyEventHandler.CallLightShiftChange(gameSeason, GetCurrentLightShift(), _timeDifference);
         }
 
+        private void OnEnable()
+        {
+            MyEventHandler.UpdateGameState += UpdateGameStateEvent;
+        }
+
+        private void OnDisable()
+        {
+            MyEventHandler.UpdateGameState -= UpdateGameStateEvent;
+        }
+        
+        private void UpdateGameStateEvent(GameState state)
+        {
+            gameClockPause = state == GameState.Pause;
+        }
+
         private void Update()
         {
             if (gameClockPause) return;

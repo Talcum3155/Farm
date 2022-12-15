@@ -698,3 +698,38 @@ private void SwitchConfinerShape()
 1. 创建一个声音预制体**Sound**带有一个音源
 2. 使用对象池，当某些物体带有音效时就会从对象池中获取一个**Sound**对象，并播放相应的声音
 
+## Timeline部分
+### 第九十三节 Timeline创建
+
+### 第九十四节 创建 Timeline 的对话
+
+1. 创建`DialogueBehavior`继承自`PlayableBehaviour`从而将`DialoguePiece`作为**Timeline**的一个**Clip**
+2. 创建`DialogueClip`继承自`PlayableAsset`(实例化`DialoguePiece`的资源),`ITimelineClipAsset`(使`DialoguePiece`可以在Timeline的轨道上播放)，实现接口的固定写法：
+```csharp
+public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
+        {
+            return ScriptPlayable<DialogueBehavior>.Create(graph, dialogueBehavior);
+        }
+```
+3. 创建`DialogueTrack`继承自`TrackAsset`使Timeline能出现**DialogueTrack**的创建选项
+```csharp
+    [TrackClipType(typeof(DialogueClip))]
+    public class DialogueTrack : TrackAsset
+    {
+    }
+```
+
+4. 每段对话需要暂停，按下空格键继续对话。创建`TimelineManager`，当`DialogueBehavior`的对话需要暂停时就调用`TimelineManager`的该方法使Timeline暂停
+```csharp
+public void PauseTimeline(PlayableDirector director)
+        {
+            _currentDirector = director;
+
+            _currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0d);
+            _isPause = true;
+        }
+```
+
+### 第九十五节 控制 Timeline 的启动和暂停
+
+1.  在`DialogueBehavior`的`OnGraphStart`和`OnGraphStop`方法中利用事件的方式分别开始和暂停游戏时间
